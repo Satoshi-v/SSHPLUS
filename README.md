@@ -1,6 +1,6 @@
 # SSHPLUS
 
-apt update -y && apt upgrade -y && wget https://raw.githubusercontent.com/Satoshi-v/SSHPLUS/main/Plus && chmod 777 Plus && ./Plus
+apt update -y && apt upgrade -y && wget -y; bash <(wget -qO- raw.githubusercontent.com/Satoshi-v/SSHPLUS/main/Plus)
 
 
 #Acessa Root
