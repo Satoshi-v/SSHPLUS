@@ -121,7 +121,7 @@ clear
 echo ""
 echo -e "          \033[1;33m[\033[1;31m!\033[1;33m] \033[1;32mINSTALANDO PAQUETES \033[1;33m[\033[1;31m!\033[1;33m] \033[0m"
 echo ""
-echo -e "\033[1;33mALGUNOS PAQUETES SON SUMAMENTE  NECESARIOS !\033[0m"
+echo -e "\033[1;33mALGUNOS PAQUETES SON SUMAMENTE NECESARIOS !\033[0m"
 echo ""
 inst_pct () {
 _pacotes=("bc" "screen" "nano" "unzip" "lsof" "netstat" "net-tools" "dos2unix" "nload" "jq" "curl" "figlet" "python3" "python-pip")
@@ -144,6 +144,6 @@ echo ""
 cd $HOME
 echo -e "        \033[1;33m • \033[1;32mINSTALACION CONCLUIDA\033[1;33m • \033[0m"
 echo ""
-echo -e "\033[1;31m \033[1;33mCOMANDO PRINCIPAL: \033[1;32mwebcont\033[0m"
+echo -e "\033[1;31m \033[1;33mCOMANDO PRINCIPAL: \033[1;32mmenu\033[0m"
 echo -e "\033[1;33m MAS INFORMACION \033[1;31m(\033[1;36mTELEGRAM\033[1;31m): \033[1;37m@Net_Satoshi\033[0m"
 rm $HOME/Plus && cat /dev/null > ~/.bash_history && history -c
