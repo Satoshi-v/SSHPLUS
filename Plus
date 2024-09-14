@@ -77,7 +77,7 @@ chmod 777 v2raymanager > /dev/null 2>&1
 chmod 777 botteste.sh > /dev/null 2>&1
 mkdir $HOME/BOT >/dev/null 2>&1
 cd $HOME/BOT
-wget https://raw.githubusercontent.com/Satoshi-v/SSHPLUS/main/Sistema/ShellBot.sh >/dev/null 2>&1
+wget https://raw.githubusercontent.com/Satoshi-v/Bot/main/ShellBot.sh >/dev/null 2>&1
 chmod 777 ShellBot.sh > /dev/null 2>&1
 cd > /dev/null 2>&1
 #-----------------------------------------------------------------------------------------------------------------
