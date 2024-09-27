@@ -1,14 +1,14 @@
 #!/bin/bash
 [[ $(screen -list| grep -c 'bot_teste') == '0' ]] && {
     clear
-    echo -e "\E[44;1;37m     ATIVACION BOT SSH TESTE     \E[0m"
+    echo -e "\E[44;1;37m     ACTIVACION BOT SSH TEST     \E[0m"
     echo ""
     echo -ne "\n\033[1;32mINFORME O TOKEN\033[1;37m: "
     read token
     clear
     echo "-----------MODELO-----------"
     echo "=×=×=×=×=×=×=×=×=×=×=×=×=×="
-    echo "   MENSAGEM DE BOAS VINDAS   "
+    echo "   MENSAJE DE BIENVENIDA   "
     echo "=×=×=×=×=×=×=×=×=×=×=×=×=×="
     echo "        MENSAGEM FINAL         "
     echo ""
