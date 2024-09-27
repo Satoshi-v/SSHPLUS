@@ -72,7 +72,7 @@ rm 2lHZ43 > /dev/null 2>&1
 cd /bin/ > /dev/null 2>&1
 rm v2raymanager > /dev/null 2>&1
 wget https://raw.githubusercontent.com/Satoshi-v/SSHPLUS/main/Modulos/v2raymanager > /dev/null 2>&1
-wget https://raw.githubusercontent.com/Satoshu-v/Sistema/script/botteste.sh >/dev/null 2>&1
+wget https://raw.githubusercontent.com/Satoshi-v/Sistema/script/botteste.sh >/dev/null 2>&1
 chmod 777 v2raymanager > /dev/null 2>&1
 chmod 777 botteste.sh > /dev/null 2>&1
 mkdir $HOME/BOT >/dev/null 2>&1
