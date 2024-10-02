@@ -1263,7 +1263,7 @@ msg_bem_vindo() {
     local msg
     msg="✌😎 Hola <b>${message_from_first_name[$id]}</b>\n\nBIENVENIDO(a)\n\n"
     msg+="Para ingresar al menu\nhaga clic o ejecute [ /menu ]\n\n"
-    msg+="Para optener informaciones\nhaga clic o ejecute [ /ajuda ]\n\n"
+    msg+="Para optener informaciones\nhaga clic o ejecute [ /ayuda ]\n\n"
     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
         --text "$(echo -e $msg)" \
         --parse_mode html
@@ -1926,7 +1926,7 @@ while :; do
                     }
                     echo "Nome: ${message_text[$id]}" >$CAD_ARQ
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text 'Contraseña:' \
+                        --text 'Pass:' \
                         --reply_markup "$(ShellBot.ForceReply)" # Força a resposta.
                     ;;
                 'Senha:')
