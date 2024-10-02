@@ -5,7 +5,7 @@
 #   DESENVOLVIDO POR: TURBONETPN2023
 #   API SHELLBOT: ORION
 #   CONTATO TELEGRAM: http://t.me/TURBONET2023
-#   CANAL TELEGRAM: http://t.me/WEBCONT_OFC
+#   CANAL TELEGRAM: http://t.me/TURBONET2023
 #===================================================
 [[ ! -d /etc/SSHPlus ]] && exit 0
 [[ ! -d /etc/bot ]] && exit 0
@@ -23,9 +23,9 @@ fun_menu() {
     [[ "${message_from_id[$id]}" == "$id_admin" ]] && {
         local env_msg
 env_msg="╔══════════•⊱✦⊰•══════════╗\n"
-        env_msg+="<b>               BOT WEBCONT</b>\n"
+        env_msg+="<b>               BOT-SSHPLUS PRO</b>\n"
         env_msg+="╚══════════•⊱✦⊰•══════════╝\n\n"
-        env_msg+="⚠️ <i>SELECCIONE UNA OPCION ABAJO !</i>\n\n"
+        env_msg+="⚠️ <i>SELECIONE UMA OPCAO ABAIXO !</i>\n\n"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text "$env_msg" \
             --reply_markup "$keyboard1" \
             --parse_mode html
@@ -33,15 +33,15 @@ env_msg="╔══════════•⊱✦⊰•═══════�
     }
     [[ -d /etc/bot/suspensos/${message_from_username} ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "🚫 ESTA SUSPENDIDO 🚫\n\nCONTACTE AL ADMIN")"
+            --text "$(echo -e "🚫 VC ESTA SUSPENSO 🚫\n\nCONTATE O ADMINISTRADOR")"
         return 0
     }
     if [[ "$(grep -w "${message_from_username}" $ativos | grep -wc 'revenda')" != '0' ]]; then
         local env_msg
 env_msg="╔════════•⊱✦⊰•════════╗\n"
-        env_msg+="<b>           🌟BOT WEBCONT🌟</b>\n"
+        env_msg+="<b>           BOT SSHPLUS PRO</b>\n"
         env_msg+="╚════════•⊱✦⊰•════════╝\n\n"
-        env_msg+="⚠️ <i>SELECCIONE UNA OPCION ABAJO !</i>\n\n"
+        env_msg+="⚠️ <i>SELECIONE UMA OPCAO ABAIXO !</i>\n\n"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text "$env_msg" \
             --reply_markup "$keyboard2" \
             --parse_mode html
@@ -49,16 +49,16 @@ env_msg="╔════════•⊱✦⊰•════════╗\n
     elif [[ "$(grep -w "${message_from_username}" $ativos | grep -wc 'subrevenda')" != '0' ]]; then
         local env_msg
 env_msg="╔═══════•⊱✦⊰•═══════╗\n"
-        env_msg+="<b>         🌟BOT WEBCONT🌟</b>\n"
+        env_msg+="<b>         BOT SSHPLUS PRO</b>\n"
         env_msg+="╚═══════•⊱✦⊰•═══════╝\n\n"
-        env_msg+="⚠️ <i>SELECCIONE UNA OPCION ABAJO !</i>\n\n"
+        env_msg+="⚠️ <i>SELECIONE UMA OPCAO ABAIXO !</i>\n\n"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text "$env_msg" \
             --reply_markup "$keyboard3" \
             --parse_mode html
         return 0
     else
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e 🚫 ACCESO NEGADO 🚫)"
+            --text "$(echo -e 🚫 ACESSO NEGADO 🚫)"
         return 0
     fi
 }
@@ -74,61 +74,61 @@ fun_ajuda() {
     if [[ "$id_chatuser" = "$id_admin" ]]; then
         local env_msg
 env_msg="╔═════════•⊱✦⊰•═════════╗\n"
-        env_msg+="<b>             🌟BOT WEBCONT🌟</b>\n"
+        env_msg+="<b>             BOT SSHPLUS PRO</b>\n"
         env_msg+="╚═════════•⊱✦⊰•═════════╝\n\n"
-        env_msg+="⚠️ <i>Comandos Disonibles</i>\n\n"
-        env_msg+="[<b>01</b>] /menu = Muestra el menu\n"
-        env_msg+="[<b>02</b>] /info = Muestra informaciones\n"
-        env_msg+="[<b>03</b>] /ayuda = Informacion sobre opciones\n\n"
-        env_msg+="⚠️ <i>Opciones Disponibles</i>\n\n"
-        env_msg+="• <u>CREAR USUARIO</u> = Crea usuario ssh\n\n"
-        env_msg+="• <u>CREAR TEST</u> = Crea test ssh\n\n"
-        env_msg+="• <u>REMOVER</u> = Remueve usuario ssh\n\n"
-        env_msg+="• <u>INFO USUARIOS</u> = Informacion de usuarios\n\n"
-        env_msg+="• <u>USUARIOS ONLINE</u> = Muestra Usuarios online\n\n"
+        env_msg+="⚠️ <i>Comandos Disponiveis</i>\n\n"
+        env_msg+="[<b>01</b>] /menu = Exibe menu\n"
+        env_msg+="[<b>02</b>] /info = Exibe informacoes\n"
+        env_msg+="[<b>03</b>] /ajuda = Informacoes sobre opcoes\n\n"
+        env_msg+="⚠️ <i>Opções Disponiveis</i>\n\n"
+        env_msg+="• <u>CRIAR USUARIO</u> = Cria usuario ssh\n\n"
+        env_msg+="• <u>CRIAR TESTE</u> = Cria teste ssh\n\n"
+        env_msg+="• <u>REMOVER</u> = Remove usuario ssh\n\n"
+        env_msg+="• <u>INFO USUARIOS</u> = Informacoes do usuario\n\n"
+        env_msg+="• <u>USUARIOS ONLINE</u> = Exibe Usuários onlines\n\n"
         env_msg+="• <u>INFO VPS</u> = Informacoes do servidor\n\n"
-        env_msg+="• <u>EDITAR CONTRASEÑA</u> = Editar contraseña ssh\n\n"
-        env_msg+="• <u>EDITAR LIMITE</u> = Alterar limite ssh\n\n"
-        env_msg+="• <u>EDITAR FECHA</u> = Alterar fecha ssh\n\n"
-        env_msg+="• <u>EXPIRADOS</u> = Remover expirados\n\n"
-        env_msg+="• <u>BACKUP</u> = Crear Backup ssh y reventas\n\n"
-        env_msg+="• <u>OPTIMIZAR</u> = Limpia cache - ram\n\n"
-        env_msg+="• <u>SPEEDTEST</u> = Test de conexion\n\n"
-        env_msg+="• <u>ARCHIVOS</u> = Hospeda Archivos\n\n"
-        env_msg+="• <u>REVENTA</u> = Gerenciar Reventas\n\n"
-        env_msg+="• <u>AUTOBACKUP</u> = Backup automatico\n\n"
-        env_msg+="• <u>INFORME</u> = Informacion de reventa\n\n"
-        env_msg+="• <u>AYUDA</u> = Informacion sobre opciones\n\n"
+        env_msg+="• <u>ALTERAR SENHA</u> = Altera senha ssh\n\n"
+        env_msg+="• <u>ALTERAR LIMITE</u> = Altera limite ssh\n\n"
+        env_msg+="• <u>ALTERAR DATA</u> = Altera data ssh\n\n"
+        env_msg+="• <u>EXPIRADOS</u> = Remove ssh expirados\n\n"
+        env_msg+="• <u>BACKUP</u> = Cria Backup ssh e revendas\n\n"
+        env_msg+="• <u>OTIMIZAR</u> = Limpa o cache - ram\n\n"
+        env_msg+="• <u>SPEEDTESTE</u> = Teste de conexao\n\n"
+        env_msg+="• <u>ARQUIVOS</u> = Hospeda Arquivos\n\n"
+        env_msg+="• <u>REVENDAS</u> = Gerenciar Revendas\n\n"
+        env_msg+="• <u>AUTOBACKUP</u> = lig/Des Backup automatico\n\n"
+        env_msg+="• <u>RELATORIO</u> = Informacoes sobre revendas\n\n"
+        env_msg+="• <u>AJUDA</u> = Informacoes sobre opcoes\n\n"
         ShellBot.sendMessage --chat_id $id_chatuser \
             --text "$(echo -e $env_msg)" \
             --parse_mode html
         return 0
     elif [[ -d /etc/bot/suspensos/$id_name ]]; then
         ShellBot.sendMessage --chat_id $id_chatuser \
-            --text "$(echo -e "🚫 ESTA SUSPENDIDO 🚫\n\nCONTACTE AL ADMIN")"
+            --text "$(echo -e "🚫 VC ESTA SUSPENSO 🚫\n\nCONTATE O ADMINISTRADOR")"
         return 0
     elif [[ "$(grep -w "$id_name" $ativos | awk '{print $NF}')" == 'revenda' ]]; then
         local env_msg
 env_msg="╔════════•⊱✦⊰•════════╗\n"
-        env_msg+="<b>           🌟BOT WEBCONT🌟</b>\n"
+        env_msg+="<b>           BOT SSHPLUS PRO</b>\n"
         env_msg+="╚════════•⊱✦⊰•════════╝\n\n"
-        env_msg+="⚠️ <i>Comandos Disonibles</i>\n\n"
-        env_msg+="[<b>01</b>] /menu = Muestra el menu\n"
-        env_msg+="[<b>02</b>] /info = Muestra informaciones\n"
-        env_msg+="[<b>03</b>] /ayuda = Informacion sobre opciones\n\n"
-        env_msg+="⚠️ <i>Opciones Disponibles</i>\n\n"
-        env_msg+="• <u>CREAR USUARIO</u> = Crea usuario ssh\n\n"
-        env_msg+="• <u>CREAR TEST</u> = Crea test ssh\n\n"
-        env_msg+="• <u>REMOVER</u> = Remueve usuario ssh\n\n"
-        env_msg+="• <u>INFO USUARIOS</u> = Informacion de usuarios\n\n"
-        env_msg+="• <u>USUARIOS ONLINE</u> = Muestra Usuarios online\n\n"
-        env_msg+="• <u>EDITAR CONTRASEÑA</u> = Editar contraseña ssh\n\n"
-        env_msg+="• <u>EDITAR LIMITE</u> = Alterar limite ssh\n\n"
-        env_msg+="• <u>EDITAR FECHA</u> = Alterar fecha ssh\n\n"
-        env_msg+="• <u>EXPIRADOS</u> = Remover expirados\n\n"
-        env_msg+="• <u>REVENTA</u> = Gerenciar Reventas\n\n"
-        env_msg+="• <u>INFORME</u> = Informacion de reventa\n\n"
-        env_msg+="• <u>AYUDA</u> = Informacion sobre opciones\n\n"
+        env_msg+="⚠️ <i>Comandos Disponiveis</i>\n\n"
+        env_msg+="[<b>01</b>] /menu = Exibe menu\n"
+        env_msg+="[<b>02</b>] /info = Exibe informacoes\n"
+        env_msg+="[<b>03</b>] /ajuda = Informacoes sobre opcoes\n\n"
+        env_msg+="⚠️ <i>Opções Disponiveis</i>\n\n"
+        env_msg+="• <u>CRIAR USUARIO</u> = Cria usuario ssh\n\n"
+        env_msg+="• <u>CRIAR TESTE</u> = Cria teste ssh\n\n"
+        env_msg+="• <u>REMOVER</u> = Remove usuario ssh\n\n"
+        env_msg+="• <u>INFO USUARIOS</u> = Informacoes do usuario\n\n"
+        env_msg+="• <u>USUARIOS ONLINE</u> = Exibe Usuários onlines\n\n"
+        env_msg+="• <u>ALTERAR SENHA</u> = Altera senha ssh\n\n"
+        env_msg+="• <u>ALTERAR LIMITE</u> = Altera limite ssh\n\n"
+        env_msg+="• <u>ALTERAR DATA</u> = Altera data ssh\n\n"
+        env_msg+="• <u>EXPIRADOS</u> = Remove ssh expirados\n\n"
+        env_msg+="• <u>REVENDAS</u> = Gerenciar Revendas\n\n"
+        env_msg+="• <u>RELATORIO</u> = Informacoes sobre revendas\n\n"
+        env_msg+="• <u>AJUDA</u> = Informacoes sobre opcoes\n\n"
         ShellBot.sendMessage --chat_id $id_chatuser \
             --text "$(echo -e $env_msg)" \
             --parse_mode html
@@ -136,30 +136,30 @@ env_msg="╔════════•⊱✦⊰•════════╗\n
     elif [[ "$(grep -w "$id_name" $ativos | awk '{print $NF}')" == 'subrevenda' ]]; then
         local env_msg
 env_msg="╔════════•⊱✦⊰•════════╗\n"
-        env_msg+="<b>           🌟BOT WEBCONT🌟</b>\n"
+        env_msg+="<b>           BOT SSHPLUS PRO</b>\n"
         env_msg+="╚════════•⊱✦⊰•════════╝\n\n"
-        env_msg+="⚠️ <i>Comandos Disonibles</i>\n\n"
-        env_msg+="[<b>01</b>] /menu = Muestra el menu\n"
-        env_msg+="[<b>02</b>] /info = Muestra informaciones\n"
-        env_msg+="[<b>03</b>] /ayuda = Informacion sobre opciones\n\n"
-        env_msg+="⚠️ <i>Opciones Disponibles</i>\n\n"
-        env_msg+="• <u>CREAR USUARIO</u> = Crea usuario ssh\n\n"
-        env_msg+="• <u>CREAR TEST</u> = Crea test ssh\n\n"
-        env_msg+="• <u>REMOVER</u> = Remueve usuario ssh\n\n"
-        env_msg+="• <u>INFO USUARIOS</u> = Informacion de usuarios\n\n"
-        env_msg+="• <u>USUARIOS ONLINE</u> = Muestra Usuarios online\n\n"
-        env_msg+="• <u>EDITAR CONTRASEÑA</u> = Editar contraseña ssh\n\n"
-        env_msg+="• <u>EDITAR LIMITE</u> = Alterar limite ssh\n\n"
-        env_msg+="• <u>EDITAR FECHA</u> = Alterar fecha ssh\n\n"
-        env_msg+="• <u>EXPIRADOS</u> = Remover expirados\n\n"
-        env_msg+="• <u>AYUDA</u> = Informacion sobre opciones\n\n"
+        env_msg+="⚠️ <i>Comandos Disponiveis</i>\n\n"
+        env_msg+="[<b>01</b>] /menu = Exibe menu\n"
+        env_msg+="[<b>02</b>] /info = Exibe informacoes\n"
+        env_msg+="[<b>03</b>] /ajuda = Informacoes sobre opcoes\n\n"
+        env_msg+="⚠️ <i>Opções Disponiveis</i>\n\n"
+        env_msg+="• <u>CRIAR USUARIO</u> = Cria usuario ssh\n\n"
+        env_msg+="• <u>CRIAR TESTE</u> = Cria teste ssh\n\n"
+        env_msg+="• <u>REMOVER</u> = Remove usuario ssh\n\n"
+        env_msg+="• <u>INFO USUARIOS</u> = Informacoes do usuario\n\n"
+        env_msg+="• <u>USUARIOS ONLINE</u> = Exibe Usuários onlines\n\n"
+        env_msg+="• <u>ALTERAR SENHA</u> = Altera senha ssh\n\n"
+        env_msg+="• <u>ALTERAR LIMITE</u> = Altera limite ssh\n\n"
+        env_msg+="• <u>ALTERAR DATA</u> = Altera data ssh\n\n"
+        env_msg+="• <u>EXPIRADOS</u> = Remove ssh expirados\n\n"
+        env_msg+="• <u>AJUDA</u> = Informacoes sobre opcoes\n\n"
         ShellBot.sendMessage --chat_id $id_chatuser \
             --text "$(echo -e $env_msg)" \
             --parse_mode html
         return 0
     else
         ShellBot.sendMessage --chat_id $id_chatuser \
-            --text "$(echo -e 🚫 ACCESO NEGADO 🚫)"
+            --text "$(echo -e 🚫 ACESSO NEGADO 🚫)"
         return 0
     fi
 }
@@ -176,16 +176,16 @@ verifica_acesso() {
 fun_adduser() {
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+            --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
         return 0
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "👤 CREAR USUARIO 👤\n\nNombre de usuario:" \
+            --text "👤 CRIAR USUARIO 👤\n\nNome do usuario:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     }
 }
@@ -217,7 +217,7 @@ criar_user() {
         (echo "${senha}";echo "${senha}") | passwd "${usuario}"
     else
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e "❌ ERROR AL CREAR USUARIO ❌")" \
+                --text "$(echo -e "❌ ERRO AO CRIAR USUARIO ❌")" \
                 --parse_mode html
         return 0
     fi
@@ -238,16 +238,16 @@ criar_user() {
 fun_deluser() {
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+            --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
         return 0
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "🗑 REMOVER USUARIO 🗑\n\nNombre de usuario:" \
+            --text "🗑 REMOVER USUARIO 🗑\n\nNome do usuario:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     }
 }
@@ -264,7 +264,7 @@ fun_del_user() {
     } || {
         [[ ! -e /etc/bot/revenda/${message_from_username}/usuarios/$usuario ]] && {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e "❌ EL USUARIO NO EXISTE ❌")" \
+                --text "$(echo -e "❌ O USUARIO NAO EXISTE ❌")" \
                 --parse_mode html
             _erro='1'
             return 0
@@ -297,16 +297,16 @@ fun_del_user() {
 alterar_senha() {
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+            --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
         return 0
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "🔐 Editar Contraseña 🔐\n\nNombre de usuario:" \
+            --text "🔐 Alterar Senha 🔐\n\nNome do usuario:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     }
 }
@@ -327,16 +327,16 @@ alterar_senha_user() {
 alterar_limite() {
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+            --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
         return 0
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "👥 Alterar Limite 👥\n\nNombre de usuario:" \
+            --text "👥 Alterar Limite 👥\n\nNome do usuario:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     }
 }
@@ -354,7 +354,7 @@ alterar_limite_user() {
     [[ -d /etc/bot/revenda/${message_from_username} ]] && {
         [[ ! -e /etc/bot/revenda/${message_from_username}/usuarios/$usuario ]] && {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e "❌ EL USUARIO NO EXISTE ❌")" \
+                --text "$(echo -e "❌ O USUARIO NAO EXISTE ❌")" \
                 --parse_mode html
             _erro='1'
             return 0
@@ -362,7 +362,7 @@ alterar_limite_user() {
         _limTotal=$(grep -w 'LIMITE_REVENDA' /etc/bot/revenda/${message_from_username}/${message_from_username} | awk '{print $NF}')
         [[ "$limite" -gt "$_limTotal" ]] && {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e "❌ NO TIENES CUPOS ❌\n\nCupos Disponibles: $_limTotal ")" \
+                --text "$(echo -e "❌ VC NAO TEM LIMITE SUFICIENTE ❌\n\nLimite Atual: $_limTotal ")" \
                 --parse_mode html
             _erro='1'
             return 0
@@ -374,7 +374,7 @@ alterar_limite_user() {
         [[ "$_limsomarev2" -gt "$_limTotal" ]] && {
             [[ "$_limTotal" == "$(($_limTotal - $_result))" ]] && _restant1='0' || _restant1=$(($_limTotal - $_result))
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e "❌ No tienes cupos disponibles\n\n: $_restant1 ")" \
+                --text "$(echo -e "❌ Vc nao tem limite suficiente\n\nLimite restante: $_restant1 ")" \
                 --parse_mode html
             _erro='1'
             return 0
@@ -391,16 +391,16 @@ alterar_limite_user() {
 alterar_data() {
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+            --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
         return 0
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "⏳ Editar Dato ⏳\n\nNombre de usuario:" \
+            --text "⏳ Alterar Data ⏳\n\nNome do usuario:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     }
 }
@@ -420,7 +420,7 @@ alterar_data_user() {
         [ $today -ge $timemachine ] && {
             verify='1'
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e "❌ Error! Dato invalido")" \
+                --text "$(echo -e "❌ Erro! Data invalida")" \
                 --parse_mode html
             _erro='1'
             return 0
@@ -440,10 +440,10 @@ ver_users() {
         arq_info=/tmp/$(echo $RANDOM)
         local info_users
         info_users='=×=×=×=×=×=×=×=×=×=×=×=×=×=\n'
-        info_users+='<b>INFORMACION DE USUARIOS</b>\n'
+        info_users+='<b>INFORMACOES DOS USUARIOS</b>\n'
         info_users+='=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n'
-        info_users+='⚠️ Muestra el formato siguiente:\n\n'
-        info_users+='<code>USER PASS LIMITE DATO</code>\n'
+        info_users+='⚠️ Exibe no formato abaixo:\n\n'
+        info_users+='<code>USUÁRIO SENHA LIMITE DATA</code>\n'
         ShellBot.sendMessage --chat_id $id_admin \
             --text "$(echo -e $info_users)" \
             --parse_mode html
@@ -460,7 +460,7 @@ ver_users() {
                     databr="$(date -d "$datauser" +"%Y%m%d")"
                     hoje="$(date -d today +"%Y%m%d")"
                     [[ $hoje -ge $databr ]] && {
-                        data="Expirado"
+                        data="Venceu"
                     } || {
                         dat="$(date -d"$datauser" '+%Y-%m-%d')"
                         data=$(echo -e "$((($(date -ud $dat +%s) - $(date -ud $(date +%Y-%m-%d) +%s)) / 86400)) DIAS")
@@ -481,21 +481,21 @@ ver_users() {
     elif [[ "$(grep -wc "${callback_query_from_username}" $ativos)" != '0' ]]; then
         [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+                --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
             return 0
         }
         [[ $(ls /etc/bot/revenda/${callback_query_from_username}/usuarios | wc -l) == '0' ]] && {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "AÚN NO HAS CREADO UN USUARIO!"
+                --text "VC AINDA NAO CRIOU USUARIO!"
             return 0
         }
         arq_info=/tmp/$(echo $RANDOM)
         local info_users
         info_users='=×=×=×=×=×=×=×=×=×=×=×=×=×=\n'
-        info_users+='<b>INFORMACION DE USUARIOS</b>\n'
+        info_users+='<b>INFORMACOES DOS USUARIOS</b>\n'
         info_users+='=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n'
-        info_users+='⚠️ Muestra el formato siguiente:\n\n'
-        info_users+='<code>USER PASS LIMITE DATO</code>\n'
+        info_users+='⚠️ Exibe no formato abaixo:\n\n'
+        info_users+='<code>USUÁRIO SENHA LIMITE DATA</code>\n'
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
             --text "$(echo -e $info_users)" \
             --parse_mode html
@@ -512,7 +512,7 @@ ver_users() {
                     databr="$(date -d "$datauser" +"%Y%m%d")"
                     hoje="$(date -d today +"%Y%m%d")"
                     [[ $hoje -ge $databr ]] && {
-                        data="Expirado"
+                        data="Venceu"
                     } || {
                         dat="$(date -d"$datauser" '+%Y-%m-%d')"
                         data=$(echo -e "$((($(date -ud $dat +%s) - $(date -ud $(date +%Y-%m-%d) +%s)) / 86400)) DIAS")
@@ -532,7 +532,7 @@ ver_users() {
         done
     else
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "$(echo -e 🚫 ACCESO NEGADO 🚫)"
+            --text "$(echo -e 🚫 ACESSO NEGADO 🚫)"
         return 0
     fi
 }
@@ -573,10 +573,10 @@ monitor_ssh() {
         cad_onli=/tmp/$(echo $RANDOM)
         local info_on
         info_on='=×=×=×=×=×=×=×=×=×=×=×=×=×=\n'
-        info_on+='<b>MONITOR USUARIOS ONLINE</b>\n'
+        info_on+='<b>MONITOR USUARIOS ONLINES</b>\n'
         info_on+='=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n'
-        info_on+='⚠️ Muestra el formato siguiente:\n\n'
-        info_on+='<code>USUARIO ONLINE/TIEMPO\n</code>'
+        info_on+='⚠️ Exibe no formato abaixo:\n\n'
+        info_on+='<code>USUÁRIO  ONLINE/LIMITE  TEMPO\n</code>'
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
             --text "$(echo -e $info_on)" \
             --parse_mode html
@@ -611,29 +611,29 @@ monitor_ssh() {
             done
         } || {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "Ningun usuario online" \
+                --text "Nenhum usuario online" \
                 --parse_mode html
             return 0
         }
     elif [[ "$(grep -wc "${callback_query_from_username}" $ativos)" != '0' ]]; then
         [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+                --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
             return 0
         }
         [[ $(ls /etc/bot/revenda/${callback_query_from_username}/usuarios | wc -l) == '0' ]] && {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "AÚN NO HAS CREADO UN USUARIO!"
+                --text "VC AINDA NAO CRIOU USUARIO!"
             return 0
         }
         database="/root/usuarios.db"
         cad_onli=/tmp/$(echo $RANDOM)
         local info_on
         info_on='=×=×=×=×=×=×=×=×=×=×=×=×=×=\n'
-        info_on+='<b>MONITOR USUARIOS ONLINE</b>\n'
+        info_on+='<b>MONITOR USUARIOS ONLINES</b>\n'
         info_on+='=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n'
-        info_on+='⚠️ Muestra el formato siguiente:\n\n'
-        info_on+='<code>USUARIO ONLINE/TIEMPO\n</code>'
+        info_on+='⚠️ Exibe no formato abaixo:\n\n'
+        info_on+='<code>USUÁRIO  ONLINE/LIMITE  TEMPO\n</code>'
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
             --text "$(echo -e $info_on)" \
             --parse_mode html
@@ -667,13 +667,13 @@ monitor_ssh() {
             done
         } || {
             ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-                --text "Ningun usuario online" \
+                --text "Nenhum usuario online" \
                 --parse_mode html
             return 0
         }
     else
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "$(echo -e 🚫 ACCESO NEGADO 🚫)"
+            --text "$(echo -e 🚫 ACESSO NEGADO 🚫)"
         return 0
     fi
 }
@@ -682,14 +682,14 @@ fun_verif_user() {
     user=$1
     [[ -z "$user" ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "Error")" \
+            --text "$(echo -e "Erro")" \
             --parse_mode html
         return 0
     }
     [[ "${message_from_id[$id]}" == "$id_admin" ]] && {
         [[ "$(awk -F : '$3 >= 1000 { print $1 }' /etc/passwd | grep -wc $user)" == '0' ]] && {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e ❌ Usuario $user no existe !)" \
+                --text "$(echo -e ❌ Usuario $user não existe !)" \
                 --parse_mode html
             _erro='1'
             return 0
@@ -698,7 +698,7 @@ fun_verif_user() {
     [[ -d /etc/bot/revenda/${message_from_username} ]] && {
         [[ ! -e /etc/bot/revenda/${message_from_username}/usuarios/$user ]] && {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e ❌ Usuario $user no existe !)" \
+                --text "$(echo -e ❌ Usuario $user nao existe !)" \
                 --parse_mode html
             _erro='1'
             return 0
@@ -709,19 +709,19 @@ fun_verif_user() {
 fun_down() {
     [[ "${callback_query_from_id[$id]}" != "$id_admin" ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     }
     [[ ! -d /tmp/file ]] && mkdir /tmp/file
     ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-        --text "[1] - AGREGAR ARCHIVO\n[2] - EXCLUIR ARQUIVOS\n\nIngresa la opción [1-2]:" \
+        --text "[1] - ADICIONAR ARQUIVO\n[2] - EXCLUIR ARQUIVO\n\nInforme a opcao [1-2]:" \
         --reply_markup "$(ShellBot.ForceReply)"
 }
 
 infovps() {
     [[ "${callback_query_from_id[$id]}" != "$id_admin" ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "$(echo -e 🚫 ACCESO NEGADO 🚫)"
+            --text "$(echo -e 🚫 ACESSO NEGADO 🚫)"
         return 0
     }
     PTs='/tmp/prts'
@@ -745,16 +745,16 @@ infovps() {
     [[ "$(netstat -nplt | grep 'python' | wc -l)" != '0' ]] && echo -e "Proxy Socks: $(netstat -nplt | grep 'python' | awk {'print $4'} | cut -d: -f2 | xargs)" >>$PTs
     local info
     info="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-    info+="<b>INFORMACION DEL SERVIDOR</b>\n"
+    info+="<b>INFORMACOES DO SERVIDOR</b>\n"
     info+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
     info+="<b>SISTEMA OPERACIONAL</b>\n"
     info+="$system\n\n"
-    info+="<b>PROCESADOR</b>\n"
+    info+="<b>PROCESSADOR</b>\n"
     info+="<b>Nucleos:</b> $cpucores\n"
-    info+="<b>Ultilizado:</b> $uso\n\n"
+    info+="<b>Ultilizacao:</b> $uso\n\n"
     info+="<b>MEMORIA RAM</b>\n"
     info+="<b>Total:</b> $ram1\n"
-    info+="<b>Ultilizado:</b> $usoram\n\n"
+    info+="<b>Ultilizacao:</b> $usoram\n\n"
     while read linha; do
         info+="<b>$(echo -e "$linha")</b>\n"
     done < <(cat $PTs)
@@ -769,14 +769,14 @@ fun_download() {
     Opc=$1
     [[ -z "$Opc" ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "❌Error vuelva intentar")"
+            --text "$(echo -e "❌Erro tente novamente")"
         _erro='1'
         return 0
     }
     _file2=$2
     [[ -z "$_file2" ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "❌Error vuelva intentar")"
+            --text "$(echo -e "❌Erro tente novamente")"
         _erro='1'
         return 0
     }
@@ -794,7 +794,7 @@ fun_download() {
     echo $_file2
     ShellBot.sendDocument --chat_id ${message_from_id[$id]} \
         --document "@/etc/bot/arquivos/$_file" \
-        --caption "$(echo -e "✅ CREADO CON ÉXITO ✅\n\n👤 USUARIO: <code>$(awk -F " " '/Nome/ {print $2}' $_file2)</code>\n🔑 CONTRASEÑA: <code>$(awk -F " " '/Senha/ {print $2}' $_file2)</code>\n📱 LIMITE: $(awk -F " " '/Limite/ {print $2}' $_file2)\n⏱️ EXPIRA: $(awk -F " " '/Validade/ {print $2}' $_file2)")" \
+        --caption "$(echo -e "✅ CRIADO COM SUCESSO ✅\n\n👤 USUARIO: <code>$(awk -F " " '/Nome/ {print $2}' $_file2)</code>\n🔑 SENHA: <code>$(awk -F " " '/Senha/ {print $2}' $_file2)</code>\n📱 LIMITE: $(awk -F " " '/Limite/ {print $2}' $_file2)\n⏱️ EXPIRA EM: $(awk -F " " '/Validade/ {print $2}' $_file2)")" \
         --parse_mode html
     [[ -e "/root/$(awk -F " " '/Nome/ {print $2}' $_file2).ovpn" ]] && {
         ShellBot.sendDocument --chat_id ${message_from_id[$id]} \
@@ -805,12 +805,12 @@ fun_download() {
 otimizer() {
     [[ "${callback_query_from_id[$id]}" != "$id_admin" ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "$(echo -e 🚫 ACCESO NEGADO 🚫)"
+            --text "$(echo -e 🚫 ACESSO NEGADO 🚫)"
         return 0
     }
     MEM1=$(free | awk '/Mem:/ {print int(100*$3/$2)}')
     ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-        --text "🧹 LIMPIANDO CACHE DEL SERVIDOR"
+        --text "🧹 LIMPANDO CACHE DO SERVIDOR"
     apt-get autoclean -y
     echo 3 >/proc/sys/vm/drop_caches
     sync && sysctl -w vm.drop_caches=3 1>/dev/null 2>/dev/null
@@ -824,13 +824,13 @@ otimizer() {
     res=$(expr $MEM1 - $MEM2)
     local sucess
     sucess="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-    sucess+="<b>OPTIMIZADO CON ÉXITO !</b>\n"
+    sucess+="<b>OTIMIZADO COM SUCESSO !</b>\n"
     sucess+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
     sucess+="<i>Ultilizacao anterior</i> $MEM1%\n\n"
     sucess+="<b>Memoria Ram Total</b> $ram1\n"
     sucess+="<b>livre</b> $ram3\n"
-    sucess+="<b>En uso</b> $ram2\n"
-    sucess+="<i>Ultilizado actual</i> $MEM2%\n\n"
+    sucess+="<b>Em uso</b> $ram2\n"
+    sucess+="<i>Ultilizacao atual</i> $MEM2%\n\n"
     sucess+="<b>Economia de:</b> $res%"
     ShellBot.sendMessage --chat_id $id_admin \
         --text "$(echo -e $sucess)" \
@@ -841,12 +841,12 @@ otimizer() {
 speed_test() {
     [[ "${callback_query_from_id[$id]}" != "$id_admin" ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "$(echo -e 🚫 ACCESO NEGADO 🚫)"
+            --text "$(echo -e 🚫 ACESSO NEGADO 🚫)"
         return 0
     }
     rm -rf $HOME/speed >/dev/null 2>&1
     ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-        --text "🚀 TESTEANDO VELOCIDADE DEL SERVIDOR"
+        --text "🚀 TESTANDO VELOCIDADE DO SERVIDOR"
     speedtest --share >speed
     png=$(cat speed | sed -n '5 p' | awk -F : {'print $NF'})
     down=$(cat speed | sed -n '7 p' | awk -F : {'print $NF'})
@@ -854,7 +854,7 @@ speed_test() {
     lnk=$(cat speed | sed -n '10 p' | awk {'print $NF'})
     local msg
     msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-    msg+="<b>🚀 VELOCIDADE DEL SERVIDOR 🚀</b>\n"
+    msg+="<b>🚀 VELOCIDADE DO SERVIDOR 🚀</b>\n"
     msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
     msg+="<b>PING/LATENCIA:</b>$png\n"
     msg+="<b>DOWNLOAD:</b>$down\n"
@@ -872,12 +872,12 @@ speed_test() {
 backup_users() {
     [[ "${callback_query_from_id[$id]}" != "$id_admin" ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "$(echo -e 🚫 ACCESO NEGADO 🚫)"
+            --text "$(echo -e 🚫 ACESSO NEGADO 🚫)"
         return 0
     }
     rm /root/backup.vps 1>/dev/null 2>/dev/null
     ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-        --text "♻️ CREANDO BACKUP DE USUARIOS"
+        --text "♻️ CRIANDO BACKUP DE USUARIOS"
     tar cvf /root/backup.vps /root/usuarios.db /etc/shadow /etc/passwd /etc/group /etc/gshadow /etc/bot /etc/SSHPlus/senha 1>/dev/null 2>/dev/null
     ShellBot.sendDocument --chat_id ${id_admin} \
         --document "@/root/backup.vps" \
@@ -888,11 +888,11 @@ backup_users() {
 sobremim() {
     local msg
     env_msg="╔═══════•⊱✦⊰•═══════╗\n"
-        env_msg+="<b>BOT WEBCONT</b>\n"
+        env_msg+="<b>BOT SSH PLUS</b>\n"
         env_msg+="╚═══════•⊱✦⊰•═══════╝\n\n"
-    msg+="<b>Desarrollado por:</b> @Net_Satoshi\n"
-    msg+="<b>Canal Oficial:</b> @WEBCONT_OFC\n\n"
-    msg+="Nací con el propósito de brindar información y herramientas para la gestión de VPN en servidores 🐧 GNU/Linux 🐧.\n\n"
+    msg+="<b>Desenvolvido por:</b> @smigolvip\n"
+    msg+="<b>Canal Oficial:</b> @SSHPLUS\n\n"
+    msg+="Fui criado com o propósito de fornecer informações e ferramentas para gestão VPN em servidores 🐧 GNU/Linux 🐧.\n\n"
     msg+="<b>Menu:</b> /menu\n"
     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
         --text "$(echo -e $msg)" \
@@ -903,11 +903,11 @@ sobremim() {
 fun_add_teste() {
     if [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]]; then
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+            --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
         return 0
     elif [[ "${callback_query_from_id[$id]}" == "$id_admin" ]]; then
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "👤 CREAR TEST 👤\n\nCuantas horas deve durar Ej: 1:" \
+            --text "👤 CRIAR TESTE 👤\n\nQuantas horas deve durar EX: 1:" \
             --reply_markup "$(ShellBot.ForceReply)"
     elif [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]]; then
         _limTotal=$(grep -w "${callback_query_from_username}" $ativos | awk '{print $4}')
@@ -915,16 +915,16 @@ fun_add_teste() {
         _limsomarev2=$(echo "$_result + 1" | bc)
         [[ "$_limsomarev2" -gt "$_limTotal" ]] && {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "❌ NO TIENES CUPOS DISPONIBLES!"
+                --text "❌ VC NAO TEM LIMITE DISPONIVEL!"
             return 0
         } || {
             ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-                --text "👤 CREAR TEST 👤\n\nCuantas horas deve durar Ej: 1:" \
+                --text "👤 CRIAR TESTE 👤\n\nQuantas horas deve durar EX: 1:" \
                 --reply_markup "$(ShellBot.ForceReply)"
         }
     else
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     fi
 }
@@ -938,7 +938,7 @@ fun_teste() {
     tuserdate=$(date '+%C%y/%m/%d' -d " +2 days")
     [[ -z $t_time ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "❌ Error vuelva intentar")" \
+            --text "$(echo -e "❌ Erro tente novamente")" \
             --parse_mode html
         return 0
         _erro='1'
@@ -971,13 +971,13 @@ fun_teste() {
         for arqv in $(ls /etc/bot/arquivos); do
             ShellBot.sendDocument --chat_id ${message_from_id[$id]} \
                 --document "@/etc/bot/arquivos/$arqv" \
-                --caption "$(echo -e "✅ Creado con éxito ✅\n\n👤 USUARIO: <code>$usuario</code>\n🔑 CONTRASEÑA: <code>1234</code>\n\n⏱️ Expira en: $t_time $hrs")" \
+                --caption "$(echo -e "✅ Criado com sucesso ✅\n\n👤 USUARIO: <code>$usuario</code>\n🔑 SENHA: <code>1234</code>\n\n⏱️ Expira em: $t_time $hrs")" \
                 --parse_mode html
         done
         return 0
     } || {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "✅ <b>Creado con éxito</b> ✅\n\n👤 USUARIO: <code>$usuario</code>\n🔑 CONTRASEÑA: <code>1234</code>\n\n⏱️ Expira en: $t_time $hrs")" \
+            --text "$(echo -e "✅ <b>Criado com sucesso</b> ✅\n\n👤 USUARIO: <code>$usuario</code>\n🔑 SENHA: <code>1234</code>\n\n⏱️ Expira em: $t_time $hrs")" \
             --parse_mode html
         return 0
     }
@@ -987,7 +987,7 @@ fun_exp_user() {
     if [[ "${callback_query_from_id[$id]}" == "$id_admin" ]]; then
         [[ $(cat /root/usuarios.db | wc -l) == '0' ]] && {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "AÚN NO HAS CREADO UN USUARIO!"
+                --text "VC AINDA NAO CRIOU USUARIO!"
             return 0
         }
         datenow=$(date +%s)
@@ -1016,12 +1016,12 @@ fun_exp_user() {
     elif [[ "$(grep -wc "${callback_query_from_username}" $ativos)" != '0' ]]; then
         [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+                --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
             return 0
         }
         [[ $(ls /etc/bot/revenda/${callback_query_from_username}/usuarios | wc -l) == '0' ]] && {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "AÚN NO HAS CREADO UN USUARIO!"
+                --text "VC AINDA NAO CRIOU USUARIO!"
             return 0
         }
         datenow=$(date +%s)
@@ -1045,7 +1045,7 @@ fun_exp_user() {
         return 0
     else
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "$(echo -e 🚫 ACCESO NEGADO 🚫)"
+            --text "$(echo -e 🚫 ACESSO NEGADO 🚫)"
         return 0
     fi
 }
@@ -1063,24 +1063,24 @@ relatorio_rev() {
         _cont_revt=$(grep -wc revenda $ativos)
         local msg
         msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-        msg+="<b>📊 INFORME | INFORMACIONES</b>\n"
+        msg+="<b>📊 RELATORIO | INFORMACOES</b>\n"
         msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
         msg+="<b>Usuarios total:</b> $_tuser\n"
         msg+="<b>Usuarios online:</b> $_onli\n"
-        msg+="<b>Reventas Activas:</b> $_cont_rev\n"
-        msg+="<b>Reventas Suspendidas:</b> $_cont_sus\n"
-        msg+="<b>Sub-Reventas:</b> $_cont_sub\n\n"
+        msg+="<b>Revendas Ativas:</b> $_cont_rev\n"
+        msg+="<b>Revendas Suspensas:</b> $_cont_sus\n"
+        msg+="<b>Sub-Revendas:</b> $_cont_sub\n\n"
         msg+="<b>User:</b> @${callback_query_from_username}\n"
         msg+="<b>ID:</b> <code>${callback_query_from_id}</code>\n"
         [[ $_cont_revt != '0' ]] && {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "📊 CREANDO INFORME !"
+                --text "📊 CRIANDO RELATORIO !"
         } || {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "⚠️ NINGUN REVENDEDOR ENCONTRADO !"
+                --text "⚠️ NENHUM REVENDEDOR ENCONTRADO !"
             return 0
         }
-        echo -e "INFORME DOS REVENDEDORES\n\nTotal: $_cont_revt  -  $(printf 'Data: %(%d/%m/%Y)T\n')\n=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=" >/tmp/Relatorio.txt
+        echo -e "RELATORIO DOS REVENDEDORES\n\nTotal: $_cont_revt  -  $(printf 'Data: %(%d/%m/%Y)T\n')\n=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=" >/tmp/Relatorio.txt
         while read _revlist; do
             _nome_rev="$(echo $_revlist | awk '{print $2}')"
             _limite_rev="$(echo $_revlist | awk '{print $4}')"
@@ -1109,7 +1109,7 @@ relatorio_rev() {
                 total_on='0'
                 total_users='0'
             }
-            echo -e "\nSTATUS: $_status\nREVENDEDOR: @$_nome_rev\nCUPOS: $_limite_rev\nDIAS RESTANTES: $_data_rev\nSSH CREADAS: $total_users\nSSH ONLINE: $total_on\nSUB-REVENTA: $_subrev\n\n=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=" >>/tmp/Relatorio.txt
+            echo -e "\nSTATUS: $_status\nREVENDEDOR: @$_nome_rev\nLIMITE: $_limite_rev\nDIAS RESTANTES: $_data_rev\nSSH CRIADAS: $total_users\nSSH ONLINE: $total_on\nSUB-REVENDAS: $_subrev\n\n=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=" >>/tmp/Relatorio.txt
         done <<<"$(grep -w 'revenda' $ativos)"
         ShellBot.sendDocument --chat_id $id_admin \
             --document "@/tmp/Relatorio.txt" \
@@ -1119,21 +1119,21 @@ relatorio_rev() {
     elif [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]]; then
         [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+                --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
             return 0
         }
         [[ $(grep -wc 'SUBREVENDA' /etc/bot/revenda/${callback_query_from_username}/${callback_query_from_username}) == '0' ]] && {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "⚠️ NINGUN SUB-REVENDEDOR ENCONTRADO !"
+                --text "⚠️ NENHUM SUB REVENDEDOR ENCONTRADO !"
             _cont_limite=$(grep -w ${callback_query_from_username} $ativos | awk '{print $4}')
             fun_verif_limite_rev ${callback_query_from_username}
             _cont_disp=$(echo $_cont_limite - $_result | bc)
             local msg
             msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-            msg+="<b>📊 INFORME | INFORMACIONES</b>\n"
+            msg+="<b>📊 RELATORIO | INFORMACOES</b>\n"
             msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
             msg+="<b>Limite de Logins:</b> $_cont_limite\n"
-            msg+="<b>Limite Disponible:</b> $_cont_disp\n"
+            msg+="<b>Limite Disponivel:</b> $_cont_disp\n"
             ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
                 --text "$msg" \
                 --parse_mode html
@@ -1152,15 +1152,15 @@ relatorio_rev() {
         _cont_sup=$(fun_contsub | paste -s -d + | bc)
         local msg
         msg="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n"
-        msg+="<b>📊 INFORME | INFORMACIONES</b>\n"
+        msg+="<b>📊 RELATORIO | INFORMACOES</b>\n"
         msg+="=×=×=×=×=×=×=×=×=×=×=×=×=×=\n\n"
         msg+="<b>Limite de Logins:</b> $_cont_limite\n"
-        msg+="<b>Limite Disponible:</b> $_cont_disp\n"
-        msg+="<b>Sub-Reventas Total:</b> $_cont_atv\n"
-        msg+="<b>Sub-Reventas Suspendidas:</b> $_cont_sup\n"
+        msg+="<b>Limite Disponivel:</b> $_cont_disp\n"
+        msg+="<b>Sub-Revendas Total:</b> $_cont_atv\n"
+        msg+="<b>Sub-Revendas Suspensas:</b> $_cont_sup\n"
         msg+="<b>User:</b> @${callback_query_from_username}\n"
         msg+="<b>ID:</b> <code>${callback_query_from_id}</code>\n"
-        echo -e "INFORME DE SUB-REVENDEDORES\n\nTotal: $_cont_atv  -  $(printf 'Data: %(%d/%m/%Y)T\n')\n=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=" >/tmp/Relatorio-${callback_query_from_username}.txt
+        echo -e "RELATORIO DOS SUB REVENDEDORES\n\nTotal: $_cont_atv  -  $(printf 'Data: %(%d/%m/%Y)T\n')\n=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=" >/tmp/Relatorio-${callback_query_from_username}.txt
         while read _sublist; do
             _usub="$(echo $_sublist | awk '{print $2}')"
             _limit_sub=$(echo $_sublist | awk '{print $4}')
@@ -1188,7 +1188,7 @@ relatorio_rev() {
                 total_on='0'
                 total_users='0'
             }
-            echo -e "\nSTATUS: $_status\nSUB-REVENDEDOR: @$_usub\nCUPOS: $_limit_sub\nDIAS RESTANTES: $_data_sub\nSSH CREADAS: $total_users\nSSH ONLINE: $total_on\n\n=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=" >>/tmp/Relatorio-${callback_query_from_username}.txt
+            echo -e "\nSTATUS: $_status\nSUB-REVENDEDOR: @$_usub\nLIMITE: $_limit_sub\nDIAS RESTANTES: $_data_sub\nSSH CRIADAS: $total_users\nSSH ONLINE: $total_on\n\n=×=×=×=×=×=×=×=×=×=×=×=×=×=×=×=" >>/tmp/Relatorio-${callback_query_from_username}.txt
         done <<<"$(grep -w 'SUBREVENDA' /etc/bot/revenda/${callback_query_from_username}/${callback_query_from_username})"
         ShellBot.sendDocument --chat_id ${callback_query_message_chat_id[$id]} \
             --document "@/tmp/Relatorio-${callback_query_from_username}.txt" \
@@ -1198,7 +1198,7 @@ relatorio_rev() {
     else
 
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     fi
 }
@@ -1213,13 +1213,13 @@ fun_backauto() {
             ) | crontab -
             s
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "♻️ BACKUP AUTOMATICO ACTIVADO 🟢"
+                --text "♻️ BACKUP AUTOMATICO ATIVADO 🟢"
             return 0
         } || {
             [[ $(crontab -l | grep -c "userbackup") != '0' ]] && crontab -l | grep -v 'userbackup' | crontab -
             [[ -d /etc/SSHPlus/backups ]] && rm -rf /etc/SSHPlus/backups
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "♻️ BACKUP AUTOMATICO DESACTIVADO 🔴"
+                --text "♻️ BACKUP AUTOMATICO DESATIVADO 🔴"
             return 0
         }
     }
@@ -1247,7 +1247,7 @@ restaure_backup() {
             }
             ShellBot.getFile --file_id $file_id
             if ShellBot.downloadFile --file_path "${return[file_path]}" --dir "/tmp"; then
-                msg='<b>♻️ ARCHIVO DE BACKUP ♻️</b>\n\n<i>El archivo subido es un archivo\nde backup de usuários!</i>'
+                msg='<b>♻️ ARQUIVO DE BACKUP ♻️</b>\n\n<i>O arquivo enviado é um arquivo\nde backup de usuários!</i>'
                 ShellBot.sendMessage --chat_id ${id_admin} \
                     --text "$(echo -e "$msg")" \
                     --parse_mode html
@@ -1261,9 +1261,9 @@ restaure_backup() {
 }
 msg_bem_vindo() {
     local msg
-    msg="✌️😎 Hola <b>${message_from_first_name[$id]}</b>\n\nBIENVENIDO(a)\n\n"
-    msg+="Para acceder al menu\nhaga clic o ejecute [ /menu ]\n\n"
-    msg+="Para optener informaciones\nhaga clic o ejecute [ /ayuda ]\n\n"
+    msg="✌️😃 Ola <b>${message_from_first_name[$id]}</b>\n\nBEM VINDO(a)\n\n"
+    msg+="Para acessar o menu\nclick ou execute [ /menu ]\n\n"
+    msg+="Para obter informacoes\nclick ou execute [ /ajuda ]\n\n"
     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
         --text "$(echo -e $msg)" \
         --parse_mode html
@@ -1307,16 +1307,16 @@ fun_verif_limite_rev() {
 fun_add_revenda() {
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+            --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
         return 0
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "👥 AGREGAR REVENDEDOR 👥\n\nIntroduce el nombre:" \
+            --text "👥 ADICIONAR REVENDEDOR 👥\n\nInforme o nome:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     }
 }
@@ -1325,7 +1325,7 @@ criar_rev() {
     file_rev=$1
     [[ -z "$file_rev" ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e Error)"
+            --text "$(echo -e Erro)"
         _erro='1'
         break
     }
@@ -1351,16 +1351,16 @@ criar_rev() {
 fun_del_rev() {
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+            --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
         return 0
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "🗑 REMOVER REVENDEDOR 🗑\n\nIntroduce el user [Ej: @smigolvip]:" \
+            --text "🗑 REMOVER REVENDEDOR 🗑\n\nInforme o user dele [Ex: @smigolvip]:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     }
 }
@@ -1369,7 +1369,7 @@ del_rev() {
     _cli_rev=$1
     [[ -z "$_cli_rev" ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "Error")"
+            --text "$(echo -e "Erro")"
         return 0
     }
     [[ "${message_from_id[$id]}" == "$id_admin" ]] && {
@@ -1413,12 +1413,12 @@ del_rev() {
                 sed -i "/\b$_cli_rev\b/d" $suspensos
             }
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e "REMOVIDO CON ÉXITO")" \
+                --text "$(echo -e "REMOVIDO COM SUCESSO")" \
                 --parse_mode html
             return 0
         } || {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e ❌ EL REVENDEDOR NO EXISTE ❌)"
+                --text "$(echo -e ❌ REVENDEDEDOR NAO EXISTE ❌)"
             return 0
         }
     } || {
@@ -1455,12 +1455,12 @@ del_rev() {
                 sed -i "/\b$_cli_rev\b/d" /etc/bot/revenda/${message_from_username}/${message_from_username}
             }
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e "REMOVIDO CON ÉXITO")" \
+                --text "$(echo -e "REMOVIDO COM SUCESSO")" \
                 --parse_mode html
             return 0
         } || {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e ❌ EL REVENDEDOR NO EXISTE ❌)"
+                --text "$(echo -e ❌ REVENDEDEDOR NAO EXISTE ❌)"
             return 0
         }
     }
@@ -1469,16 +1469,16 @@ del_rev() {
 fun_lim_rev() {
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+            --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
         return 0
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "♾ EDITAR CUPOS DE REVENTA ♾\n\nIntroduce el user [Ej:  @Net_Satoshi]:" \
+            --text "♾ ALTERAR LIMITE REVENDA ♾\n\nInforme o user dele [Ex: @smigolvip]:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     }
 }
@@ -1487,7 +1487,7 @@ lim_rev() {
     _file_lim=$1
     [[ -z "$_file_lim" ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "Error")"
+            --text "$(echo -e "Erro")"
         return 0
     }
     _rev_usern=$(grep -w 'Revendedor' $_file_lim | awk -F '@' {'print $2'})
@@ -1515,16 +1515,16 @@ lim_rev() {
 fun_dat_rev() {
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+            --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
         return 0
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "📆 EDITAR DATOS DE REVENTA 📆\n\nIntroduce el user [Ej:  @Net_Satoshi]:" \
+            --text "📆 ALTERAR DATA REVENDA 📆\n\nInforme o user dele [Ex: @smigolvip]:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     }
 }
@@ -1533,7 +1533,7 @@ dat_rev() {
     _datfile=$1
     [[ -z "$_datfile" ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "Error")"
+            --text "$(echo -e "Erro")"
         _erro='1'
         return 0
     }
@@ -1564,7 +1564,7 @@ dat_rev() {
         sed -i "/\b$_revd\b/d" $suspensos
         sed -i "s;$new_d;$(date "+%d/%m/%Y" -d "+$new_d days");" $_datfile
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "⚠️ $_revd FUE SUSPENDIDO Y SE REACTIVÓ !")" \
+            --text "$(echo -e "⚠️ $_revd ESTAVA SUSPENSO E FOI REATIVADO !")" \
             --parse_mode html
     } || {
         d_old=$(grep -w 'DIAS_REVENDA' /etc/bot/revenda/$_revd/$_revd | awk {'print $2'})
@@ -1577,7 +1577,7 @@ dat_rev() {
 fun_list_rev() {
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+            --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
         return 0
     }
     if [[ "${callback_query_from_id[$id]}" == "$id_admin" ]]; then
@@ -1595,7 +1595,7 @@ fun_list_rev() {
             return 0
         } || {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "NO TIENES REVENDEDORES"
+                --text "VC NAO TEM REVENDEDORES"
             return 0
         }
     elif [[ "$(grep -w ${callback_query_from_username} $ativos | awk '{print $NF}')" == 'revenda' ]]; then
@@ -1614,12 +1614,12 @@ fun_list_rev() {
             return 0
         } || {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "NO TIENES SUB-REVENDEDORES"
+                --text "VC NAO TEM SUB REVENDEDORES"
             return 0
         }
     else
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     fi
 }
@@ -1627,16 +1627,16 @@ fun_list_rev() {
 fun_susp_rev() {
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+            --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
         return 0
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "🔒 SUSPENDER REVENDEDOR 🔒\n\nIntroduce el user [Ej:  @Net_Satoshi]:" \
+            --text "🔒 SUSPENDER REVENDEDOR 🔒\n\nInforme o user dele [Ex: @smigolvip]:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "🚫 ACCESO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     }
 }
@@ -1645,18 +1645,18 @@ susp_rev() {
     _revs=$1
     [[ -z "$_revs" ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "Error")"
+            --text "$(echo -e "Erro")"
         return 0
     }
     [[ -d "/etc/bot/suspensos/$_revs" ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "EL USUARIO YA ESTÁ SUSPENDIDO !")" \
+            --text "$(echo -e "O USUARIO JA ESTA SUSPENSO !")" \
             --parse_mode html
         return 0
     }
     [[ ! -d "/etc/bot/revenda/$_revs" ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "EL USUARIO NO EXISTE !")" \
+            --text "$(echo -e "O USUARIO NAO EXISTE !")" \
             --parse_mode html
         return 0
     }
@@ -1684,7 +1684,7 @@ susp_rev() {
         mv /etc/bot/revenda/$_revs /etc/bot/suspensos/$_revs
         grep -w "$_revs" $ativos >>$suspensos
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "SUSPENDIDO CON ÉXITO")" \
+            --text "$(echo -e "SUSPENDIDO COM SUCESSO")" \
             --parse_mode html
         return 0
     } || {
@@ -1698,12 +1698,12 @@ susp_rev() {
             mv /etc/bot/revenda/$_revs /etc/bot/suspensos/$_revs
             grep -w "$_revs" $ativos >>$suspensos
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e "SUSPENDIDO CON ÉXITO")" \
+                --text "$(echo -e "SUSPENDIDO COM SUCESSO")" \
                 --parse_mode html
             return 0
         } || {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e "EL SUB-REVENDEDOR NO EXISTE")" \
+                --text "$(echo -e "O SUB REVENDEDOR NAO EXISTE")" \
                 --parse_mode html
             return 0
         }
@@ -1716,12 +1716,12 @@ infouserbot() {
         fun_verif_limite_rev ${message_from_username}
         _cont_disp=$(echo $_cont_limite - $_result | bc)
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "<b>NOMBRE: </> ${message_from_first_name[$(ShellBot.ListUpdates)]}\n<b>USER:</>" "@${message_from_username[$(ShellBot.ListUpdates)]:-null}")\n<b>ID:</> ${message_from_id[$(ShellBot.ListUpdates)]}\nACCESO: REVENTA\n<b>TOTAL DE CUPOS:</b> $_cont_limite\n<b>CUPOS RESTANTE:</b> $_cont_disp" \
+            --text "$(echo -e "<b>NOME: </> ${message_from_first_name[$(ShellBot.ListUpdates)]}\n<b>USER:</>" "@${message_from_username[$(ShellBot.ListUpdates)]:-null}")\n<b>ID:</> ${message_from_id[$(ShellBot.ListUpdates)]}\nACESSO: REVENDA\n<b>LIMITE TOTAL:</b> $_cont_limite\n<b>LIMITE RESTANTE:</b> $_cont_disp" \
             --parse_mode html
         return 0
     } || {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "<b>NOMBRE: </> ${message_from_first_name[$(ShellBot.ListUpdates)]}\n<b>USER:</>" "@${message_from_username[$(ShellBot.ListUpdates)]:-null}")\n<b>ID:</> ${message_from_id[$(ShellBot.ListUpdates)]} " \
+            --text "$(echo -e "<b>NOME: </> ${message_from_first_name[$(ShellBot.ListUpdates)]}\n<b>USER:</>" "@${message_from_username[$(ShellBot.ListUpdates)]:-null}")\n<b>ID:</> ${message_from_id[$(ShellBot.ListUpdates)]} " \
             --parse_mode html
         return 0
     }
@@ -1730,13 +1730,13 @@ infouserbot() {
 fun_menurevenda() {
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-            --text "⚠️ ESTA SUSPENDIDO! CONTACTE AL ADMIN"
+            --text "⚠️ VC ESTA SUSPENSO! CONTATE O ADMINISTRADOR"
         return 0
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.editMessageText --chat_id ${callback_query_message_chat_id[$id]} \
             --message_id ${callback_query_message_message_id[$id]} \
-            --text "SELECCIONE UNA OPCIÓN A CONTINUACIÓN:" \
+            --text "SELECIONE UMA OPÇÃO ABAIXO:" \
             --reply_markup "$(ShellBot.InlineKeyboardMarkup --button 'menu4')"
         return 0
     }
@@ -1745,24 +1745,24 @@ fun_menurevenda() {
 # LISTA MENU ADMIN
 unset menu1
 menu1=''
-ShellBot.InlineKeyboardButton --button 'menu1' --line 1 --text 'CREAR USUARIO' --callback_data '_criaruser'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 2 --text 'CREAR TEST' --callback_data '_criarteste'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 1 --text 'CRIAR USUARIO' --callback_data '_criaruser'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 2 --text 'CRIAR TESTE' --callback_data '_criarteste'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 3 --text 'REMOVER' --callback_data '_deluser'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 4 --text 'EDITAR CONTRASEÑA' --callback_data '_altsenha'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 5 --text 'EDITAR LIMITE' --callback_data '_altlimite'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 6 --text 'EDITAR DATOS' --callback_data '_altdata'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 4 --text 'ALTERAR SENHA' --callback_data '_altsenha'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 5 --text 'ALTERAR LIMITE' --callback_data '_altlimite'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 6 --text 'ALTERAR DATA' --callback_data '_altdata'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 7 --text 'USUARIOS ONLINE' --callback_data '_monitor'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 8 --text 'INFO USUARIOS' --callback_data '_verusers'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 9 --text 'EXPIRADOS' --callback_data '_expirados'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 1 --text 'INFO VPS' --callback_data '_infovps'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 2 --text 'OPTIMIZAR' --callback_data '_otimizar'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 3 --text 'ARCHIVOS' --callback_data '_arqdown'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 4 --text 'REVENTA' --callback_data '_opcoesrev'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 5 --text 'SPEEDTEST' --callback_data '_speedteste'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 2 --text 'OTIMIZAR' --callback_data '_otimizar'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 3 --text 'ARQUIVOS' --callback_data '_arqdown'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 4 --text 'REVENDA' --callback_data '_opcoesrev'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 5 --text 'SPEEDTESTE' --callback_data '_speedteste'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 6 --text 'BACKUP USUARIOS' --callback_data '_backupusers'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 7 --text "ALTO BACKUP" --callback_data '_autobkp'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 8 --text 'INFORME' --callback_data '_relatorio'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 9 --text 'AYUDA' --callback_data '_ajuda'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 8 --text 'RELATORIO' --callback_data '_relatorio'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 9 --text 'AJUDA' --callback_data '_ajuda'
 ShellBot.regHandleFunction --function fun_adduser --callback_data _criaruser
 ShellBot.regHandleFunction --function fun_add_teste --callback_data _criarteste
 ShellBot.regHandleFunction --function fun_deluser --callback_data _deluser
@@ -1787,18 +1787,18 @@ keyboard1="$(ShellBot.InlineKeyboardMarkup -b 'menu1')"
 # LISTA MENU REVENDEDOR
 unset menu2
 menu2=''
-ShellBot.InlineKeyboardButton --button 'menu2' --line 1 --text 'CREAR USUARIO' --callback_data '_criaruser2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 1 --text 'CREAR TEST' --callback_data '_criarteste2'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 1 --text 'CRIAR USUARIO' --callback_data '_criaruser2'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 1 --text 'CRIAR TESTE' --callback_data '_criarteste2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 2 --text 'REMOVER' --callback_data '_deluser2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 2 --text 'USUARIOS ONLINE' --callback_data '_monitor2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 3 --text 'EDITAR LIMITE' --callback_data '_altlimite2'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 3 --text 'ALTERAR LIMITE' --callback_data '_altlimite2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 3 --text 'INFO USUARIOS' --callback_data '_verusers2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 4 --text 'EDITAR CONTRASEÑA' --callback_data '_altsenha2'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 4 --text 'ALTERAR SENHA' --callback_data '_altsenha2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 4 --text 'EXPIRADOS' --callback_data '_expirados2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 5 --text 'EDITAR DATOS' --callback_data '_altdata2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 5 --text 'REVENTA' --callback_data '_opcoesrev2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 6 --text 'INFORME' --callback_data '_relatorio2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 6 --text 'AYUDA' --callback_data '_ajuda2'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 5 --text 'ALTERAR DATA' --callback_data '_altdata2'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 5 --text 'REVENDA' --callback_data '_opcoesrev2'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 6 --text 'RELATORIO' --callback_data '_relatorio2'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 6 --text 'AJUDA' --callback_data '_ajuda2'
 ShellBot.regHandleFunction --function fun_adduser --callback_data _criaruser2
 ShellBot.regHandleFunction --function fun_add_teste --callback_data _criarteste2
 ShellBot.regHandleFunction --function fun_deluser --callback_data _deluser2
@@ -1817,16 +1817,16 @@ keyboard2="$(ShellBot.InlineKeyboardMarkup -b 'menu2')"
 #LISTA MUNU SUB REVENDEDOR
 unset menu3
 menu3=''
-ShellBot.InlineKeyboardButton --button 'menu3' --line 1 --text 'CREAR USUARIO' --callback_data '_criaruser3'
-ShellBot.InlineKeyboardButton --button 'menu3' --line 1 --text 'CREAR TEST' --callback_data '_criarteste3'
+ShellBot.InlineKeyboardButton --button 'menu3' --line 1 --text 'CRIAR USUARIO' --callback_data '_criaruser3'
+ShellBot.InlineKeyboardButton --button 'menu3' --line 1 --text 'CRIAR TESTE' --callback_data '_criarteste3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 2 --text 'REMOVER' --callback_data '_deluser3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 2 --text 'USUARIOS ONLINE' --callback_data '_monitor3'
-ShellBot.InlineKeyboardButton --button 'menu3' --line 3 --text 'EDITAR LIMITE' --callback_data '_altlimite3'
+ShellBot.InlineKeyboardButton --button 'menu3' --line 3 --text 'ALTERAR LIMITE' --callback_data '_altlimite3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 3 --text 'INFO USUARIOS' --callback_data '_verusers3'
-ShellBot.InlineKeyboardButton --button 'menu3' --line 4 --text 'EDITAR CONTRASEÑA' --callback_data '_altsenha3'
+ShellBot.InlineKeyboardButton --button 'menu3' --line 4 --text 'ALTERAR SENHA' --callback_data '_altsenha3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 4 --text 'EXPIRADOS' --callback_data '_expirados3'
-ShellBot.InlineKeyboardButton --button 'menu3' --line 5 --text 'EDITAR DATOS' --callback_data '_altdata3'
-ShellBot.InlineKeyboardButton --button 'menu3' --line 5 --text 'AYUDA' --callback_data '_ajuda3'
+ShellBot.InlineKeyboardButton --button 'menu3' --line 5 --text 'ALTERAR DATA' --callback_data '_altdata3'
+ShellBot.InlineKeyboardButton --button 'menu3' --line 5 --text 'AJUDA' --callback_data '_ajuda3'
 ShellBot.regHandleFunction --function fun_adduser --callback_data _criaruser3
 ShellBot.regHandleFunction --function fun_add_teste --callback_data _criarteste3
 ShellBot.regHandleFunction --function fun_deluser --callback_data _deluser3
@@ -1840,15 +1840,15 @@ ShellBot.regHandleFunction --function fun_ajuda --callback_data _ajuda3
 unset keyboard3
 keyboard3="$(ShellBot.InlineKeyboardMarkup -b 'menu3')"
 
-#LISTA MENU OPCOES REVENTA
+#LISTA MENU OPCOES REVENDA
 unset menu4
 menu4=''
-ShellBot.InlineKeyboardButton --button 'menu4' --line 1 --text 'AGREGAR REVENTA' --callback_data '_addrev'
-ShellBot.InlineKeyboardButton --button 'menu4' --line 2 --text 'REMOVER REVENTA' --callback_data '_delrev'
-ShellBot.InlineKeyboardButton --button 'menu4' --line 3 --text 'EDITAR CUPOS DE REVENTA' --callback_data '_limrev'
-ShellBot.InlineKeyboardButton --button 'menu4' --line 4 --text 'EDITAR DATOS DE REVENTA' --callback_data '_datrev'
-ShellBot.InlineKeyboardButton --button 'menu4' --line 5 --text 'LISTA DE REVENTA' --callback_data '_listrev'
-ShellBot.InlineKeyboardButton --button 'menu4' --line 6 --text 'SUSPENDER REVENTA' --callback_data '_susprevendas'
+ShellBot.InlineKeyboardButton --button 'menu4' --line 1 --text 'ADICIONAR REVENDA' --callback_data '_addrev'
+ShellBot.InlineKeyboardButton --button 'menu4' --line 2 --text 'REMOVER REVENDA' --callback_data '_delrev'
+ShellBot.InlineKeyboardButton --button 'menu4' --line 3 --text 'ALTERAR LIMITE REVENDA' --callback_data '_limrev'
+ShellBot.InlineKeyboardButton --button 'menu4' --line 4 --text 'ALTERAR DATA REVENDA' --callback_data '_datrev'
+ShellBot.InlineKeyboardButton --button 'menu4' --line 5 --text 'LISTAR REVENDA' --callback_data '_listrev'
+ShellBot.InlineKeyboardButton --button 'menu4' --line 6 --text 'SUSPENDER REVENDA' --callback_data '_susprevendas'
 ShellBot.regHandleFunction --function fun_add_revenda --callback_data _addrev
 ShellBot.regHandleFunction --function fun_del_rev --callback_data _delrev
 ShellBot.regHandleFunction --function fun_lim_rev --callback_data _limrev
@@ -1883,7 +1883,7 @@ while :; do
                     [[ "${comando[0]}" = "/start" ]] && msg_bem_vindo
                     [[ "${comando[0]}" = "/menu" ]] && fun_menu
                     [[ "${comando[0]}" = "/info" ]] && infouserbot
-                    [[ "${comando[0]}" = "/hrlp" || "${comando[0]}" = "/ayuda" ]] && fun_ajuda
+                    [[ "${comando[0]}" = "/hrlp" || "${comando[0]}" = "/ajuda" ]] && fun_ajuda
                     [[ "${comando[0]}" = "/bot" || "${comando[0]}" = "/sobre" ]] && sobremim
                     ;;
                 esac
@@ -1891,19 +1891,19 @@ while :; do
             if [[ ${message_reply_to_message_message_id[$id]} ]]; then
                 # Analisa a interface de resposta.
                 case ${message_reply_to_message_text[$id]} in
-                '👤 CREAR USUARIO 👤\n\nNombre de usuario:')
+                '👤 CRIAR USUARIO 👤\n\nNome do usuario:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     [[ "$(awk -F : '$3 >= 1000 { print $1 }' /etc/passwd | grep -w ${message_text[$id]} | wc -l)" != '0' ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error! USUARIO INVALIDO ❌\n\n⚠️ Ingrese Otro Nombre..")" \
+                            --text "$(echo -e "❌ Erro! USUARIO INVALIDO ❌\n\n⚠️ Informe Outro Nome..")" \
                             --parse_mode html
                         >$CAD_ARQ
                         break
                     }
                     [ "${message_text[$id]}" == 'root' ] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ ERROR! USUARIO INVALIDO ❌\n\n⚠️ Ingrese Otro Nombre..")" \
+                            --text "$(echo -e "❌ ERRO! USUARIO INVALIDO ❌\n\n⚠️ Informe Outro Nome..")" \
                             --parse_mode html
                         >$CAD_ARQ
                         break
@@ -1911,7 +1911,7 @@ while :; do
                     sizemin=$(echo -e ${#message_text[$id]})
                     [[ "$sizemin" -lt '4' ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error !\n\nUse mínimo 4 caracteres\n[Ej: test]")" \
+                            --text "$(echo -e "❌ Erro !\n\nUse no mínimo 4 caracteres\n[EX: test]")" \
                             --parse_mode html
                         >$CAD_ARQ
                         break
@@ -1919,7 +1919,7 @@ while :; do
                     sizemax=$(echo -e ${#message_text[$id]})
                     [[ "$sizemax" -gt '10' ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error !\n\nUse maximo 8 caracteres\n[Ej: Telegram]")" \
+                            --text "$(echo -e "❌ Erro !\n\nUse no maximo 8 caracteres\n[EX: Telegram]")" \
                             --parse_mode html
                         >$CAD_ARQ
                         break
@@ -1935,7 +1935,7 @@ while :; do
                     [[ "$_erro" == '1' ]] && break
                     [[ "$sizepass" -lt '4' ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error !\n\nUse mínimo 4 caracteres\n[Ej: 1234]")" \
+                            --text "$(echo -e "❌ Erro !\n\nUse no mínimo 4 caracteres\n[EX: 1234]")" \
                             --parse_mode html
                         >$CAD_ARQ
                         break
@@ -1951,7 +1951,7 @@ while :; do
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error ! \n\nUltilize solo numeros [Ej: 1]")" \
+                            --text "$(echo -e "❌ Erro ! \n\nUltilize apenas numeros [EX: 1]")" \
                             --parse_mode html
                         >$CAD_ARQ
                         break
@@ -1963,7 +1963,7 @@ while :; do
                         [[ "$_limsomarev2" -gt "$_limTotal" ]] && {
                             _restant1=$(($_limTotal - $_result))
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "❌ No tienes cupos disponibles\n\nCupos disponibles: $_restant1 ")" \
+                                --text "$(echo -e "❌ Vc nao tem limite suficiente\n\nLimite disponivel: $_restant1 ")" \
                                 --parse_mode html
                             >$CAD_ARQ
                             break
@@ -1972,7 +1972,7 @@ while :; do
                     echo "Limite: ${message_text[$id]}" >>$CAD_ARQ
                     # Próximo campo.
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text 'Validez en dias: ' \
+                        --text 'Validade em dias: ' \
                         --reply_markup "$(ShellBot.ForceReply)"
                     ;;
 
@@ -1981,7 +1981,7 @@ while :; do
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error ! \n\nUltilize solo numeros [Ej: 30]")" \
+                            --text "$(echo -e "❌ Erro ! \n\nUltilize apenas numeros [EX: 30]")" \
                             --parse_mode html
                         >$CAD_ARQ
                         break
@@ -1991,37 +1991,37 @@ while :; do
                     criar_user $CAD_ARQ
                     [[ "(grep -w ${message_text[$id]} /etc/passwd)" = '0' ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e ❌ Error al crear usuario !)" \
+                            --text "$(echo -e ❌ Erro ao criar usuario !)" \
                             --parse_mode html
                         >$CAD_ARQ
                         break
                     }
                     [[ "$(ls /etc/bot/arquivos | wc -l)" != '0' ]] && {
                         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                            --text '📥 ARCHIVOS DISPONIBLES 📥\n\nDesea descargar? si o no?:' \
+                            --text '📥 ARQUIVOS DISPONIVEIS 📥\n\nDeseja baixar? Sim ou Nao?:' \
                             --reply_markup "$(ShellBot.ForceReply)"
                     } || {
                         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                            --text "<b>✅ CREADO CON ÉXITO ✅</b>\n\n👤 USUARIO: <code>$(awk -F " " '/Nome/ {print $2}' $CAD_ARQ)</code>\n🔑 CONTRASEÑA: <code>$(awk -F " " '/Senha/ {print $2}' $CAD_ARQ)</code>\n📱 LIMITE: $(awk -F " " '/Limite/ {print $2}' $CAD_ARQ)\n⏱️ EXPIRA: $(awk -F " " '/Validade/ {print $2}' $CAD_ARQ)" \
+                            --text "<b>✅ CRIADO COM SUCESSO ✅</b>\n\n👤 USUARIO: <code>$(awk -F " " '/Nome/ {print $2}' $CAD_ARQ)</code>\n🔑 SENHA: <code>$(awk -F " " '/Senha/ {print $2}' $CAD_ARQ)</code>\n📱 LIMITE: $(awk -F " " '/Limite/ {print $2}' $CAD_ARQ)\n⏱️ EXPIRA EM: $(awk -F " " '/Validade/ {print $2}' $CAD_ARQ)" \
                             --parse_mode html
                         break
                     }
                     ;;
-                '📥 ARCHIVOS DISPONIBLES 📥\n\nDesea descargar? si o no?:')
+                '📥 ARQUIVOS DISPONIVEIS 📥\n\nDeseja baixar? Sim ou Nao?:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([A-Za-z]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Opcion Invalida ❌\n\n⚠️ Utilize solo letras [Ej: si o no]")" \
+                            --text "$(echo -e "❌ Opcao Invalida ❌\n\n⚠️ Ultilize apenas letras [EX: sim ou nao]")" \
                             --parse_mode html
                         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                            --text "<b>✅ CREADO CON ÉXITO ✅</b>\n\n👤 USUARIO: <code>$(awk -F " " '/Nome/ {print $2}' $CAD_ARQ)</code>\n🔑 CONTRASEÑA: <code>$(awk -F " " '/Senha/ {print $2}' $CAD_ARQ)</code>\n📱 LIMITE: $(awk -F " " '/Limite/ {print $2}' $CAD_ARQ)\n⏱️ EXPIRA: $(awk -F " " '/Validade/ {print $2}' $CAD_ARQ)" \
+                            --text "<b>✅ CRIADO COM SUCESSO ✅</b>\n\n👤 USUARIO: <code>$(awk -F " " '/Nome/ {print $2}' $CAD_ARQ)</code>\n🔑 SENHA: <code>$(awk -F " " '/Senha/ {print $2}' $CAD_ARQ)</code>\n📱 LIMITE: $(awk -F " " '/Limite/ {print $2}' $CAD_ARQ)\n⏱️ EXPIRA EM: $(awk -F " " '/Validade/ {print $2}' $CAD_ARQ)" \
                             --parse_mode html
                         break
                     }
                     [[ "${message_text[$id]}" = @(Sim|sim|SIM) ]] && {
                         msg_cli="≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠\n"
-                        msg_cli+="<b>ARCHIVOS PRE-CONFIGURADOS </b>❗\n"
+                        msg_cli+="<b>ARQUIVOS PRE-CONFIGURADOS </b>❗\n"
                         msg_cli+="≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠\n\n"
                         for _file in $(ls /etc/bot/arquivos); do
                             i=$(($i + 1))
@@ -2035,7 +2035,7 @@ while :; do
                             --reply_markup "$(ShellBot.ForceReply)"
                     } || {
                         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                            --text "<b>✅ CREADO CON ÉXITO ✅</b>\n\n👤 USUARIO: <code>$(awk -F " " '/Nome/ {print $2}' $CAD_ARQ)</code>\n🔑 CONTRASEÑA: <code>$(awk -F " " '/Senha/ {print $2}' $CAD_ARQ)</code>\n📱 LIMITE: $(awk -F " " '/Limite/ {print $2}' $CAD_ARQ)\n⏱️ EXPIRA: $(awk -F " " '/Validade/ {print $2}' $CAD_ARQ)" \
+                            --text "<b>✅ CRIADO COM SUCESSO ✅</b>\n\n👤 USUARIO: <code>$(awk -F " " '/Nome/ {print $2}' $CAD_ARQ)</code>\n🔑 SENHA: <code>$(awk -F " " '/Senha/ {print $2}' $CAD_ARQ)</code>\n📱 LIMITE: $(awk -F " " '/Limite/ {print $2}' $CAD_ARQ)\n⏱️ EXPIRA EM: $(awk -F " " '/Validade/ {print $2}' $CAD_ARQ)" \
                             --parse_mode html
                     }
                     ;;
@@ -2044,10 +2044,10 @@ while :; do
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Opcion Invalida ❌ \n\n⚠️ Utilize solo numeros [Ej: 1]")" \
+                            --text "$(echo -e "❌ Opcao Invalida ❌ \n\n⚠️ Ultilize apenas numeros [EX: 1]")" \
                             --parse_mode html
                         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                            --text "<b>✅ CREADO CON ÉXITO ✅</b>\n\n👤 USUARIO: <code>$(awk -F " " '/Nome/ {print $2}' $CAD_ARQ)</code>\n🔑 CONTRASEÑA: <code>$(awk -F " " '/Senha/ {print $2}' $CAD_ARQ)</code>\n📱 LIMITE: $(awk -F " " '/Limite/ {print $2}' $CAD_ARQ)\n⏱️ EXPIRA: $(awk -F " " '/Validade/ {print $2}' $CAD_ARQ)" \
+                            --text "<b>✅ CRIADO COM SUCESSO ✅</b>\n\n👤 USUARIO: <code>$(awk -F " " '/Nome/ {print $2}' $CAD_ARQ)</code>\n🔑 SENHA: <code>$(awk -F " " '/Senha/ {print $2}' $CAD_ARQ)</code>\n📱 LIMITE: $(awk -F " " '/Limite/ {print $2}' $CAD_ARQ)\n⏱️ EXPIRA EM: $(awk -F " " '/Validade/ {print $2}' $CAD_ARQ)" \
                             --parse_mode html
                         >$CAD_ARQ
                         break
@@ -2057,16 +2057,16 @@ while :; do
                     >$CAD_ARQ
                     break
                     ;;
-                '🗑 REMOVER USUARIO 🗑\n\nNombre de usuario:')
+                '🗑 REMOVER USUARIO 🗑\n\nNome do usuario:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     fun_del_user ${message_text[$id]}
                     [[ "$_erro" == '1' ]] && break
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text "✅ *Removido con éxito.* 🚮" \
+                        --text "✅ *Removido com sucesso.* 🚮" \
                         --parse_mode markdown
                     ;;
-                '🔐 Editar Contraseña 🔐\n\nNombre de usuario:')
+                '🔐 Alterar Senha 🔐\n\nNome do usuario:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     fun_verif_user ${message_text[$id]}
@@ -2074,7 +2074,7 @@ while :; do
                     [[ "$_erro" == '1' ]] && break
                     echo "${message_text[$id]}" >/tmp/name-s
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text 'Nueva contraseña:' \
+                        --text 'Nova senha:' \
                         --reply_markup "$(ShellBot.ForceReply)"
                     ;;
                 'Nova senha:')
@@ -2083,18 +2083,18 @@ while :; do
                     [[ "$_erro" == '1' ]] && break
                     [[ "$sizepass" -lt '4' ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error !\n\n⚠️ Use mínimo 4 caracteres [EX: 1234]")" \
+                            --text "$(echo -e "❌ Erro !\n\n⚠️ Use mínimo 4 caracteres [EX: 1234]")" \
                             --parse_mode html
                         break
                     }
                     alterar_senha_user $(cat /tmp/name-s) ${message_text[$id]}
                     [[ "$_erro" == '1' ]] && break
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ CONTRASEÑA ALTERADA !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-s)\n<b>Nueva contraseña:</b> ${message_text[$id]}")" \
+                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ SENHA ALTERADA !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-s)\n<b>Nova senha:</b> ${message_text[$id]}")" \
                         --parse_mode html
                     rm /tmp/name-s >/dev/null 2>&1
                     ;;
-                '👥 Alterar Limite 👥\n\nNombre de usuario:')
+                '👥 Alterar Limite 👥\n\nNome do usuario:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     echo $_erro segundo
@@ -2103,7 +2103,7 @@ while :; do
                     [[ "$_erro" == '1' ]] && break
                     echo "${message_text[$id]}" >/tmp/name-l
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text 'Nuevo limite:' \
+                        --text 'Novo limite:' \
                         --reply_markup "$(ShellBot.ForceReply)"
                     ;;
                 'Novo limite:')
@@ -2111,18 +2111,18 @@ while :; do
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error ! \n\n⚠️ Utilize solo numeros [Ej: 1]")" \
+                            --text "$(echo -e "❌ Erro ! \n\n⚠️ Ultilize apenas numeros [EX: 1]")" \
                             --parse_mode html
                         break
                     }
                     alterar_limite_user $(cat /tmp/name-l) ${message_text[$id]}
                     [[ "$_erro" == '1' ]] && break
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ LIMITE ALTERADO !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-l)\n<b>Nuevo Limite:</b> ${message_text[$id]}")" \
+                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ LIMITE ALTERADO !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-l)\n<b>Novo Limite:</b> ${message_text[$id]}")" \
                         --parse_mode html
                     rm /tmp/name-l >/dev/null 2>&1
                     ;;
-                '⏳ Editar Dato ⏳\n\nNombre de usuario:')
+                '⏳ Alterar Data ⏳\n\nNome do usuario:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     fun_verif_user ${message_text[$id]}
@@ -2137,7 +2137,7 @@ while :; do
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([0-9/]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error! Siga el ejemplo\n\nDias formato [EX: 30]\nData formato [EX: 30/12/2019]")" \
+                            --text "$(echo -e "❌ Erro! Siga o exemplo\n\nDias formato [EX: 30]\nData formato [EX: 30/12/2019]")" \
                             --parse_mode html
                         break
                     }
@@ -2148,21 +2148,21 @@ while :; do
                         --parse_mode html
                     rm /tmp/name-d >/dev/null 2>&1
                     ;;
-                '[1] - AGREGAR ARCHIVO\n[2] - EXCLUIR ARQUIVOS\n\nIngresa la opción [1-2]:')
+                '[1] - ADICIONAR ARQUIVO\n[2] - EXCLUIR ARQUIVO\n\nInforme a opcao [1-2]:')
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error ! \n\n⚠️ Utilize solo numeros [Ej: 1 ou 2]")" \
+                            --text "$(echo -e "❌ Erro ! \n\n⚠️ Ultilize apenas numeros [EX: 1 ou 2]")" \
                             --parse_mode html
                         break
                     }
                     if [[ "${message_text[$id]}" = '1' ]]; then
                         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                            --text "📤 HOSPEDAR ARCHIVOS 📤\n\nEnvie-me o arquivo:" \
+                            --text "📤 HOSPEDAR ARQUIVOS 📤\n\nEnvie-me o arquivo:" \
                             --reply_markup "$(ShellBot.ForceReply)"
                     elif [[ "${message_text[$id]}" = '2' ]]; then
                         [[ $(ls /etc/bot/arquivos | wc -l) != '0' ]] && {
                             msg_cli1="≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠\n"
-                            msg_cli1+="🚀<b> ARCHIVOS HOSPEDADOS </b>\n"
+                            msg_cli1+="🚀<b> ARQUIVOS HOSPEDADOS </b>\n"
                             msg_cli1+="≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠\n\n"
                             for _file in $(ls /etc/bot/arquivos); do
                                 i=$(($i + 1))
@@ -2182,7 +2182,7 @@ while :; do
                         }
                     else
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Opcion Invalida")" \
+                            --text "$(echo -e "❌ Opcao Invalida")" \
                             --parse_mode html
                         break
                     fi
@@ -2193,7 +2193,7 @@ while :; do
                     echo $Opc1
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error ao Excluir arquivo ! \n\n⚠️ Utilize solo numeros [Ej: 1]")" \
+                            --text "$(echo -e "❌ Erro ao Excluir arquivo ! \n\n⚠️ Ultilize apenas numeros [EX: 1]")" \
                             --parse_mode html
                         break
                     } || {
@@ -2222,7 +2222,7 @@ while :; do
                         }
                     }
                     ;;
-                '📤 HOSPEDAR ARCHIVOS 📤\n\nEnvie-me o arquivo:')
+                '📤 HOSPEDAR ARQUIVOS 📤\n\nEnvie-me o arquivo:')
                     if [[ "${update_id[$id]}" ]]; then
                         # Monitora o envio de arquivos
                         [[ ${message_document_file_id[$id]} ]] && file_id=${message_document_file_id[$id]} && download_file=1
@@ -2243,7 +2243,7 @@ while :; do
                             }
                         } || {
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "❌ Error ao receber arquivo ❌")" \
+                                --text "$(echo -e "❌ Erro ao receber arquivo ❌")" \
                                 --parse_mode markdown
                             break
                         }
@@ -2254,7 +2254,7 @@ while :; do
                     [[ ${message_from_id[$id]} != ${id_admin} ]] && break
                     [[ $Resp != ?(+|-)+([a-z]) ]] && {
                         ShellBot.sendMessage --chat_id ${id_admin} \
-                            --text "$(echo -e "❌ Error ! \n\n⚠️ Ultilize apenas sim ou nao")" \
+                            --text "$(echo -e "❌ Erro ! \n\n⚠️ Ultilize apenas sim ou nao")" \
                             --parse_mode html
                         break
                     }
@@ -2273,31 +2273,31 @@ while :; do
                     }
                     break
                     ;;
-                    # FUNCOES DE GESTAO REVENTA
+                    # FUNCOES DE GESTAO REVENDA
                     #
                     # Adicionar, remover, limite, data, suspencao, relatorio
                     #
-                '👥 AGREGAR REVENDEDOR 👥\n\nIntroduce el nombre:')
+                '👥 ADICIONAR REVENDEDOR 👥\n\nInforme o nome:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     echo "Nome: ${message_text[$id]}" >$CAD_ARQ
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text 'Informe o user dele [Ej:  @Net_Satoshi]:' \
+                        --text 'Informe o user dele [Ex: @smigolvip]:' \
                         --reply_markup "$(ShellBot.ForceReply)"
                     ;;
-                'Informe o user dele [Ej:  @Net_Satoshi]:')
+                'Informe o user dele [Ex: @smigolvip]:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     _VAR1=$(echo -e ${message_text[$id]} | awk -F '@' {'print $2'})
                     [[ -z $_VAR1 ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error \n\n⚠️ Informe o user [EX: @smigolvip]")" \
+                            --text "$(echo -e "❌ Erro \n\n⚠️ Informe o user [EX: @smigolvip]")" \
                             --parse_mode html
                         break
                     }
                     [[ -d /etc/bot/revenda/$_VAR1 ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ El Revendedor ${message_text[$id]} ja existe")" \
+                            --text "$(echo -e "❌ O Revendedor ${message_text[$id]} ja existe")" \
                             --parse_mode html
                         break
                     }
@@ -2311,7 +2311,7 @@ while :; do
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error ! \n\n⚠️ Utilize solo numeros [Ej: 10]")" \
+                            --text "$(echo -e "❌ Erro ! \n\n⚠️ Ultilize apenas numeros [EX: 10]")" \
                             --parse_mode html
                         break
                     }
@@ -2322,7 +2322,7 @@ while :; do
                         [[ "$_limsomarev" -gt "$_limTotal" ]] && {
                             _restant1=$(($_limTotal - $_result))
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "❌ No tienes cupos disponibles\n\nLimite disponivel: $_restant1 ")" \
+                                --text "$(echo -e "❌ Vc nao tem limite suficiente\n\nLimite disponivel: $_restant1 ")" \
                                 --parse_mode html
                             break
                         }
@@ -2339,11 +2339,11 @@ while :; do
                     _clientrev=$(cat $CAD_ARQ)
                     criar_rev $CAD_ARQ
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text "✅ Creado con éxito. ✅\n\n$(<$CAD_ARQ)\n\nBOT: @${message_reply_to_message_from_username}" \
+                        --text "✅ Criado com sucesso. ✅\n\n$(<$CAD_ARQ)\n\nBOT: @${message_reply_to_message_from_username}" \
                         --parse_mode html
                     ;;
                     # REMOVE REVENDEDOR
-                '🗑 REMOVER REVENDEDOR 🗑\n\nIntroduce el user [Ej:  @Net_Satoshi]:')
+                '🗑 REMOVER REVENDEDOR 🗑\n\nInforme o user dele [Ex: @smigolvip]:')
                     echo -e "${message_text[$id]}" >$CAD_ARQ
                     _Var=$(sed -n '1 p' $CAD_ARQ | awk -F '@' {'print $2'})
                     [[ -z $_Var ]] && {
@@ -2355,8 +2355,8 @@ while :; do
                     del_rev $_Var
                     break
                     ;;
-                    # EDITAR LIMITE
-                '♾ EDITAR CUPOS DE REVENTA ♾\n\nIntroduce el user [Ej:  @Net_Satoshi]:')
+                    # ALTERAR LIMITE
+                '♾ ALTERAR LIMITE REVENDA ♾\n\nInforme o user dele [Ex: @smigolvip]:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     echo -e "Revendedor: ${message_text[$id]}" >$CAD_ARQ
@@ -2370,11 +2370,11 @@ while :; do
                     [[ "${message_from_id[$id]}" == "$id_admin" ]] && {
                         [[ $(grep -wc $_Var1 $ativos) != '0' ]] && {
                             ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                                --text 'Ingrese el limite SSH:' \
+                                --text 'Informe o Limite SSH:' \
                                 --reply_markup "$(ShellBot.ForceReply)"
                         } || {
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "❌ Revendedor ${message_text[$id]} no existe")" \
+                                --text "$(echo -e "❌ Revendedor ${message_text[$id]} nao existe")" \
                                 --parse_mode html
                             break
                         }
@@ -2382,11 +2382,11 @@ while :; do
                     [[ $(grep -w ${message_from_username} $ativos | awk '{print $NF}') == 'revenda' ]] && {
                         [[ "$(grep -wc "$_Var1" /etc/bot/revenda/${message_from_username}/${message_from_username})" != '0' ]] && {
                             ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                                --text 'Ingrese el limite SSH:' \
+                                --text 'Informe o Limite SSH:' \
                                 --reply_markup "$(ShellBot.ForceReply)"
                         } || {
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "❌ El Sub-revendedor no existe")" \
+                                --text "$(echo -e "❌ O Sub-revendedor nao existe")" \
                                 --parse_mode html
                             break
                         }
@@ -2397,7 +2397,7 @@ while :; do
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error ! \n\nUtilize solo numeros [Ej: 1]")" \
+                            --text "$(echo -e "❌ Erro ! \n\nUltilize apenas numeros [EX: 1]")" \
                             --parse_mode html
                         break
                     }
@@ -2414,14 +2414,14 @@ while :; do
                         [[ "$_limsomarev2" -ge "$_limTotal" ]] && {
                             echo $_limsomarev2
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "❌ No tienes cupos disponibles")" \
+                                --text "$(echo -e "❌ Vc nao tem limite suficiente")" \
                                 --parse_mode html
                             break
                         }
                         [[ "$_limsomarev" -gt "$_limTotal" ]] && {
                             [[ "$_limTotal" == "$(($_limTotal - $_result))" ]] && _restant1='0' || _restant1=$(($_limTotal - $_result))
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "❌ No tienes cupos disponibles\n\nCupo restante: $_restant1 ")" \
+                                --text "$(echo -e "❌ Vc nao tem limite suficiente\n\nLimite restante: $_restant1 ")" \
                                 --parse_mode html
                             break
                         }
@@ -2429,17 +2429,17 @@ while :; do
                     echo -e "Limite: ${message_text[$id]}" >>$CAD_ARQ
                     lim_rev $CAD_ARQ
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ CUPOS DE REVENTA ALTERADO !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n$(<$CAD_ARQ)")" \
+                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ LIMITE REVENDA ALTERADO !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n$(<$CAD_ARQ)")" \
                         --parse_mode html
-                    # EDITAR DATOS
+                    # ALTERAR DATA
                     ;;
-                '📆 EDITAR DATOS DE REVENTA 📆\n\nIntroduce el user [Ej:  @Net_Satoshi]:')
+                '📆 ALTERAR DATA REVENDA 📆\n\nInforme o user dele [Ex: @smigolvip]:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     _VAR1=$(echo -e ${message_text[$id]} | awk -F '@' {'print $2'})
                     [[ -z $_VAR1 ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "Revendedor ${message_text[$id]} no existe")" \
+                            --text "$(echo -e "Revendedor ${message_text[$id]} nao existe")" \
                             --parse_mode html
                         break
                     }
@@ -2447,11 +2447,11 @@ while :; do
                         [[ $(grep -wc $_VAR1 $ativos) != '0' ]] && {
                             echo -e "Revendedor: ${message_text[$id]}" >$CAD_ARQ
                             ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                                --text 'Dias de acceso [Ej: 30]:' \
+                                --text 'Dias de acesso [Ex: 30]:' \
                                 --reply_markup "$(ShellBot.ForceReply)"
                         } || {
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "❌ El Revendedor ${message_text[$id]} no existe")" \
+                                --text "$(echo -e "❌ O Revendedor ${message_text[$id]} nao existe")" \
                                 --parse_mode html
                             break
                         }
@@ -2460,23 +2460,23 @@ while :; do
                             [[ "$(grep -wc "$_VAR1" /etc/bot/revenda/${message_from_username}/${message_from_username})" != '0' ]] && {
                                 echo -e "Revendedor: ${message_text[$id]}" >$CAD_ARQ
                                 ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                                    --text 'Dias de acceso [Ej: 30]:' \
+                                    --text 'Dias de acesso [Ex: 30]:' \
                                     --reply_markup "$(ShellBot.ForceReply)"
                             } || {
                                 ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                    --text "$(echo -e "❌ El SubRevendedor ${message_text[$id]} no existe")" \
+                                    --text "$(echo -e "❌ O SubRevendedor ${message_text[$id]} nao existe")" \
                                     --parse_mode html
                                 break
                             }
                         }
                     }
                     ;;
-                'Dias de acceso [Ej: 30]:')
+                'Dias de acesso [Ex: 30]:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error ! \n\nUtilize solo numeros [Ej: 30]")" \
+                            --text "$(echo -e "❌ Erro ! \n\nUltilize apenas numeros [EX: 30]")" \
                             --parse_mode html
                         break
                     }
@@ -2484,28 +2484,28 @@ while :; do
                     dat_rev $CAD_ARQ
                     [[ "$_erro" == '1' ]] && break
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ DATO DE REVENTA ALTERADO !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n$(<$CAD_ARQ)")" \
+                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ DATA REVENDA ALTERADA !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n$(<$CAD_ARQ)")" \
                         --parse_mode html
                     ;;
                     # SUSPENDER REVENDEDOR
-                '🔒 SUSPENDER REVENDEDOR 🔒\n\nIntroduce el user [Ej:  @Net_Satoshi]:')
+                '🔒 SUSPENDER REVENDEDOR 🔒\n\nInforme o user dele [Ex: @smigolvip]:')
                     _VAR1=$(echo -e ${message_text[$id]} | awk -F '@' {'print $2'})
                     [[ -z $_VAR1 ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Revendedor ${message_text[$id]} no existe")" \
+                            --text "$(echo -e "❌ Revendedor ${message_text[$id]} nao existe")" \
                             --parse_mode html
                         break
                     }
                     susp_rev $_VAR1
                     break
                     ;;
-                '👤 CREAR TEST 👤\n\nCuantas horas deve durar Ej: 1:')
+                '👤 CRIAR TESTE 👤\n\nQuantas horas deve durar EX: 1:')
                     verifica_acesso
                     echo $_erro
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error ! \n\nUtilize solo numeros [Ej: 1]")" \
+                            --text "$(echo -e "❌ Erro ! \n\nUltilize apenas numeros [EX: 1]")" \
                             --parse_mode html
                         >$CAD_ARQ
                         break
@@ -2516,7 +2516,7 @@ while :; do
                         _limsomarev2=$(echo "$_result + 1" | bc)
                         [[ "$_limsomarev2" -gt "$_limTotal" ]] && {
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "❌ No tienes cupos disponibles")" \
+                                --text "$(echo -e "❌ Vc nao tem limite suficiente")" \
                                 --parse_mode html
                             >$CAD_ARQ
                             break
