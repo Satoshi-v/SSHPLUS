@@ -82,7 +82,7 @@ env_msg="╔═════════•⊱✦⊰•════════�
         env_msg+="[<b>03</b>] /ajuda = Informacoes sobre opcoes\n\n"
         env_msg+="⚠️ <i>Opções Disponiveis</i>\n\n"
         env_msg+="• <u>CREAR USUARIO</u> = Cria usuario ssh\n\n"
-        env_msg+="• <u>CRIAR TESTE</u> = Cria teste ssh\n\n"
+        env_msg+="• <u>CREAR TESTE</u> = Cria teste ssh\n\n"
         env_msg+="• <u>REMOVER</u> = Remove usuario ssh\n\n"
         env_msg+="• <u>INFO USUARIOS</u> = Informacoes do usuario\n\n"
         env_msg+="• <u>USUARIOS ONLINE</u> = Exibe Usuários onlines\n\n"
@@ -118,7 +118,7 @@ env_msg="╔════════•⊱✦⊰•════════╗\n
         env_msg+="[<b>03</b>] /ajuda = Informacoes sobre opcoes\n\n"
         env_msg+="⚠️ <i>Opções Disponiveis</i>\n\n"
         env_msg+="• <u>CREAR USUARIO</u> = Cria usuario ssh\n\n"
-        env_msg+="• <u>CRIAR TESTE</u> = Cria teste ssh\n\n"
+        env_msg+="• <u>CREAR TESTE</u> = Cria teste ssh\n\n"
         env_msg+="• <u>REMOVER</u> = Remove usuario ssh\n\n"
         env_msg+="• <u>INFO USUARIOS</u> = Informacoes do usuario\n\n"
         env_msg+="• <u>USUARIOS ONLINE</u> = Exibe Usuários onlines\n\n"
@@ -144,7 +144,7 @@ env_msg="╔════════•⊱✦⊰•════════╗\n
         env_msg+="[<b>03</b>] /ajuda = Informacoes sobre opcoes\n\n"
         env_msg+="⚠️ <i>Opções Disponiveis</i>\n\n"
         env_msg+="• <u>CREAR USUARIO</u> = Cria usuario ssh\n\n"
-        env_msg+="• <u>CRIAR TESTE</u> = Cria teste ssh\n\n"
+        env_msg+="• <u>CREAR TESTE</u> = Cria teste ssh\n\n"
         env_msg+="• <u>REMOVER</u> = Remove usuario ssh\n\n"
         env_msg+="• <u>INFO USUARIOS</u> = Informacoes do usuario\n\n"
         env_msg+="• <u>USUARIOS ONLINE</u> = Exibe Usuários onlines\n\n"
@@ -971,13 +971,13 @@ fun_teste() {
         for arqv in $(ls /etc/bot/arquivos); do
             ShellBot.sendDocument --chat_id ${message_from_id[$id]} \
                 --document "@/etc/bot/arquivos/$arqv" \
-                --caption "$(echo -e "✅ Criado com sucesso ✅\n\n👤 User: <code>$usuario</code>\n🔑 Pass: <code>1234</code>\n\n⏱️ Expira em: $t_time $hrs")" \
+                --caption "$(echo -e "✅ Creado con éxito ✅\n\n👤 User: <code>$usuario</code>\n🔑 Pass: <code>1234</code>\n\n⏱️ Expira en: $t_time $hrs")" \
                 --parse_mode html
         done
         return 0
     } || {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "✅ <b>Criado com sucesso</b> ✅\n\n👤 User: <code>$usuario</code>\n🔑 Pass: <code>1234</code>\n\n⏱️ Expira em: $t_time $hrs")" \
+            --text "$(echo -e "✅ <b>Creado con éxito</b> ✅\n\n👤 User: <code>$usuario</code>\n🔑 Pass: <code>1234</code>\n\n⏱️ Expira en: $t_time $hrs")" \
             --parse_mode html
         return 0
     }
@@ -1746,7 +1746,7 @@ fun_menurevenda() {
 unset menu1
 menu1=''
 ShellBot.InlineKeyboardButton --button 'menu1' --line 1 --text 'CREAR USUARIO' --callback_data '_criaruser'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 2 --text 'CRIAR TESTE' --callback_data '_criarteste'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 2 --text 'CREAR TESTE' --callback_data '_criarteste'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 3 --text 'REMOVER' --callback_data '_deluser'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 4 --text 'ALTERAR SENHA' --callback_data '_altsenha'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 5 --text 'ALTERAR LIMITE' --callback_data '_altlimite'
@@ -1788,7 +1788,7 @@ keyboard1="$(ShellBot.InlineKeyboardMarkup -b 'menu1')"
 unset menu2
 menu2=''
 ShellBot.InlineKeyboardButton --button 'menu2' --line 1 --text 'CREAR USUARIO' --callback_data '_criaruser2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 1 --text 'CRIAR TESTE' --callback_data '_criarteste2'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 1 --text 'CREAR TESTE' --callback_data '_criarteste2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 2 --text 'REMOVER' --callback_data '_deluser2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 2 --text 'USUARIOS ONLINE' --callback_data '_monitor2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 3 --text 'ALTERAR LIMITE' --callback_data '_altlimite2'
@@ -1818,7 +1818,7 @@ keyboard2="$(ShellBot.InlineKeyboardMarkup -b 'menu2')"
 unset menu3
 menu3=''
 ShellBot.InlineKeyboardButton --button 'menu3' --line 1 --text 'CREAR USUARIO' --callback_data '_criaruser3'
-ShellBot.InlineKeyboardButton --button 'menu3' --line 1 --text 'CRIAR TESTE' --callback_data '_criarteste3'
+ShellBot.InlineKeyboardButton --button 'menu3' --line 1 --text 'CREAR TESTE' --callback_data '_criarteste3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 2 --text 'REMOVER' --callback_data '_deluser3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 2 --text 'USUARIOS ONLINE' --callback_data '_monitor3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 3 --text 'ALTERAR LIMITE' --callback_data '_altlimite3'
@@ -2339,7 +2339,7 @@ while :; do
                     _clientrev=$(cat $CAD_ARQ)
                     criar_rev $CAD_ARQ
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text "✅ Criado com sucesso. ✅\n\n$(<$CAD_ARQ)\n\nBOT: @${message_reply_to_message_from_username}" \
+                        --text "✅ Creado con éxito. ✅\n\n$(<$CAD_ARQ)\n\nBOT: @${message_reply_to_message_from_username}" \
                         --parse_mode html
                     ;;
                     # REMOVE REVENDEDOR
