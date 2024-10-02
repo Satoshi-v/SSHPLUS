@@ -1757,7 +1757,7 @@ ShellBot.InlineKeyboardButton --button 'menu1' --line 9 --text 'EXPIRADOS' --cal
 ShellBot.InlineKeyboardButton --button 'menu1' --line 1 --text 'INFO VPS' --callback_data '_infovps'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 2 --text 'OPTIMIZAR' --callback_data '_otimizar'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 3 --text 'ARCHIVOS' --callback_data '_arqdown'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 4 --text 'REVENDA' --callback_data '_opcoesrev'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 4 --text 'REVENTA' --callback_data '_opcoesrev'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 5 --text 'SPEEDTEST' --callback_data '_speedteste'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 6 --text 'BACKUP USUARIOS' --callback_data '_backupusers'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 7 --text "ALTO BACKUP" --callback_data '_autobkp'
@@ -1796,7 +1796,7 @@ ShellBot.InlineKeyboardButton --button 'menu2' --line 3 --text 'INFO USUARIOS' -
 ShellBot.InlineKeyboardButton --button 'menu2' --line 4 --text 'EDITAR CONTRASEÑA' --callback_data '_altsenha2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 4 --text 'EXPIRADOS' --callback_data '_expirados2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 5 --text 'EDITAR DATOS' --callback_data '_altdata2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 5 --text 'REVENDA' --callback_data '_opcoesrev2'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 5 --text 'REVENTA' --callback_data '_opcoesrev2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 6 --text 'INFORME' --callback_data '_relatorio2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 6 --text 'AYUDA' --callback_data '_ajuda2'
 ShellBot.regHandleFunction --function fun_adduser --callback_data _criaruser2
@@ -1840,7 +1840,7 @@ ShellBot.regHandleFunction --function fun_ajuda --callback_data _ajuda3
 unset keyboard3
 keyboard3="$(ShellBot.InlineKeyboardMarkup -b 'menu3')"
 
-#LISTA MENU OPCOES REVENDA
+#LISTA MENU OPCOES REVENTA
 unset menu4
 menu4=''
 ShellBot.InlineKeyboardButton --button 'menu4' --line 1 --text 'AGREGAR REVENTA' --callback_data '_addrev'
@@ -2273,7 +2273,7 @@ while :; do
                     }
                     break
                     ;;
-                    # FUNCOES DE GESTAO REVENDA
+                    # FUNCOES DE GESTAO REVENTA
                     #
                     # Adicionar, remover, limite, data, suspencao, relatorio
                     #
