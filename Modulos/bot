@@ -23,7 +23,7 @@ fun_menu() {
     [[ "${message_from_id[$id]}" == "$id_admin" ]] && {
         local env_msg
 env_msg="╔══════════•⊱✦⊰•══════════╗\n"
-        env_msg+="<b>               🛸 BOT WEBCONT 🛸</b>\n"
+        env_msg+="<b>               🔥 BOT WEBCONT 🔥</b>\n"
         env_msg+="╚══════════•⊱✦⊰•══════════╝\n\n"
         env_msg+="⚠️ <i>SELECCIONE UNA OPCIÓN A CONTINUACIÓN !</i>\n\n"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text "$env_msg" \
@@ -1940,7 +1940,7 @@ while :; do
                         >$CAD_ARQ
                         break
                     }
-                    echo "Pass: ${message_text[$id]}" >>$CAD_ARQ
+                    echo "Senha: ${message_text[$id]}" >>$CAD_ARQ
                     # Próximo campo.
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
                         --text 'Limite de conexiones:' \
@@ -1969,7 +1969,7 @@ while :; do
                             break
                         }
                     }
-                    echo "Limite de conexiones: ${message_text[$id]}" >>$CAD_ARQ
+                    echo "Limite: ${message_text[$id]}" >>$CAD_ARQ
                     # Próximo campo.
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
                         --text 'Dias de Validez: ' \
