@@ -87,7 +87,7 @@ env_msg="╔═════════•⊱✦⊰•════════�
         env_msg+="• <u>INFO USUARIOS</u> = Informacoes do usuario\n\n"
         env_msg+="• <u>USUARIOS ONLINE</u> = Exibe Usuários onlines\n\n"
         env_msg+="• <u>INFO VPS</u> = Informacoes do servidor\n\n"
-        env_msg+="• <u>ALTERAR SENHA</u> = Altera senha ssh\n\n"
+        env_msg+="• <u>CAMBIAR CONTRASEÑA</u> = Altera senha ssh\n\n"
         env_msg+="• <u>ALTERAR LIMITE</u> = Altera limite ssh\n\n"
         env_msg+="• <u>ALTERAR DATA</u> = Altera data ssh\n\n"
         env_msg+="• <u>EXPIRADOS</u> = Remove ssh expirados\n\n"
@@ -122,7 +122,7 @@ env_msg="╔════════•⊱✦⊰•════════╗\n
         env_msg+="• <u>REMOVER</u> = Remove usuario ssh\n\n"
         env_msg+="• <u>INFO USUARIOS</u> = Informacoes do usuario\n\n"
         env_msg+="• <u>USUARIOS ONLINE</u> = Exibe Usuários onlines\n\n"
-        env_msg+="• <u>ALTERAR SENHA</u> = Altera senha ssh\n\n"
+        env_msg+="• <u>CAMBIAR CONTRASEÑA</u> = Altera senha ssh\n\n"
         env_msg+="• <u>ALTERAR LIMITE</u> = Altera limite ssh\n\n"
         env_msg+="• <u>ALTERAR DATA</u> = Altera data ssh\n\n"
         env_msg+="• <u>EXPIRADOS</u> = Remove ssh expirados\n\n"
@@ -148,7 +148,7 @@ env_msg="╔════════•⊱✦⊰•════════╗\n
         env_msg+="• <u>REMOVER</u> = Remove usuario ssh\n\n"
         env_msg+="• <u>INFO USUARIOS</u> = Informacoes do usuario\n\n"
         env_msg+="• <u>USUARIOS ONLINE</u> = Exibe Usuários onlines\n\n"
-        env_msg+="• <u>ALTERAR SENHA</u> = Altera senha ssh\n\n"
+        env_msg+="• <u>CAMBIAR CONTRASEÑA</u> = Altera senha ssh\n\n"
         env_msg+="• <u>ALTERAR LIMITE</u> = Altera limite ssh\n\n"
         env_msg+="• <u>ALTERAR DATA</u> = Altera data ssh\n\n"
         env_msg+="• <u>EXPIRADOS</u> = Remove ssh expirados\n\n"
@@ -1474,7 +1474,7 @@ fun_lim_rev() {
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "♾ ALTERAR LIMITE REVENDA ♾\n\nInforme o user dele [Ex: @smigolvip]:" \
+            --text "♾ ALTERAR CUPOS DE REVENTA ♾\n\nInforme o user dele [Ex: @smigolvip]:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
@@ -1520,7 +1520,7 @@ fun_dat_rev() {
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-            --text "📆 ALTERAR DATA REVENDA 📆\n\nInforme o user dele [Ex: @smigolvip]:" \
+            --text "📆 ALTERAR DATOS DE REVENTA 📆\n\nInforme o user dele [Ex: @smigolvip]:" \
             --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
@@ -1736,7 +1736,7 @@ fun_menurevenda() {
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.editMessageText --chat_id ${callback_query_message_chat_id[$id]} \
             --message_id ${callback_query_message_message_id[$id]} \
-            --text "SELECIONE UMA OPÇÃO ABAIXO:" \
+            --text "SELECCIONE UNA OPCIÓN A CONTINUACIÓN:" \
             --reply_markup "$(ShellBot.InlineKeyboardMarkup --button 'menu4')"
         return 0
     }
@@ -1748,7 +1748,7 @@ menu1=''
 ShellBot.InlineKeyboardButton --button 'menu1' --line 1 --text 'CREAR USUARIO' --callback_data '_criaruser'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 2 --text 'CREAR TEST' --callback_data '_criarteste'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 3 --text 'REMOVER' --callback_data '_deluser'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 4 --text 'ALTERAR SENHA' --callback_data '_altsenha'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 4 --text 'CAMBIAR CONTRASEÑA' --callback_data '_altsenha'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 5 --text 'ALTERAR LIMITE' --callback_data '_altlimite'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 6 --text 'ALTERAR DATA' --callback_data '_altdata'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 7 --text 'USUARIOS ONLINE' --callback_data '_monitor'
@@ -1757,7 +1757,7 @@ ShellBot.InlineKeyboardButton --button 'menu1' --line 9 --text 'EXPIRADOS' --cal
 ShellBot.InlineKeyboardButton --button 'menu1' --line 1 --text 'INFO VPS' --callback_data '_infovps'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 2 --text 'OPTIMIZAR' --callback_data '_otimizar'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 3 --text 'ARCHIVOS' --callback_data '_arqdown'
-ShellBot.InlineKeyboardButton --button 'menu1' --line 4 --text 'REVENDA' --callback_data '_opcoesrev'
+ShellBot.InlineKeyboardButton --button 'menu1' --line 4 --text 'REVENTA' --callback_data '_opcoesrev'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 5 --text 'SPEEDTESTE' --callback_data '_speedteste'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 6 --text 'BACKUP USUARIOS' --callback_data '_backupusers'
 ShellBot.InlineKeyboardButton --button 'menu1' --line 7 --text "ALTO BACKUP" --callback_data '_autobkp'
@@ -1793,10 +1793,10 @@ ShellBot.InlineKeyboardButton --button 'menu2' --line 2 --text 'REMOVER' --callb
 ShellBot.InlineKeyboardButton --button 'menu2' --line 2 --text 'USUARIOS ONLINE' --callback_data '_monitor2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 3 --text 'ALTERAR LIMITE' --callback_data '_altlimite2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 3 --text 'INFO USUARIOS' --callback_data '_verusers2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 4 --text 'ALTERAR SENHA' --callback_data '_altsenha2'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 4 --text 'CAMBIAR CONTRASEÑA' --callback_data '_altsenha2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 4 --text 'EXPIRADOS' --callback_data '_expirados2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 5 --text 'ALTERAR DATA' --callback_data '_altdata2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 5 --text 'REVENDA' --callback_data '_opcoesrev2'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 5 --text 'REVENTA' --callback_data '_opcoesrev2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 6 --text 'RELATORIO' --callback_data '_relatorio2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 6 --text 'AJUDA' --callback_data '_ajuda2'
 ShellBot.regHandleFunction --function fun_adduser --callback_data _criaruser2
@@ -1823,7 +1823,7 @@ ShellBot.InlineKeyboardButton --button 'menu3' --line 2 --text 'REMOVER' --callb
 ShellBot.InlineKeyboardButton --button 'menu3' --line 2 --text 'USUARIOS ONLINE' --callback_data '_monitor3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 3 --text 'ALTERAR LIMITE' --callback_data '_altlimite3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 3 --text 'INFO USUARIOS' --callback_data '_verusers3'
-ShellBot.InlineKeyboardButton --button 'menu3' --line 4 --text 'ALTERAR SENHA' --callback_data '_altsenha3'
+ShellBot.InlineKeyboardButton --button 'menu3' --line 4 --text 'CAMBIAR CONTRASEÑA' --callback_data '_altsenha3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 4 --text 'EXPIRADOS' --callback_data '_expirados3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 5 --text 'ALTERAR DATA' --callback_data '_altdata3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 5 --text 'AJUDA' --callback_data '_ajuda3'
@@ -1843,12 +1843,12 @@ keyboard3="$(ShellBot.InlineKeyboardMarkup -b 'menu3')"
 #LISTA MENU OPCOES REVENDA
 unset menu4
 menu4=''
-ShellBot.InlineKeyboardButton --button 'menu4' --line 1 --text 'ADICIONAR REVENDA' --callback_data '_addrev'
-ShellBot.InlineKeyboardButton --button 'menu4' --line 2 --text 'REMOVER REVENDA' --callback_data '_delrev'
-ShellBot.InlineKeyboardButton --button 'menu4' --line 3 --text 'ALTERAR LIMITE REVENDA' --callback_data '_limrev'
-ShellBot.InlineKeyboardButton --button 'menu4' --line 4 --text 'ALTERAR DATA REVENDA' --callback_data '_datrev'
-ShellBot.InlineKeyboardButton --button 'menu4' --line 5 --text 'LISTAR REVENDA' --callback_data '_listrev'
-ShellBot.InlineKeyboardButton --button 'menu4' --line 6 --text 'SUSPENDER REVENDA' --callback_data '_susprevendas'
+ShellBot.InlineKeyboardButton --button 'menu4' --line 1 --text 'AGREGAR REVENDEDOR' --callback_data '_addrev'
+ShellBot.InlineKeyboardButton --button 'menu4' --line 2 --text 'REMOVER REVENDEDOR' --callback_data '_delrev'
+ShellBot.InlineKeyboardButton --button 'menu4' --line 3 --text 'ALTERAR CUPOS DE REVENTA' --callback_data '_limrev'
+ShellBot.InlineKeyboardButton --button 'menu4' --line 4 --text 'ALTERAR DATOS DE REVENTA' --callback_data '_datrev'
+ShellBot.InlineKeyboardButton --button 'menu4' --line 5 --text 'LISTA DE REVENDEDORES' --callback_data '_listrev'
+ShellBot.InlineKeyboardButton --button 'menu4' --line 6 --text 'SUSPENDER REVENDEDOR' --callback_data '_susprevendas'
 ShellBot.regHandleFunction --function fun_add_revenda --callback_data _addrev
 ShellBot.regHandleFunction --function fun_del_rev --callback_data _delrev
 ShellBot.regHandleFunction --function fun_lim_rev --callback_data _limrev
@@ -2090,7 +2090,7 @@ while :; do
                     alterar_senha_user $(cat /tmp/name-s) ${message_text[$id]}
                     [[ "$_erro" == '1' ]] && break
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ SENHA ALTERADA !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-s)\n<b>Nueva Contraseña:</b> ${message_text[$id]}")" \
+                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ CONTRASEÑA ALTERADA !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-s)\n<b>Nueva Contraseña:</b> ${message_text[$id]}")" \
                         --parse_mode html
                     rm /tmp/name-s >/dev/null 2>&1
                     ;;
@@ -2356,7 +2356,7 @@ while :; do
                     break
                     ;;
                     # ALTERAR LIMITE
-                '♾ ALTERAR LIMITE REVENDA ♾\n\nInforme o user dele [Ex: @smigolvip]:')
+                '♾ ALTERAR CUPOS DE REVENTA ♾\n\nInforme o user dele [Ex: @smigolvip]:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     echo -e "Revendedor: ${message_text[$id]}" >$CAD_ARQ
@@ -2433,7 +2433,7 @@ while :; do
                         --parse_mode html
                     # ALTERAR DATA
                     ;;
-                '📆 ALTERAR DATA REVENDA 📆\n\nInforme o user dele [Ex: @smigolvip]:')
+                '📆 ALTERAR DATOS DE REVENTA 📆\n\nInforme o user dele [Ex: @smigolvip]:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     _VAR1=$(echo -e ${message_text[$id]} | awk -F '@' {'print $2'})
