@@ -1645,7 +1645,7 @@ susp_rev() {
     _revs=$1
     [[ -z "$_revs" ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "Erro")"
+            --text "$(echo -e "Error")"
         return 0
     }
     [[ -d "/etc/bot/suspensos/$_revs" ]] && {
@@ -1684,7 +1684,7 @@ susp_rev() {
         mv /etc/bot/revenda/$_revs /etc/bot/suspensos/$_revs
         grep -w "$_revs" $ativos >>$suspensos
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e "SUSPENDIDO COM SUCESSO")" \
+            --text "$(echo -e "SUSPENDIDO CON ÉXITO")" \
             --parse_mode html
         return 0
     } || {
@@ -1698,7 +1698,7 @@ susp_rev() {
             mv /etc/bot/revenda/$_revs /etc/bot/suspensos/$_revs
             grep -w "$_revs" $ativos >>$suspensos
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e "SUSPENDIDO COM SUCESSO")" \
+                --text "$(echo -e "SUSPENDIDO CON ÉXITO")" \
                 --parse_mode html
             return 0
         } || {
