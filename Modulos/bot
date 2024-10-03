@@ -2392,7 +2392,7 @@ while :; do
                         }
                     }
                     ;;
-                'Informe o Limite SSH:')
+                'Ingrese el limite SSH:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
