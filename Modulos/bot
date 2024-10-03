@@ -780,7 +780,7 @@ fun_download() {
         _erro='1'
         return 0
     }
-    _DirArq=$(ls /etc/bot/arquivos)
+    _DirArq=$(ls /etc/bot/archivos)
     i=0
     unset _Pass
     while read _Arq; do
@@ -793,7 +793,7 @@ fun_download() {
     _file=$(echo -e "${_Pass}" | grep -E "\b$Opc\b" | cut -d: -f2)
     echo $_file2
     ShellBot.sendDocument --chat_id ${message_from_id[$id]} \
-        --document "@/etc/bot/arquivos/$_file" \
+        --document "@/etc/bot/archivos/$_file" \
         --caption "$(echo -e "✅ CREADO CON ÉXITO ✅\n\n👤 User: <code>$(awk -F " " '/Nome/ {print $2}' $_file2)</code>\n🔑 Pass: <code>$(awk -F " " '/Senha/ {print $2}' $_file2)</code>\n📱 Dispositivos: $(awk -F " " '/Limite/ {print $2}' $_file2)\n⏱️ Expira: $(awk -F " " '/Validade/ {print $2}' $_file2)")" \
         --parse_mode html
     [[ -e "/root/$(awk -F " " '/Nome/ {print $2}' $_file2).ovpn" ]] && {
@@ -967,10 +967,10 @@ fun_teste() {
     chmod +x /etc/SSHPlus/userteste/$usuario.sh
     echo "/etc/SSHPlus/userteste/$usuario.sh" | at now + $t_time hour >/dev/null 2>&1
     [[ "$t_time" == '1' ]] && hrs="hora" || hrs="horas"
-    [[ "$(ls /etc/bot/arquivos | wc -l)" != '0' ]] && {
-        for arqv in $(ls /etc/bot/arquivos); do
+    [[ "$(ls /etc/bot/archivos | wc -l)" != '0' ]] && {
+        for arqv in $(ls /etc/bot/archivos); do
             ShellBot.sendDocument --chat_id ${message_from_id[$id]} \
-                --document "@/etc/bot/arquivos/$arqv" \
+                --document "@/etc/bot/archivos/$arqv" \
                 --caption "$(echo -e "✅ Creado con éxito ✅\n\n👤 User: <code>$usuario</code>\n🔑 Pass: <code>1234</code>\n\n⏱️ Expira en: $t_time $hrs")" \
                 --parse_mode html
         done
@@ -1924,7 +1924,7 @@ while :; do
                         >$CAD_ARQ
                         break
                     }
-                    echo "Nome: ${message_text[$id]}" >$CAD_ARQ
+                    echo "Nombre: ${message_text[$id]}" >$CAD_ARQ
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
                         --text 'Pass:' \
                         --reply_markup "$(ShellBot.ForceReply)" # Força a resposta.
@@ -1996,9 +1996,9 @@ while :; do
                         >$CAD_ARQ
                         break
                     }
-                    [[ "$(ls /etc/bot/arquivos | wc -l)" != '0' ]] && {
+                    [[ "$(ls /etc/bot/archivos | wc -l)" != '0' ]] && {
                         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                            --text '📥 ARCHIVOS DISPONIVEIS 📥\n\nDeseja baixar? Sim ou Nao?:' \
+                            --text '📥 ARCHIVOS DISPONIBLES 📥\n\n¿Quieres descargar? ¿Si o no?:' \
                             --reply_markup "$(ShellBot.ForceReply)"
                     } || {
                         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
@@ -2007,23 +2007,23 @@ while :; do
                         break
                     }
                     ;;
-                '📥 ARCHIVOS DISPONIVEIS 📥\n\nDeseja baixar? Sim ou Nao?:')
+                '📥 ARCHIVOS DISPONIBLES 📥\n\n¿Quieres descargar? ¿Si o no?:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([A-Za-z]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Opcion Invalida ❌\n\n⚠️ Ultilize apenas letras [Ej: sim ou nao]")" \
+                            --text "$(echo -e "❌ Opcion Invalida ❌\n\n⚠️ Utilice sólo letras [Ej: si o no]")" \
                             --parse_mode html
                         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
                             --text "<b>✅ CREADO CON ÉXITO ✅</b>\n\n👤 User: <code>$(awk -F " " '/Nome/ {print $2}' $CAD_ARQ)</code>\n🔑 Pass: <code>$(awk -F " " '/Senha/ {print $2}' $CAD_ARQ)</code>\n📱 Dispositivos: $(awk -F " " '/Limite/ {print $2}' $CAD_ARQ)\n⏱️ Expira: $(awk -F " " '/Validade/ {print $2}' $CAD_ARQ)" \
                             --parse_mode html
                         break
                     }
-                    [[ "${message_text[$id]}" = @(Sim|sim|SIM) ]] && {
+                    [[ "${message_text[$id]}" = @(Si|si|SI) ]] && {
                         msg_cli="≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠\n"
                         msg_cli+="<b>ARCHIVOS PRE-CONFIGURADOS </b>❗\n"
                         msg_cli+="≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠\n\n"
-                        for _file in $(ls /etc/bot/arquivos); do
+                        for _file in $(ls /etc/bot/archivos); do
                             i=$(($i + 1))
                             msg_cli+="<b>[$i]</b> - $_file\n"
                         done
@@ -2160,11 +2160,11 @@ while :; do
                             --text "📤 HOSPEDAR ARCHIVOS 📤\n\nEnvíame el archivo:" \
                             --reply_markup "$(ShellBot.ForceReply)"
                     elif [[ "${message_text[$id]}" = '2' ]]; then
-                        [[ $(ls /etc/bot/arquivos | wc -l) != '0' ]] && {
+                        [[ $(ls /etc/bot/archivos | wc -l) != '0' ]] && {
                             msg_cli1="≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠\n"
                             msg_cli1+="🚀<b> ARCHIVOS HOSPEDADOS </b>\n"
                             msg_cli1+="≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠≠\n\n"
-                            for _file in $(ls /etc/bot/arquivos); do
+                            for _file in $(ls /etc/bot/archivos); do
                                 i=$(($i + 1))
                                 msg_cli1+="<b>[$i]</b> - $_file\n"
                             done
@@ -2198,7 +2198,7 @@ while :; do
                         break
                     } || {
                         echo "opcao $Opc1"
-                        _DirArq=$(ls /etc/bot/arquivos)
+                        _DirArq=$(ls /etc/bot/archivos)
                         i=0
                         unset _Pass
                         while read _Arq; do
@@ -2209,8 +2209,8 @@ while :; do
                             _Pass+="\n${_oP}:${_Arq}"
                         done <<<"${_DirArq}"
                         _file=$(echo -e "${_Pass}" | grep -E "\b$Opc1\b" | cut -d: -f2)
-                        [[ -e /etc/bot/arquivos/$_file ]] && {
-                            rm /etc/bot/arquivos/$_file
+                        [[ -e /etc/bot/archivos/$_file ]] && {
+                            rm /etc/bot/archivos/$_file
                             ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
                                 --text "✅ *Excluido con éxito* ✅" \
                                 --parse_mode markdown
@@ -2232,13 +2232,13 @@ while :; do
                             ShellBot.getFile --file_id "${file_id[0]}"
                             ShellBot.downloadFile --file_path ${return[file_path]} --dir "/tmp/file" && {
                                 msg='*✅ Archivo hospedado exitosamente.*\n\n'
-                                msg+="*📤 Informações*\n\n"
+                                msg+="*📤 Informaciones*\n\n"
                                 msg+="*Nome*: ${message_document_file_name}\n"
-                                msg+="*Salvo em*: /etc/bot/arquivos"
+                                msg+="*Guardado en:*: /etc/bot/archivos"
                                 ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
                                     --text "$(echo -e "$msg")" \
                                     --parse_mode markdown
-                                mv /tmp/file/$(ls -1rt /tmp/file | tail -n1) /etc/bot/arquivos/${message_document_file_name}
+                                mv /tmp/file/$(ls -1rt /tmp/file | tail -n1) /etc/bot/archivos/${message_document_file_name}
                                 break
                             }
                         } || {
@@ -2280,7 +2280,7 @@ while :; do
                 '👥 ADICIONAR REVENDEDOR 👥\n\nInforme o nome:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
-                    echo "Nome: ${message_text[$id]}" >$CAD_ARQ
+                    echo "Nombre: ${message_text[$id]}" >$CAD_ARQ
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
                         --text 'Informe o user dele [Ex: @smigolvip]:' \
                         --reply_markup "$(ShellBot.ForceReply)"
