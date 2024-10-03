@@ -698,7 +698,7 @@ fun_verif_user() {
     [[ -d /etc/bot/revenda/${message_from_username} ]] && {
         [[ ! -e /etc/bot/revenda/${message_from_username}/usuarios/$user ]] && {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e ❌ Usuario $user nao existe !)" \
+                --text "$(echo -e ❌ Usuario $user no existe !)" \
                 --parse_mode html
             _erro='1'
             return 0
@@ -2291,13 +2291,13 @@ while :; do
                     _VAR1=$(echo -e ${message_text[$id]} | awk -F '@' {'print $2'})
                     [[ -z $_VAR1 ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Erro \n\n⚠️ Informe o user [Ej: @smigolvip]")" \
+                            --text "$(echo -e "❌ Error \n\n⚠️ Ingrese el user [Ej: @smigolvip]")" \
                             --parse_mode html
                         break
                     }
                     [[ -d /etc/bot/revenda/$_VAR1 ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ O Revendedor ${message_text[$id]} ja existe")" \
+                            --text "$(echo -e "❌ EL Revendedor ${message_text[$id]} ya existe")" \
                             --parse_mode html
                         break
                     }
@@ -2363,7 +2363,7 @@ while :; do
                     _Var1=$(sed -n '1 p' $CAD_ARQ | awk -F '@' {'print $2'})
                     [[ -z $_Var1 ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Nome invalido !")" \
+                            --text "$(echo -e "❌ Nombre invalido !")" \
                             --parse_mode html
                         break
                     }
@@ -2374,7 +2374,7 @@ while :; do
                                 --reply_markup "$(ShellBot.ForceReply)"
                         } || {
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "❌ Revendedor ${message_text[$id]} nao existe")" \
+                                --text "$(echo -e "❌ Revendedor ${message_text[$id]} no existe")" \
                                 --parse_mode html
                             break
                         }
@@ -2386,7 +2386,7 @@ while :; do
                                 --reply_markup "$(ShellBot.ForceReply)"
                         } || {
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "❌ O Sub-revendedor nao existe")" \
+                                --text "$(echo -e "❌ O Sub-revendedor no existe")" \
                                 --parse_mode html
                             break
                         }
@@ -2439,7 +2439,7 @@ while :; do
                     _VAR1=$(echo -e ${message_text[$id]} | awk -F '@' {'print $2'})
                     [[ -z $_VAR1 ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "Revendedor ${message_text[$id]} nao existe")" \
+                            --text "$(echo -e "Revendedor ${message_text[$id]} no existe")" \
                             --parse_mode html
                         break
                     }
@@ -2447,11 +2447,11 @@ while :; do
                         [[ $(grep -wc $_VAR1 $ativos) != '0' ]] && {
                             echo -e "Revendedor: ${message_text[$id]}" >$CAD_ARQ
                             ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                                --text 'Dias de acesso [Ex: 30]:' \
+                                --text 'Dias de acceso [Ej: 30]:' \
                                 --reply_markup "$(ShellBot.ForceReply)"
                         } || {
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                --text "$(echo -e "❌ O Revendedor ${message_text[$id]} nao existe")" \
+                                --text "$(echo -e "❌ EL Revendedor ${message_text[$id]} no existe")" \
                                 --parse_mode html
                             break
                         }
@@ -2460,18 +2460,18 @@ while :; do
                             [[ "$(grep -wc "$_VAR1" /etc/bot/revenda/${message_from_username}/${message_from_username})" != '0' ]] && {
                                 echo -e "Revendedor: ${message_text[$id]}" >$CAD_ARQ
                                 ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                                    --text 'Dias de acesso [Ex: 30]:' \
+                                    --text 'Dias de acceso [Ej: 30]:' \
                                     --reply_markup "$(ShellBot.ForceReply)"
                             } || {
                                 ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                                    --text "$(echo -e "❌ O SubRevendedor ${message_text[$id]} nao existe")" \
+                                    --text "$(echo -e "❌ O SubRevendedor ${message_text[$id]} no existe")" \
                                     --parse_mode html
                                 break
                             }
                         }
                     }
                     ;;
-                'Dias de acesso [Ex: 30]:')
+                'Dias de acceso [Ej: 30]:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
@@ -2480,11 +2480,11 @@ while :; do
                             --parse_mode html
                         break
                     }
-                    echo -e "Data: ${message_text[$id]}" >>$CAD_ARQ
+                    echo -e "Dato: ${message_text[$id]}" >>$CAD_ARQ
                     dat_rev $CAD_ARQ
                     [[ "$_erro" == '1' ]] && break
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ DATA REVENDA ALTERADA !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n$(<$CAD_ARQ)")" \
+                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ DATO ALTERADO !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n$(<$CAD_ARQ)")" \
                         --parse_mode html
                     ;;
                     # SUSPENDER REVENDEDOR
@@ -2492,7 +2492,7 @@ while :; do
                     _VAR1=$(echo -e ${message_text[$id]} | awk -F '@' {'print $2'})
                     [[ -z $_VAR1 ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Revendedor ${message_text[$id]} nao existe")" \
+                            --text "$(echo -e "❌ Revendedor ${message_text[$id]} no existe")" \
                             --parse_mode html
                         break
                     }
