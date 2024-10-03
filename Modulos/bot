@@ -714,7 +714,7 @@ fun_down() {
     }
     [[ ! -d /tmp/file ]] && mkdir /tmp/file
     ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-        --text "[1] - AGREGAR ARCHIVO\n[2] - EXCLUIR ARCHIVO\n\nInforme a opcao [1-2]:" \
+        --text "[1] - AGREGAR ARCHIVO\n[2] - EXCLUIR ARCHIVO\n\nIngrese la opcion [1-2]" \
         --reply_markup "$(ShellBot.ForceReply)"
 }
 
@@ -1252,7 +1252,7 @@ restaure_backup() {
                     --text "$(echo -e "$msg")" \
                     --parse_mode html
                 ShellBot.sendMessage --chat_id ${id_admin} \
-                    --text 'Deseja restaurar ? [sim | nao]' \
+                    --text 'Deseja restaurar ? [si | nao]' \
                     --reply_markup "$(ShellBot.ForceReply)"
             fi
         fi
@@ -2148,7 +2148,7 @@ while :; do
                         --parse_mode html
                     rm /tmp/name-d >/dev/null 2>&1
                     ;;
-                '[1] - AGREGAR ARCHIVO\n[2] - EXCLUIR ARCHIVO\n\nInforme a opcao [1-2]:')
+                '[1] - AGREGAR ARCHIVO\n[2] - EXCLUIR ARCHIVO\n\nIngrese la opcion [1-2]')
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
                             --text "$(echo -e "❌ Error ! \n\n⚠️ Utilize solo numeros [Ej: 1 ou 2]")" \
@@ -2234,7 +2234,7 @@ while :; do
                                 msg='*✅ Archivo hospedado exitosamente.*\n\n'
                                 msg+="*📤 Informaciones*\n\n"
                                 msg+="*Nome*: ${message_document_file_name}\n"
-                                msg+="*Salvo em*: /etc/bot/arquivos"
+                                msg+="*Guardado en*: /etc/bot/archivos"
                                 ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
                                     --text "$(echo -e "$msg")" \
                                     --parse_mode markdown
@@ -2249,16 +2249,16 @@ while :; do
                         }
                     fi
                     ;;
-                'Deseja restaurar ? [sim | nao]')
+                'Deseja restaurar ? [si | nao]')
                     Resp=${message_text[$id]}
                     [[ ${message_from_id[$id]} != ${id_admin} ]] && break
                     [[ $Resp != ?(+|-)+([a-z]) ]] && {
                         ShellBot.sendMessage --chat_id ${id_admin} \
-                            --text "$(echo -e "❌ Error ! \n\n⚠️ Ultilize apenas sim ou nao")" \
+                            --text "$(echo -e "❌ Error ! \n\n⚠️ Ultilize apenas si ou nao")" \
                             --parse_mode html
                         break
                     }
-                    [[ "$Resp" = @(Sim|sim|SIM) ]] && {
+                    [[ "$Resp" = @(Si|si|SI) ]] && {
                         filebkp=$(ls /tmp | grep '.vps')
                         [[ -e /tmp/$filebkp ]] && {
                             mv /tmp/$filebkp /backup.vps
