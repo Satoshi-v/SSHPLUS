@@ -79,8 +79,8 @@ env_msg="╔═════════•⊱✦⊰•════════�
         env_msg+="⚠️ <i>Comandos Disponibles</i>\n\n"
         env_msg+="[<b>01</b>] /menu = Muestra el menu\n"
         env_msg+="[<b>02</b>] /info = Muestra informaciones\n"
-        env_msg+="[<b>03</b>] /ajuda = Muestra info de opciones\n\n"
-        env_msg+="⚠️ <i>Opções Disponiveis</i>\n\n"
+        env_msg+="[<b>03</b>] /ayuda = Muestra info de opciones\n\n"
+        env_msg+="⚠️ <i>Opciones Disponibles</i>\n\n"
         env_msg+="• <u>CREAR USUARIO</u> = Crear usuario ssh\n\n"
         env_msg+="• <u>CREAR TEST</u> = Crear test ssh\n\n"
         env_msg+="• <u>REMOVER</u> = Borra usuario ssh\n\n"
@@ -90,7 +90,7 @@ env_msg="╔═════════•⊱✦⊰•════════�
         env_msg+="• <u>CAMBIAR CONTRASEÑA</u> = Alterar contraseña ssh\n\n"
         env_msg+="• <u>ALTERAR LIMITE</u> = Altera limite ssh\n\n"
         env_msg+="• <u>ALTERAR FECHA</u> = Altera dato de fecha ssh\n\n"
-        env_msg+="• <u>BORRAR EXPIRADOS</u> = Remove ssh expirados\n\n"
+        env_msg+="• <u>BORRAR EXPIRADOS</u> = Remueve ssh expirados\n\n"
         env_msg+="• <u>BACKUP</u> = Crea Backup ssh y reventas\n\n"
         env_msg+="• <u>OPTIMIZAR</u> = Limpa cache - ram\n\n"
         env_msg+="• <u>SPEEDTEST</u> = Test de conexion\n\n"
@@ -115,8 +115,8 @@ env_msg="╔════════•⊱✦⊰•════════╗\n
         env_msg+="⚠️ <i>Comandos Disponibles</i>\n\n"
         env_msg+="[<b>01</b>] /menu = Muestra el menu\n"
         env_msg+="[<b>02</b>] /info = Muestra informaciones\n"
-        env_msg+="[<b>03</b>] /ajuda = Muestra info de opciones\n\n"
-        env_msg+="⚠️ <i>Opções Disponiveis</i>\n\n"
+        env_msg+="[<b>03</b>] /ayuda = Muestra info de opciones\n\n"
+        env_msg+="⚠️ <i>Opciones Disponibles</i>\n\n"
         env_msg+="• <u>CREAR USUARIO</u> = Crear usuario ssh\n\n"
         env_msg+="• <u>CREAR TEST</u> = Crear test ssh\n\n"
         env_msg+="• <u>REMOVER</u> = Borra usuario ssh\n\n"
@@ -125,7 +125,7 @@ env_msg="╔════════•⊱✦⊰•════════╗\n
         env_msg+="• <u>CAMBIAR CONTRASEÑA</u> = Alterar contraseña ssh\n\n"
         env_msg+="• <u>ALTERAR LIMITE</u> = Altera limite ssh\n\n"
         env_msg+="• <u>ALTERAR FECHA</u> = Altera dato de fecha ssh\n\n"
-        env_msg+="• <u>BORRAR EXPIRADOS</u> = Remove ssh expirados\n\n"
+        env_msg+="• <u>BORRAR EXPIRADOS</u> = Remueve ssh expirados\n\n"
         env_msg+="• <u>REVENTAS</u> = Gerenciar Reventas\n\n"
         env_msg+="• <u>INFORME</u> = Informaciones sobre reventas\n\n"
         env_msg+="• <u>AYUDA</u> = Muestra info de opciones\n\n"
@@ -141,8 +141,8 @@ env_msg="╔════════•⊱✦⊰•════════╗\n
         env_msg+="⚠️ <i>Comandos Disponibles</i>\n\n"
         env_msg+="[<b>01</b>] /menu = Muestra el menu\n"
         env_msg+="[<b>02</b>] /info = Muestra informaciones\n"
-        env_msg+="[<b>03</b>] /ajuda = Muestra info de opciones\n\n"
-        env_msg+="⚠️ <i>Opções Disponiveis</i>\n\n"
+        env_msg+="[<b>03</b>] /ayuda = Muestra info de opciones\n\n"
+        env_msg+="⚠️ <i>Opciones Disponibles</i>\n\n"
         env_msg+="• <u>CREAR USUARIO</u> = Crear usuario ssh\n\n"
         env_msg+="• <u>CREAR TEST</u> = Crear test ssh\n\n"
         env_msg+="• <u>REMOVER</u> = Borra usuario ssh\n\n"
@@ -151,7 +151,7 @@ env_msg="╔════════•⊱✦⊰•════════╗\n
         env_msg+="• <u>CAMBIAR CONTRASEÑA</u> = Alterar contraseña ssh\n\n"
         env_msg+="• <u>ALTERAR LIMITE</u> = Altera limite ssh\n\n"
         env_msg+="• <u>ALTERAR FECHA</u> = Altera dato de fecha ssh\n\n"
-        env_msg+="• <u>BORRAR EXPIRADOS</u> = Remove ssh expirados\n\n"
+        env_msg+="• <u>BORRAR EXPIRADOS</u> = Remueve ssh expirados\n\n"
         env_msg+="• <u>AYUDA</u> = Muestra info de opciones\n\n"
         ShellBot.sendMessage --chat_id $id_chatuser \
             --text "$(echo -e $env_msg)" \
@@ -2129,10 +2129,10 @@ while :; do
                     [[ "$_erro" == '1' ]] && break
                     echo "${message_text[$id]}" >/tmp/name-d
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text 'informe os dias ou data:' \
+                        --text 'ingrese cantidad de dias:' \
                         --reply_markup "$(ShellBot.ForceReply)"
                     ;;
-                'informe os dias ou data:')
+                'ingrese cantidad de dias:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([0-9/]) ]] && {
