@@ -1586,7 +1586,7 @@ fun_list_rev() {
         [[ "$(grep -wc 'revenda' $ativos)" != '0' ]] && {
             while read _atvs; do
                 _uativ="$(echo $_atvs | awk '{print $2}')"
-                [[ "$(grep -wc "$_uativ" $suspensos)" == '0' ]] && _stsrev='ATIVO' || _stsrev='SUSPENSO'
+                [[ "$(grep -wc "$_uativ" $suspensos)" == '0' ]] && _stsrev='ACTIVO' || _stsrev='SUSPENSO'
                 msg1+="• @$_uativ - $_stsrev\n"
             done <<<"$(grep -w 'revenda' /etc/bot/lista_ativos)"
             ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
@@ -1605,7 +1605,7 @@ fun_list_rev() {
         [[ "$(grep -wc "SUBREVENDA" $_patch/${callback_query_from_username}/${callback_query_from_username})" != '0' ]] && {
             while read _listsub; do
                 _usub="$(echo $_listsub | awk '{print $2}')"
-                [[ "$(grep -wc "$_usub" $suspensos)" == '0' ]] && _usts='ATIVO' || _usts='SUSPENSO'
+                [[ "$(grep -wc "$_usub" $suspensos)" == '0' ]] && _usts='ACTIVO' || _usts='SUSPENSO'
                 msg1+="• @$_usub - $_usts\n"
             done <<<"$(grep -w 'SUBREVENDA' $_patch/${callback_query_from_username}/${callback_query_from_username})"
             ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
