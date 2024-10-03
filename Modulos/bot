@@ -2370,7 +2370,7 @@ while :; do
                     [[ "${message_from_id[$id]}" == "$id_admin" ]] && {
                         [[ $(grep -wc $_Var1 $ativos) != '0' ]] && {
                             ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                                --text 'Informe o Limite SSH:' \
+                                --text 'Ingrese el limite SSH:' \
                                 --reply_markup "$(ShellBot.ForceReply)"
                         } || {
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
@@ -2382,7 +2382,7 @@ while :; do
                     [[ $(grep -w ${message_from_username} $ativos | awk '{print $NF}') == 'revenda' ]] && {
                         [[ "$(grep -wc "$_Var1" /etc/bot/revenda/${message_from_username}/${message_from_username})" != '0' ]] && {
                             ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                                --text 'Informe o Limite SSH:' \
+                                --text 'Ingrese el limite SSH:' \
                                 --reply_markup "$(ShellBot.ForceReply)"
                         } || {
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
