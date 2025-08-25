@@ -1841,7 +1841,6 @@ ShellBot.InlineKeyboardButton --button 'menu2' --line 1 --text 'CREAR USUARIO' -
 ShellBot.InlineKeyboardButton --button 'menu2' --line 1 --text 'CREAR TEST' --callback_data '_criarteste2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 2 --text 'REMOVER' --callback_data '_deluser2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 2 --text 'ONLINE' --callback_data '_monitor2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 3 --text 'ALTERAR LIMITE' --callback_data '_altlimite2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 3 --text 'INFO USUARIOS' --callback_data '_verusers2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 4 --text 'CAMBIAR CONTRASEÑA' --callback_data '_altsenha2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 4 --text 'BORRAR EXPIRADOS' --callback_data '_expirados2'
@@ -1852,7 +1851,6 @@ ShellBot.regHandleFunction --function fun_adduser --callback_data _criaruser2
 ShellBot.regHandleFunction --function fun_add_teste --callback_data _criarteste2
 ShellBot.regHandleFunction --function fun_deluser --callback_data _deluser2
 ShellBot.regHandleFunction --function alterar_senha --callback_data _altsenha2
-ShellBot.regHandleFunction --function alterar_limite --callback_data _altlimite2
 ShellBot.regHandleFunction --function alterar_data --callback_data _altdata2
 ShellBot.regHandleFunction --function monitor_ssh --callback_data _monitor2
 ShellBot.regHandleFunction --function ver_users --callback_data _verusers2
@@ -1869,7 +1867,6 @@ ShellBot.InlineKeyboardButton --button 'menu3' --line 1 --text 'CREAR USUARIO' -
 ShellBot.InlineKeyboardButton --button 'menu3' --line 1 --text 'CREAR TEST' --callback_data '_criarteste3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 2 --text 'REMOVER' --callback_data '_deluser3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 2 --text 'ONLINE' --callback_data '_monitor3'
-ShellBot.InlineKeyboardButton --button 'menu3' --line 3 --text 'ALTERAR LIMITE' --callback_data '_altlimite3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 3 --text 'INFO USUARIOS' --callback_data '_verusers3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 4 --text 'CAMBIAR CONTRASEÑA' --callback_data '_altsenha3'
 ShellBot.InlineKeyboardButton --button 'menu3' --line 4 --text 'BORRAR EXPIRADOS' --callback_data '_expirados3'
