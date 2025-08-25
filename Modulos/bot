@@ -880,88 +880,31 @@ sobremim() {
 }
 
 fun_add_teste() {
-    local revendedor="${message_from_username}"
-    local dir_teste="/etc/SSHPlus/userteste"
-    local prefix="test_${revendedor}_"
-
-    # Crear directorio si no existe
-    [[ ! -d "$dir_teste" ]] && mkdir -p "$dir_teste"
-
-    # === VERIFICAR CUPOS DISPONIBLES ===
-    local limite_total=$(grep -w "$revendedor" $ativos | awk '{print $4}')
-    [[ -z "$limite_total" ]] && limite_total=0
-
-    fun_verif_limite_rev "$revendedor"
-    local usuarios_criados=$_result
-
-    if (( usuarios_criados >= limite_total )); then
-        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e '❌ <b>No tienes cupos disponibles</b> para crear más usuarios.\n\n🔹 Cupos usados: <b>$usuarios_criados</b>\n🔹 Cupos totales: <b>$limite_total</b>')" \
-            --parse_mode html
-        return 1
-    fi
-
-    # === VERIFICAR LÍMITE DIARIO DE TESTS (2 por día) ===
-    local hoy=$(date +%Y%m%d)
-    local tests_hoy=$(find "$dir_teste" -name "${prefix}${hoy}_*" 2>/dev/null | wc -l)
-
-    if (( tests_hoy >= 2 )); then
-        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e '❌ Has alcanzado el límite de <b>2 tests por día</b>.\n\nPuedes crear más mañana.')" \
-            --parse_mode html
-        return 1
-    fi
-
-    # === CREAR EL TEST (3 horas) ===
-    local usuario_teste="${prefix}${hoy}_$(date +%H%M%S)"
-    local senha_teste="123456"
-    local limite_teste="1"
-    local data_teste=$(date "+%d/%m/%Y %H:%M" -d "+3 hours")
-    local validade=$(date -d "+3 hours" +%Y-%m-%d)
-
-    if /usr/sbin/useradd -M -N -s /bin/false "$usuario_teste" -e "$validade"; then
-        (echo "$senha_teste"; echo "$senha_teste") | passwd "$usuario_teste" >/dev/null 2>&1
+    if [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]]; then
+        ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
+            --text "⚠️ ¡ESTÁS SUSPENDIDO! CONTACTAR AL ADMINISTRADOR"
+        return 0
+    elif [[ "${callback_query_from_id[$id]}" == "$id_admin" ]]; then
+        ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
+            --text "👤 CREAR TEST 👤\n\nHoras para expirar? Ej: 1:" \
+            --reply_markup "$(ShellBot.ForceReply)"
+    elif [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]]; then
+        _limTotal=$(grep -w "${callback_query_from_username}" $ativos | awk '{print $4}')
+        fun_verif_limite_rev ${callback_query_from_username}
+        _limsomarev2=$(echo "$_result + 1" | bc)
+        [[ "$_limsomarev2" -gt "$_limTotal" ]] && {
+            ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
+                --text "❌ NO TIENES LIMITE DISPONIBLE!"
+            return 0
+        } || {
+            ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
+                --text "👤 CREAR TEST 👤\n\nHoras para expirar? Ej: 1:" \
+                --reply_markup "$(ShellBot.ForceReply)"
+        }
     else
-        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e '❌ Error al crear el usuario de prueba.')" \
-            --parse_mode html
-        return 1
-    fi
-
-    # Guardar información
-    echo "$usuario_teste:$senha_teste:$data_teste:$limite_teste" > /etc/bot/info-users/$usuario_teste
-    echo "$usuario_teste:$senha_teste:$data_teste:$limite_teste" > /etc/bot/revenda/${revendedor}/usuarios/$usuario_teste
-    echo "$senha_teste" > /etc/SSHPlus/senha/$usuario_teste
-    echo "$usuario_teste $limite_teste" >> /root/usuarios.db
-
-    # Script de eliminación automática en 3 horas
-    local script_teste="$dir_teste/${usuario_teste}.sh"
-    cat > "$script_teste" << EOF
-#!/bin/bash
-pkill -u $usuario_teste >/dev/null 2>&1
-userdel --force $usuario_teste 2>/dev/null
-grep -v ^$usuario_teste[[:space:]] /root/usuarios.db > /tmp/ph && cat /tmp/ph > /root/usuarios.db
-rm -f /etc/SSHPlus/senha/$usuario_teste
-rm -f /etc/bot/info-users/$usuario_teste
-rm -f /etc/bot/revenda/${revendedor}/usuarios/$usuario_teste
-rm -f "\$script_teste"
-EOF
-    chmod +x "$script_teste"
-    echo "$script_teste" | at now + 3 hours >/dev/null 2>&1
-
-    # ✅ Mensaje de éxito
-    ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-        --text "$(echo -e "✅ TEST CREADO CON ÉXITO ✅\n\n👤 Usuario: <code>$usuario_teste</code>\n🔑 Contraseña: <code>$senha_teste</code>\n⏱️ Duración: 3 horas\n📅 Expira: $data_teste")" \
-        --parse_mode html
-
-    # 📎 Enviar archivos adjuntos si existen
-    if [[ -d "/etc/bot/arquivos" ]] && [[ "$(ls /etc/bot/arquivos | wc -l)" -gt 0 ]]; then
-        for arqv in /etc/bot/arquivos/*; do
-            ShellBot.sendDocument --chat_id ${message_from_id[$id]} \
-                --document "@$arqv" \
-                --caption "📌 Archivo adjunto al test creado." \
-                --parse_mode html
-        done
+        ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
+            --text "🚫 ACESSO NEGADO 🚫"
+        return 0
     fi
 }
 
