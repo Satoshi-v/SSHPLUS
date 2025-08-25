@@ -1925,25 +1925,20 @@ while :; do
                     # FIN MODIFICACIONES
 
                     criar_user $CAD_ARQ
-                    # FIX: usar el nombre de usuario del archivo temporal para la verificación
-                    [[ "$(awk -F " " '/Nome/ {print $2}' $CAD_ARQ | xargs -I {} grep -wc {} /etc/passwd)" = '0' ]] && {
-                        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e ❌ Error al crear usuario !)" \
-                            --parse_mode html
-                        >$CAD_ARQ
-                        break
-                    }
-    
-                    [[ "$(ls /etc/bot/arquivos | wc -l)" != '0' ]] && {
-                        ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                            --text '📥 ARCHIVOS DISPONIBLES 📥\n\n¿Quieres descargar? ¿Si o no?:' \
-                            --reply_markup "$(ShellBot.ForceReply)"
-                    } || {
-                        ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                            --text "<b>✅ CREADO CON ÉXITO ✅</b>\n\n👤 User: <code>$(awk -F " " '/Nome/ {print $2}' $CAD_ARQ)</code>\n🔑 Pass: <code>$(awk -F " " '/Senha/ {print $2}' $CAD_ARQ)</code>\n📱 Dispositivos: $(awk -F " " '/Limite/ {print $2}' $CAD_ARQ)\n⏱️ Expira: $(awk -F " " '/Validade/ {print $2}' $CAD_ARQ)" \
-                            --parse_mode html
-                        break
-                    }
+
+[[ "$(awk -F " " '/Nome/ {print $2}' $CAD_ARQ | xargs -I {} grep -wc {} /etc/passwd)" = '0' ]] && {
+    ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+        --text "$(echo -e '❌ Error al crear usuario !')" \
+        --parse_mode html
+    rm $CAD_ARQ 2>/dev/null
+    break
+}
+
+[[ "$(ls /etc/bot/arquivos | wc -l)" != '0' ]] && {
+    ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
+        --text '📥 ARCHIVOS DISPONIBLES 📥\n\n¿Quieres descargar? ¿Si o no?:' \
+        --reply_markup "$(ShellBot.ForceReply)"
+}
                     ;;
                 # BLOQUE PARA 'Limite de conexiones:' - ELIMINADO/IGNORADO
                 'Limite de conexiones:')
