@@ -910,14 +910,14 @@ fun_add_teste() {
 
 fun_teste() {
     verifica_acesso
-    [[ "$_erro" == '1' ]] && break
+    [[ "$_erro" == '1' ]] && return 0
 
     # Validar que el tiempo sea un número
     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
         --text "$(echo -e "❌ Error! Usa solo números [Ej: 1]")" \
         --parse_mode html >$CAD_ARQ
-        break
+        return 0
     }
 
     t_time=${message_text[$id]}
@@ -927,13 +927,13 @@ fun_teste() {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
         --text "$(echo -e "❌ Máximo 3 horas permitidas para tests.")" \
         --parse_mode html
-        break
+        return 0
     }
 
     # Solo revendedor (no admin) debe descontar cupo
     if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
         local revendedor="${message_from_username}"
-        local arquivo_rev="/etc/bot/revenda/${revendedor}/${revendedor}"
+        local arquivo_reve="/etc/bot/revenda/${revendedor}/${revendedor}"
         local limite_atual=$(grep -w 'LIMITE_REVENDA' "$arquivo_reve" | awk '{print $2}')
 
         # Verificar si tiene cupos
@@ -941,7 +941,7 @@ fun_teste() {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
             --text "$(echo -e "❌ No tienes cupos disponibles.")" \
             --parse_mode html
-            break
+            return 0
         }
     fi
 
@@ -1011,7 +1011,7 @@ EOF
         --parse_mode html
     fi
 
-    break
+    return 0
 }
 
 fun_exp_user() {
