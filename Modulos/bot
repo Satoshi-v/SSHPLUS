@@ -934,20 +934,15 @@ fun_teste() {
     if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
         local revendedor="${message_from_username}"
         local arquivo_rev="/etc/bot/revenda/${revendedor}/${revendedor}"
-        local limite_atual=$(grep -w 'LIMITE_REVENDA' "$arquivo_rev" | awk '{print $2}')
+        local limite_atual=$(grep -w 'LIMITE_REVENDA' "$arquivo_reve" | awk '{print $2}')
 
         # Verificar si tiene cupos
         [[ -z "$limite_atual" || "$limite_atual" -le 0 ]] && {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "$(echo -e '❌ No tienes cupos disponibles.')" \
+            --text "$(echo -e "❌ No tienes cupos disponibles.")" \
             --parse_mode html
             break
         }
-
-        # Descontar 1 cupo
-        local novo_limite=$((limite_atual - 1))
-        sed -i "s/LIMITE_REVENDA: $limite_atual/LIMITE_REVENDA: $novo_limite/" "$arquivo_rev"
-        sed -i "s/LIMITE: $limite_atual/LIMITE: $novo_limite/" "$ativos"
     fi
 
     # Generar usuario y contraseña
@@ -964,6 +959,13 @@ fun_teste() {
         echo "$usuario:$senha" > "/etc/bot/info-users/$usuario"
         echo "$usuario" >> /root/usuarios.db
 
+        # Descontar 1 cupo si no es admin
+        if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
+            local novo_limite=$((limite_atual - 1))
+            sed -i "s/LIMITE_REVENDA: $limite_atual/LIMITE_REVENDA: $novo_limite/" "$arquivo_reve"
+            sed -i "s/LIMITE: $limite_atual/LIMITE: $novo_limite/" "$ativos"
+        fi
+
         # Script de eliminación automática + devolución de cupo
         cat > "$dir_teste/$usuario.sh" <<EOF
 #!/bin/bash
@@ -975,10 +977,10 @@ rm -f /etc/bot/info-users/$usuario
 rm -f /etc/SSHPlus/userteste/$usuario.sh
 
 # Devolver cupo al revendedor (solo si no es admin)
-if [[ "$revendedor" != "admin" && -f /etc/bot/revenda/$revendedor/$revendedor ]]; then
-    limite_atual=\$(grep -w 'LIMITE_REVENDA' /etc/bot/revenda/$revendedor/$revendedor | awk '{print \$2}')
+if [[ "\$revendedor" != "admin" && -f /etc/bot/revenda/\$revendedor/\$revendedor ]]; then
+    limite_atual=\$(grep -w 'LIMITE_REVENDA' /etc/bot/revenda/\$revendedor/\$revendedor | awk '{print \$2}')
     novo_limite=\$((limite_atual + 1))
-    sed -i "s/LIMITE_REVENDA: \$limite_atual/LIMITE_REVENDA: \$novo_limite/" /etc/bot/revenda/$revendedor/$revendedor
+    sed -i "s/LIMITE_REVENDA: \$limite_atual/LIMITE_REVENDA: \$novo_limite/" /etc/bot/revenda/\$revendedor/\$revendedor
     sed -i "s/LIMITE: \$limite_atual/LIMITE: \$novo_limite/" $ativos
 fi
 EOF
@@ -994,15 +996,16 @@ EOF
 ⏳ <b>Duración:</b> $t_time $hrs
 💡 <b>Cupo descontado</b>
 
-⚠️ El acceso se eliminará automáticamente.")" \
+⚠️ El acceso se eliminará automáticamente.
+🟢 <b>El cupo será devuelto al finalizar.</b>")" \
         --parse_mode html
 
     else
         # Si falla, devolver cupo
-        [[ "${message_from_id[$id]}" != "$id_admin" ]] && {
-            sed -i "s/LIMITE_REVENDA: $novo_limite/LIMITE_REVENDA: $limite_atual/" "$arquivo_rev"
+        if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
+            sed -i "s/LIMITE_REVENDA: $novo_limite/LIMITE_REVENDA: $limite_atual/" "$arquivo_reve"
             sed -i "s/LIMITE: $novo_limite/LIMITE: $limite_atual/" "$ativos"
-        }
+        fi
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
         --text "$(echo -e '❌ Error al crear el test.')" \
         --parse_mode html
