@@ -98,7 +98,6 @@ criar_user() {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
             --text "$(echo -e '❌ Erro: Arquivo vazio ou inválido.')" \
             --parse_mode html
-        _erro='1'
         return 1
     }
 
@@ -109,66 +108,101 @@ criar_user() {
     local validade=$(echo "$data" | awk -F'/' '{print $2"/"$1"/"$3}' | xargs -i date -d'{}' +%Y-%m-%d)
     local info_data=$(date '+%d/%m/%C%y' -d "$data")
 
-    # Verificar se o nome de usuário é válido
-    [[ "$(awk -F : '$3 >= 1000 { print $1 }' /etc/passwd | grep -w "$usuario" | wc -l)" != '0' ]] && {
+    # Verificar si el usuario ya existe
+    if [[ "$(awk -F: '$3 >= 1000 { print $1 }' /etc/passwd | grep -w "$usuario" | wc -l)" -gt 0 ]]; then
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
             --text "$(echo -e '❌ Usuario ya existe en el sistema.')" \
             --parse_mode html
         return 1
-    }
+    fi
 
-    # Solo verificar límites si NO es el admin
+    # Solo verificar y descontar cupos si NO es el admin
     if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
-        # Verificar límite total del revendedor
-        _cont_limite=$(grep -w ${message_from_username} $ativos | awk '{print $4}')
-        [[ -z $_cont_limite ]] && _cont_limite=0
+        local revendedor="${message_from_username}"
+        local arquivo_rev="/etc/bot/revenda/${revendedor}/${revendedor}"
 
-        # Contar cuántos usuarios ya ha creado
-        fun_verif_limite_rev ${message_from_username}
-        _usuarios_criados=$_result
-
-        # Comparar
-        if (( $_usuarios_criados >= _cont_limite )); then
+        # Verificar si existe el archivo del revendedor
+        [[ ! -f "$arquivo_rev" ]] && {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e "⚠️ LIMITE DE CUPOS ALCANZADO!\n\n🔹 Cupos disponibles: 0\n🔹 No puedes crear más usuarios.")" \
+                --text "$(echo -e '❌ Error: Perfil de revendedor no encontrado.')" \
+                --parse_mode html
+            return 1
+        }
+
+        # Obtener límite actual
+        local limite_atual=$(grep -w 'LIMITE_REVENDA' "$arquivo_rev" | awk '{print $2}')
+        [[ -z "$limite_atual" || "$limite_atual" -le 0 ]] && {
+            ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+                --text "$(echo -e '⚠️ No tienes cupos disponibles.')" \
+                --parse_mode html
+            return 1
+        }
+
+        # Contar cuántos usuarios ya ha creado (opcional, como doble verificación)
+        fun_verif_limite_rev "$revendedor"
+        local usuarios_criados=$_result
+        local limite_total=$(grep -w "$revendedor" $ativos | awk '{print $4}')
+
+        if (( usuarios_criados >= limite_total )); then
+            ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+                --text "$(echo -e '⚠️ Límite de cupos alcanzado.')" \
                 --parse_mode html
             return 1
         fi
+
+        # ✅ Descontar 1 del límite
+        local novo_limite=$((limite_atual - 1))
+        sed -i "s/LIMITE_REVENDA: $limite_atual/LIMITE_REVENDA: $novo_limite/" "$arquivo_rev"
+
+        # Actualizar también en la lista de activos (opcional, para coherencia)
+        local linha_rev=$(grep -w "$revendedor" $ativos)
+        local novo_registro=$(echo "$linha_rev" | sed "s/LIMITE: $limite_atual/LIMITE: $novo_limite/")
+        sed -i "s/.*$revendedor.*/$novo_registro/" $ativos
     fi
 
-    # Crear usuario en el sistema
+    # Crear el usuario en el sistema
     if /usr/sbin/useradd -M -N -s /bin/false "$usuario" -e "$validade"; then
         (echo "$senha"; echo "$senha") | passwd "$usuario" >/dev/null 2>&1
     else
+        # Si falla, devolver el cupo (opcional)
+        [[ "${message_from_id[$id]}" != "$id_admin" ]] && {
+            sed -i "s/LIMITE_REVENDA: $novo_limite/LIMITE_REVENDA: $limite_atual/" "$arquivo_rev"
+            sed -i "s/LIMITE: $novo_limite/LIMITE: $limite_atual/" $ativos
+        }
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
             --text "$(echo -e '❌ Error al crear el usuario en el sistema.')" \
             --parse_mode html
         return 1
     fi
 
-    # Guardar en bases de datos locales
+    # Guardar información del usuario
     [[ "${message_from_id[$id]}" != "$id_admin" ]] && {
-        echo "$usuario:$senha:$info_$limite" > /etc/bot/revenda/${message_from_username}/usuarios/$usuario
-        echo "$usuario:$senha:$info_$limite" > /etc/bot/info-users/$usuario
+        echo "$usuario:$senha:$info_data:$limite" > /etc/bot/revenda/${message_from_username}/usuarios/$usuario
+        echo "$usuario:$senha:$info_data:$limite" > /etc/bot/info-users/$usuario
     }
 
     echo "$usuario $limite" >> /root/usuarios.db
     echo "$senha" > /etc/SSHPlus/senha/$usuario
 
     # Generar perfil OpenVPN si existe
-    [[ -e "/etc/openvpn/server.conf" ]] && {
-        cd /etc/openvpn/easy-rsa/
-        ./easyrsa build-client-full "$usuario" nopass
+    if [[ -e "/etc/openvpn/server.conf" ]]; then
+        cd /etc/openvpn/easy-rsa/ || {
+            ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+                --text "$(echo -e '❌ No se pudo acceder al directorio de OpenVPN.')" \
+                --parse_mode html
+            return 1
+        }
+        ./easyrsa build-client-full "$usuario" nopass >/dev/null 2>&1
         newclient "$usuario"
-    }
+    fi
 
-    # Responder con éxito
+    # Mensaje de éxito
     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-        --text "$(echo -e "✅ USUARIO CREADO CON ÉXITO ✅\n\n👤 Usuario: <code>$usuario</code>\n🔑 Contraseña: <code>$senha</code>\n📱 Dispositivos: $limite\n⏱️ Expira: $data")" \
+        --text "$(echo -e "✅ USUARIO CREADO CON ÉXITO ✅\n\n👤 Usuario: <code>$usuario</code>\n🔑 Contraseña: <code>$senha</code>\n📱 Dispositivos: $limite\n⏱️ Expira: $data\n\n🔹 <b>Cupos restantes:</b> $novo_limite")" \
         --parse_mode html
 
     # Enviar archivos adjuntos si existen
-    if [[ -d "/etc/bot/arquivos" ]] && [[ "$(ls /etc/bot/arquivos | wc -l)" != '0' ]]; then
+    if [[ -d "/etc/bot/arquivos" ]] && [[ "$(ls /etc/bot/arquivos | wc -l)" -gt 0 ]]; then
         for arqv in /etc/bot/arquivos/*; do
             ShellBot.sendDocument --chat_id ${message_from_id[$id]} \
                 --document "@$arqv" \
