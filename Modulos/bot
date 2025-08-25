@@ -991,9 +991,22 @@ EOF
         echo "/etc/SSHPlus/userteste/$usuario.sh" | at now + $t_time hour >/dev/null 2>&1
 
         # Mensaje al usuario
-        [[ "$t_time" == '1' ]] && hrs="hora" || hrs="horas"
-        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-        --text "$(echo -e "✅ Test creado con éxito:
+[[ "$t_time" == '1' ]] && hrs="hora" || hrs="horas"
+
+if [[ "${message_from_id[$id]}" == "$id_admin" ]]; then
+    # Mensaje para admin (sin mencionar cupos)
+    ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+    --text "$(echo -e "✅ Test creado con éxito:
+👤 <b>Usuario:</b> <code>$usuario</code>
+🔑 <b>Contraseña:</b> <code>$senha</code>
+⏳ <b>Duración:</b> $t_time $hrs
+
+⚠️ El acceso se eliminará automáticamente.")" \
+    --parse_mode html
+else
+    # Mensaje para revendedor (con cupos)
+    ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+    --text "$(echo -e "✅ Test creado con éxito:
 👤 <b>Usuario:</b> <code>$usuario</code>
 🔑 <b>Contraseña:</b> <code>$senha</code>
 ⏳ <b>Duración:</b> $t_time $hrs
@@ -1001,7 +1014,8 @@ EOF
 
 ⚠️ El acceso se eliminará automáticamente.
 🟢 <b>El cupo será devuelto al finalizar.</b>")" \
-        --parse_mode html
+    --parse_mode html
+fi
 
     else
         # Si falla, devolver cupo
