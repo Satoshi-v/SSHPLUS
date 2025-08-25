@@ -894,7 +894,7 @@ fun_add_teste() {
         _limsomarev2=$(echo "$_result + 1" | bc)
         [[ "$_limsomarev2" -gt "$_limTotal" ]] && {
             ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-                --text "❌ NO TIENES LIMITE DISPONIBLE!"
+                --text "❌ NO TIENES CUPOS DISPONIBLES!"
             return 0
         } || {
             ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
@@ -922,21 +922,24 @@ fun_teste() {
 
     t_time=${message_text[$id]}
 
-    # Limitar a máximo 3 horas
-    [[ "$t_time" -gt 3 ]] && {
-        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-        --text "$(echo -e "❌ Máximo 3 horas permitidas para tests.")" \
-        --parse_mode html
-        return 0
-    }
+    # Si es admin, no hay límite de tiempo ni cupos
+    if [[ "${message_from_id[$id]}" == "$id_admin" ]]; then
+        # Admin puede usar cualquier tiempo
+        pass
+    else
+        # Revendedor: limitar a 3 horas
+        [[ "$t_time" -gt 3 ]] && {
+            ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+            --text "$(echo -e "❌ Máximo 3 horas permitidas para tests.")" \
+            --parse_mode html
+            return 0
+        }
 
-    # Solo revendedor (no admin) debe descontar cupo
-    if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
+        # Verificar cupos del revendedor
         local revendedor="${message_from_username}"
         local arquivo_reve="/etc/bot/revenda/${revendedor}/${revendedor}"
         local limite_atual=$(grep -w 'LIMITE_REVENDA' "$arquivo_reve" | awk '{print $2}')
 
-        # Verificar si tiene cupos
         [[ -z "$limite_atual" || "$limite_atual" -le 0 ]] && {
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
             --text "$(echo -e "❌ No tienes cupos disponibles.")" \
@@ -959,7 +962,7 @@ fun_teste() {
         echo "$usuario:$senha" > "/etc/bot/info-users/$usuario"
         echo "$usuario" >> /root/usuarios.db
 
-        # Descontar 1 cupo si no es admin
+        # Descontar 1 cupo si NO es admin
         if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
             local novo_limite=$((limite_atual - 1))
             sed -i "s/LIMITE_REVENDA: $limite_atual/LIMITE_REVENDA: $novo_limite/" "$arquivo_reve"
@@ -987,7 +990,7 @@ EOF
         chmod +x "$dir_teste/$usuario.sh"
         echo "/etc/SSHPlus/userteste/$usuario.sh" | at now + $t_time hour >/dev/null 2>&1
 
-        # Mensaje al revendedor
+        # Mensaje al usuario
         [[ "$t_time" == '1' ]] && hrs="hora" || hrs="horas"
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
         --text "$(echo -e "✅ Test creado con éxito:
