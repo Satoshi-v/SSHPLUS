@@ -381,14 +381,13 @@ alterar_data() {
 
 alterar_data_user() {
     usuario=$1
-    inputdate=$2
     database="/root/usuarios.db"
 
     # Verificación para revendedores: comprueba que el usuario pertenezca al revendedor
     if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
-        if [[ ! -e "/etc/bot/revenda/${message_from_username}/usuarios/${message_text[$id]}" ]]; then
+        if [[ ! -e "/etc/bot/revenda/${message_from_username}/usuarios/${usuario}" ]]; then
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "$(echo -e "❌ El usuario ${message_text[$id]} no es tuyo.")" \
+                --text "$(echo -e "❌ El usuario ${usuario} no es tuyo.")" \
                 --parse_mode html
             return 0
         fi
@@ -405,14 +404,14 @@ alterar_data_user() {
 
     # Restaura la fecha de expiración del sistema y añade 32 días
     new_date=$(date -d "+32 days" +"%Y-%m-%d")
-    chage -E $new_date ${message_text[$id]}
+    chage -E $new_date ${usuario}
     
     # Actualiza la fecha en el archivo de información del usuario
-    sed -i "s;${message_text[$id]}:\(.*\):\(.*\):\(.*\);${message_text[$id]}:\1:${new_date}:\3;" /etc/bot/info-users/${message_text[$id]}
+    sed -i "s;${usuario}:\(.*\):\(.*\):\(.*\);${usuario}:\1:${new_date}:\3;" /etc/bot/info-users/${usuario}
     
     # Mensaje de éxito
     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-        --text "🎉 Éxito! El usuario **${message_text[$id]}** ha sido renovado. La nueva fecha de caducidad es: **${new_date}**" \
+        --text "🎉 Éxito! El usuario **${usuario}** ha sido renovado. La nueva fecha de caducidad es: **${new_date}**" \
         --parse_mode html
     
     # Descuenta un cupo si es un revendedor
@@ -2142,7 +2141,7 @@ while :; do
                         --parse_mode html
                     rm /tmp/name-l >/dev/null 2>&1
                     ;;
-                '⏳ Alterar Fecha ⏳\n\nNombre de usuario:')
+                '⏳ Alterar Fecha ⏳'):
     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
         --text 'Ingrese el Nombre de usuario que desea alterar la fecha:' \
         --reply_markup "$(ShellBot.ForceReply)" \
@@ -2165,6 +2164,7 @@ while :; do
         break
     fi
 
+    # Aquí se llama a la función corregida en el siguiente paso
     alterar_data_user "${message_text[$id]}"
     break
 ;;
