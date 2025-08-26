@@ -364,99 +364,47 @@ alterar_limite_user() {
 alterar_data() {
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-        --text "⚠️ ¡ESTÁS SUSPENDIDO! CONTACTAR AL ADMINISTRADOR"
+            --text "⚠️ ¡ESTÁS SUSPENDIDO! CONTACTAR AL ADMINISTRADOR"
         return 0
     }
     [[ "${callback_query_from_id[$id]}" == "$id_admin" ]] || \
     [[ "$(grep -wc ${callback_query_from_username} $ativos)" != '0' ]] && {
         ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
-        --text "🔄 RENOVAR USUARIO 🔄\n\nIngrese el nombre del usuario:" \
-        --reply_markup "$(ShellBot.ForceReply)"
+            --text "⏳ Alterar Fecha ⏳\n\nNombre de usuario:" \
+            --reply_markup "$(ShellBot.ForceReply)"
     } || {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
-        --text "🚫 ACESSO NEGADO 🚫"
+            --text "🚫 ACESSO NEGADO 🚫"
         return 0
     }
 }
 
 alterar_data_user() {
-    local usuario=$1
-    local database="/root/usuarios.db"
-
-    # Verificar si el usuario existe
-    if [[ ! $(awk -F: '$3 >= 1000 { print $1 }' /etc/passwd | grep -w "$usuario") ]]; then
-        ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-        --text "$(echo -e '❌ Usuario no existe en el sistema.')" \
-        --parse_mode html
-        _erro='1'
-        return 0
-    fi
-
-    # Solo revendedor (no admin) necesita cupos
-    if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
-        local revendedor="${message_from_username}"
-        local arquivo_rev="/etc/bot/revenda/${revendedor}/${revendedor}"
-        local limite_atual=$(grep -w 'LIMITE_REVENDA' "$arquivo_rev" | awk '{print $2}')
-
-        # Verificar cupos
-        [[ -z "$limite_atual" || "$limite_atual" -le 0 ]] && {
-            ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-            --text "$(echo -e '❌ No tienes cupos disponibles para renovar.')" \
-            --parse_mode html
-            _erro='1'
+    usuario=$1
+    inputdate=$2
+    database="/root/usuarios.db"
+    [[ "${message_from_id[$id]}" != "$id_admin" ]] && {
+        _limTotal=$(grep -w "${message_from_username}" $ativos | awk '{print $4}')
+        if [[ "$_limTotal" -le 0 ]]; then
+            ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+                --text "$(echo -e "❌ No tienes cupos suficientes para renovar")" \
+                --parse_mode html
             return 0
-        }
-
-        # Descontar 1 cupo
-        local novo_limite=$((limite_atual - 1))
-        sed -i "s/LIMITE_REVENDA: $limite_atual/LIMITE_REVENDA: $novo_limite/" "$arquivo_rev"
-        sed -i "s/LIMITE: $limite_atual/LIMITE: $novo_limite/" "$ativos"
-    fi
-
-    # Calcular nueva fecha: +32 días desde hoy
-    local dias="32"
-    local udata=$(date "+%d/%m/%Y" -d "+$dias days")
-    local sysdate=$(echo "$udata" | awk -v FS=/ -v OFS=- '{print $3,$2,$1}')
-
-    # Aplicar nueva fecha de expiración
-    if chage -M "$sysdate" "$usuario"; then
-        # Actualizar en info-users si existe
-        [[ -e "/etc/bot/info-users/$usuario" ]] && {
-            sed -i "s;\(.*\):\(.*\):\(.*\);\1:\2:$udata;" /etc/bot/info-users/$usuario
-        }
-        # Actualizar en usuarios del revendedor si existe
-        [[ -e "/etc/bot/revenda/${message_from_username}/usuarios/$usuario" ]] && {
-            sed -i "s;\(.*\):\(.*\):\(.*\);\1:\2:$udata;" /etc/bot/revenda/${message_from_username}/usuarios/$usuario
-        }
-
-        # Mensaje de éxito
-        local msg_cupos=""
-        if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
-            msg_cupos="\n🔹 <b>Cupos restantes:</b> $novo_limite"
         fi
-
-        ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-        --text "$(echo -e "✅ USUARIO RENOVADO CON ÉXITO ✅
-👤 <b>Usuario:</b> <code>$usuario</code>
-📅 <b>Nueva Fecha:</b> $udata (+32 días)
-⏳ <b>Expira:</b> $udata$msg_cupos")" \
+    }
+    new_date=$(date -d "+32 days" +"%Y-%m-%d")
+    expiracao=$(grep -w "${message_text[$id]}" $ativos | cut -d' ' -f2)
+    sed -i "/^${message_text[$id]} /s/\(^.* .*\).*/\1 ${new_date}/" $ativos
+    ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+        --text "🎉 Éxito! El usuario ${message_text[$id]} ha sido renovado. La nueva fecha de caducidad es: ${new_date}" \
         --parse_mode html
-    else
-        # Si falla, devolver cupo
-        if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
-            sed -i "s/LIMITE_REVENDA: $novo_limite/LIMITE_REVENDA: $limite_atual/" "$arquivo_rev"
-            sed -i "s/LIMITE: $novo_limite/LIMITE: $limite_atual/" "$ativos"
-        fi
-        ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-        --text "$(echo -e '❌ Error al renovar el usuario.')" \
-        --parse_mode html
-        _erro='1'
-        return 0
+    if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
+        fun_verif_limite_rev ${message_from_username}
+        _limsomarev2=$(echo "$_result - 1" | bc)
+        sed -i "/\b${message_from_username}\b/s/\s\s*/ /g;s/^${message_from_username} .* /${_limsomarev2}/" $ativos
     fi
+}
 
-    return 0
-}
-}
 ver_users() {
     if [[ "${callback_query_from_id[$id]}" == "$id_admin" ]]; then
         arq_info=/tmp/$(echo $RANDOM)
@@ -1886,7 +1834,7 @@ ShellBot.InlineKeyboardButton --button 'menu2' --line 2 --text 'ONLINE' --callba
 ShellBot.InlineKeyboardButton --button 'menu2' --line 3 --text 'INFO USUARIOS' --callback_data '_verusers2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 4 --text 'CAMBIAR CONTRASEÑA' --callback_data '_altsenha2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 4 --text 'BORRAR EXPIRADOS' --callback_data '_expirados2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 5 --text 'RENOVAR' --callback_data '_altdata2'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 5 --text 'ALTERAR FECHA' --callback_data '_altdata2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 5 --text 'REVENTA' --callback_data '_opcoesrev2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 6 --text 'INFORME' --callback_data '_relatorio2'
 ShellBot.regHandleFunction --function fun_adduser --callback_data _criaruser2
@@ -2178,31 +2126,31 @@ while :; do
                     rm /tmp/name-l >/dev/null 2>&1
                     ;;
                 '⏳ Alterar Fecha ⏳\n\nNombre de usuario:')
-                    verifica_acesso
-                    [[ "$_erro" == '1' ]] && break
-                    fun_verif_user ${message_text[$id]}
-                    [[ "$_erro" == '1' ]] && break
-                    echo "${message_text[$id]}" >/tmp/name-d
-                    ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text 'ingrese cantidad de dias:' \
-                        --reply_markup "$(ShellBot.ForceReply)"
-                    ;;
-                'ingrese cantidad de dias:')
-                    verifica_acesso
-                    [[ "$_erro" == '1' ]] && break
-                    [[ ${message_text[$id]} != ?(+|-)+([0-9/]) ]] && {
-                        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error! Siga el ejemplo\n\nDias formato [Ej: 30]\nFormato dato [Ej: 30/12/2019]")" \
-                            --parse_mode html
-                        break
-                    }
-                    alterar_data_user $(cat /tmp/name-d) ${message_text[$id]}
-                    [[ "$_erro" == '1' ]] && break
-                    ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ DATO ALTERADO !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-d)\n<b>Nueva Fecha:</b> $udata")" \
-                        --parse_mode html
-                    rm /tmp/name-d >/dev/null 2>&1
-                    ;;
+    ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+        --text 'Ingrese el Nombre de usuario que desea alterar la fecha:' \
+        --reply_markup "$(ShellBot.ForceReply)" \
+        --parse_mode html \
+        --reply_to_message_id ${message_id[$id]}
+
+    ShellBot.ForceReply_getValue ${message_chat_id[$id]}
+    if [[ "${message_text[$id]}" == "/cancel" ]]; then
+        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+            --text "❌ OPERACION CANCELADA CON EXITO" \
+            --parse_mode html
+        break
+    fi
+
+    verifica_user "${message_text[$id]}"
+    if [[ $_erro == '1' ]]; then
+        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+            --text "❌ Error ! Usuario No existe !!" \
+            --parse_mode html
+        break
+    fi
+
+    alterar_data_user "${message_text[$id]}"
+    break
+;;
                 '[1] - AGREGAR ARCHIVO\n[2] - EXCLUIR ARCHIVO\n\nIngrese la opcion [1-2]')
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
