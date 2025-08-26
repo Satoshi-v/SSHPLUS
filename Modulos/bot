@@ -393,9 +393,9 @@ alterar_data_user() {
             return 0
         fi
         
-        # Verificación de cupos antes de la renovación
-        _limTotal=$(grep -w "${message_from_username}" $ativos | awk '{print $4}')
-        if [[ "$_limTotal" -le 0 ]]; then
+        # Verificación de cupos ANTES de la renovación
+        fun_verif_limite_rev ${message_from_username}
+        if [[ "$_result" -le 0 ]]; then
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
                 --text "$(echo -e "❌ No tienes cupos suficientes para renovar")" \
                 --parse_mode html
@@ -417,7 +417,7 @@ alterar_data_user() {
     
     # Descuenta un cupo si es un revendedor
     if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
-        _limsomarev2=$(echo "$_limTotal - 1" | bc)
+        _limsomarev2=$(echo "$_result - 1" | bc)
         sed -i "/\b${message_from_username}\b/s/\s\s*/ /g;s/^${message_from_username} .* /${_limsomarev2}/" $ativos
     fi
 }
