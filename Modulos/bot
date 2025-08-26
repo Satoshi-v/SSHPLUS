@@ -2131,11 +2131,8 @@ while :; do
                     ;;
                 '⏳ Alterar Fecha ⏳\n\nNombre de usuario:')
     
-    # Reinicia la bandera de error al inicio para cada nueva acción
-    _erro=0
-
     # ---------------- INICIO DE LA VERIFICACIÓN DE CUPOS ----------------
-    # Este código verifica si el usuario es un revendedor y si no tiene cupos disponibles.
+    # Si el usuario es un revendedor y no tiene cupos, se detiene el proceso.
     [[ "${message_from_id[$id]}" != "$id_admin" ]] && {
         _limTotal=$(grep -w "${message_from_username}" $ativos | awk '{print $4}')
         fun_verif_limite_rev "${message_from_username}"
@@ -2143,12 +2140,13 @@ while :; do
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
                 --text "❌ No tienes cupos disponibles para realizar esta acción." \
                 --parse_mode html
-            _erro=1  # <--- ACTIVA LA BANDERA DE ERROR
+            # Se detiene la ejecución al salir del 'case'
+            break
         }
     }
     # ---------------- FIN DE LA VERIFICACIÓN DE CUPOS ----------------
 
-    [[ "$_erro" == '1' ]] && break
+    # Estas líneas sólo se ejecutarán si el usuario tiene cupos disponibles
     verifica_acesso
     [[ "$_erro" == '1' ]] && break
     fun_verif_user ${message_text[$id]}
@@ -2159,9 +2157,6 @@ while :; do
         --reply_markup "$(ShellBot.ForceReply)"
     ;;
 'ingrese cantidad de dias:')
-    # VERIFICA LA BANDERA DE ERROR AL INICIO
-    [[ "$_erro" == '1' ]] && break
-
     verifica_acesso
     [[ "$_erro" == '1' ]] && break
     [[ ${message_text[$id]} != ?(+|-)+([0-9/]) ]] && {
