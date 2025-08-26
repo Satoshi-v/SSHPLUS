@@ -2147,7 +2147,9 @@ while :; do
         --reply_markup "$(ShellBot.ForceReply)" \
         --parse_mode html \
         --reply_to_message_id ${message_id[$id]}
-
+    break
+;;
+'Ingrese el Nombre de usuario que desea alterar la fecha:')
     ShellBot.ForceReply_getValue ${message_chat_id[$id]}
     if [[ "${message_text[$id]}" == "/cancel" ]]; then
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
@@ -2155,7 +2157,7 @@ while :; do
             --parse_mode html
         break
     fi
-
+    
     verifica_user "${message_text[$id]}"
     if [[ $_erro == '1' ]]; then
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
@@ -2163,8 +2165,7 @@ while :; do
             --parse_mode html
         break
     fi
-
-    # Aquí se llama a la función corregida en el siguiente paso
+    
     alterar_data_user "${message_text[$id]}"
     break
 ;;
