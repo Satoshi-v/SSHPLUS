@@ -2140,17 +2140,16 @@ while :; do
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
                 --text "❌ No tienes cupos disponibles para realizar esta acción." \
                 --parse_mode html
-            # Se detiene la ejecución al salir del 'case'
-            break
+            return 0 # <--- Se detiene la función aquí si hay un error
         }
     }
     # ---------------- FIN DE LA VERIFICACIÓN DE CUPOS ----------------
 
-    # Estas líneas sólo se ejecutarán si el usuario tiene cupos disponibles
+    # Estas líneas solo se ejecutarán si el usuario tiene cupos disponibles
     verifica_acesso
-    [[ "$_erro" == '1' ]] && break
+    [[ "$_erro" == '1' ]] && return 0
     fun_verif_user ${message_text[$id]}
-    [[ "$_erro" == '1' ]] && break
+    [[ "$_erro" == '1' ]] && return 0
     echo "${message_text[$id]}" >/tmp/name-d
     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
         --text 'ingrese cantidad de dias:' \
@@ -2158,15 +2157,15 @@ while :; do
     ;;
 'ingrese cantidad de dias:')
     verifica_acesso
-    [[ "$_erro" == '1' ]] && break
+    [[ "$_erro" == '1' ]] && return 0
     [[ ${message_text[$id]} != ?(+|-)+([0-9/]) ]] && {
         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
             --text "$(echo -e "❌ Error! Siga el ejemplo\n\nDias formato [Ej: 30]\nFormato dato [Ej: 30/12/2019]")" \
             --parse_mode html
-        break
+        return 0 # <--- También se usa aquí para la validación de formato
     }
     alterar_data_user $(cat /tmp/name-d) ${message_text[$id]}
-    [[ "$_erro" == '1' ]] && break
+    [[ "$_erro" == '1' ]] && return 0
     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
         --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ DATO ALTERADO !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-d)\n<b>Nueva Fecha:</b> $udata")" \
         --parse_mode html
