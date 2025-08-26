@@ -2131,7 +2131,8 @@ while :; do
                     ;;
                 '⏳ Alterar Fecha ⏳\n\nNombre de usuario:')
     
-    # ---------------- VERIFICACIÓN DE CUPOS CON SOLUCIÓN DEFINITIVA ----------------
+    # ---------------- VERIFICACIÓN DE CUPOS CON SOLUCIÓN FINAL ----------------
+    # Si el usuario es un revendedor y no tiene cupos, se detiene el proceso.
     [[ "${message_from_id[$id]}" != "$id_admin" ]] && {
         _limTotal=$(grep -w "${message_from_username}" $ativos | awk '{print $4}')
         fun_verif_limite_rev "${message_from_username}"
@@ -2139,7 +2140,8 @@ while :; do
             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
                 --text "❌ No tienes cupos disponibles para realizar esta acción." \
                 --parse_mode html
-            ShellBot.setVar --mode del --var_name VAR2 # <--- ESTA ES LA LÍNEA CLAVE
+            # Borra la variable de estado para que el bot no espere la siguiente entrada.
+            ShellBot.setVar --mode del --var_name VAR2 
             return 0
         }
     }
