@@ -2192,7 +2192,7 @@ while :; do
         local _limite_nuevo=$((_limite_actual - 1))
 
         # Reemplaza SOLO el cuarto campo (el cupo)
-        sed -i "s/^${message_from_username}\s\+.*\s\+.*\s\+${_limite_actual}\s\+.*/${linea_rev//${_limite_actual}/${_limite_nuevo}/}" $ativos
+        sed -i "s/\(.*\s\)\(${_limite_actual}\)\(\s.*\)/\1${_limite_nuevo}\3/" $ativos
         
         # Envía el mensaje de confirmación con el nuevo límite
         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
