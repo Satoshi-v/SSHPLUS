@@ -2196,10 +2196,18 @@ while :; do
         # ✅ Actualiza el cupo en el archivo de perfil (la fuente de verdad de tu script)
         sed -i "s/LIMITE_REVENDA: $limite_actual/LIMITE_REVENDA: $_limite_nuevo/" "$arquivo_rev"
 
-        # ✅ Luego, actualiza el archivo de activos para mantener la coherencia
+        # ✅ Método seguro para actualizar la línea en el archivo de activos
         local linea_activos=$(grep -w "${message_from_username}" $ativos)
         local nueva_linea_activos=$(echo "$linea_activos" | sed "s/${limite_actual}/${_limite_nuevo}/")
-        sed -i "s|.*${message_from_username}.*|${nueva_linea_activos}|" $ativos
+        
+        # Crea un archivo temporal con todas las líneas excepto la del revendedor
+        grep -v "^${message_from_username}" "$ativos" > "/tmp/temp_activos"
+
+        # Añade la nueva línea con el cupo actualizado al archivo temporal
+        echo "$nueva_linea_activos" >> "/tmp/temp_activos"
+
+        # Sobrescribe el archivo original con el temporal
+        mv "/tmp/temp_activos" "$ativos"
         
         # Envía el mensaje de confirmación con el nuevo límite
         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
