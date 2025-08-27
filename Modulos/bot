@@ -2182,7 +2182,7 @@ while :; do
     alterar_data_user $(cat /tmp/name-d) ${message_text[$id]}
     [[ "$_erro" == '1' ]] && return 0
 
-    # Lógica de descuento de cupo, replicando el método de 'crear_user'
+    # Lógica de descuento de cupo, con un comando 'sed' mucho más seguro
     if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
         # Obtiene la línea completa del revendedor
         local linea_rev=$(grep -w "${message_from_username}" $ativos)
@@ -2191,12 +2191,9 @@ while :; do
         # Le resta 1 al límite
         local _limite_nuevo=$((_limite_actual - 1))
 
-        # Crea una nueva línea con el cupo actualizado
-        local nueva_linea=$(echo "$linea_rev" | sed "s/ $_limite_actual / $_limite_nuevo /")
+        # Reemplaza SOLO el cuarto campo (el cupo)
+        sed -i "s/^${message_from_username}\s\+.*\s\+.*\s\+${_limite_actual}\s\+.*/${linea_rev//${_limite_actual}/${_limite_nuevo}/}" $ativos
         
-        # Reemplaza la línea completa en el archivo $ativos
-        sed -i "s|.*${message_from_username}.*|${nueva_linea}|" $ativos
-
         # Envía el mensaje de confirmación con el nuevo límite
         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
             --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ DATO ALTERADO !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-d)\n<b>Nueva Fecha:</b> $udata\n\n<b>💥 LÍMITE RESTANTE:</b> $_limite_nuevo")" \
