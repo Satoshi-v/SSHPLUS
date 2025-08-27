@@ -2181,6 +2181,21 @@ while :; do
     }
     alterar_data_user $(cat /tmp/name-d) ${message_text[$id]}
     [[ "$_erro" == '1' ]] && return 0
+
+    # ---------------- INICIO DE LA LÓGICA PARA DESCONTAR EL CUPO ----------------
+    # Solo si el usuario es un revendedor (no un admin)
+    if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
+        # Obtiene el límite actual del revendedor
+        _limite_actual=$(grep -w "${message_from_username}" $ativos | awk '{print $4}')
+        
+        # Le resta 1 al límite
+        _limite_nuevo=$((_limite_actual - 1))
+        
+        # Actualiza el archivo de usuarios activos del revendedor con el nuevo límite
+        sed -i "s;${message_from_username}:${_limite_actual};${message_from_username}:${_limite_nuevo};" $ativos
+    fi
+    # ---------------- FIN DE LA LÓGICA PARA DESCONTAR EL CUPO ----------------
+
     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
         --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ DATO ALTERADO !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-d)\n<b>Nueva Fecha:</b> $udata")" \
         --parse_mode html
