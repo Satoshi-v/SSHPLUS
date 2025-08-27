@@ -362,6 +362,20 @@ alterar_limite_user() {
 }
 
 alterar_data() {
+    # ---------------- VERIFICACIÓN DE CUPOS AQUÍ ----------------
+    [[ "${callback_query_from_id[$id]}" != "$id_admin" ]] && {
+        _limTotal=$(grep -w "${callback_query_from_username}" $ativos | awk '{print $4}')
+        fun_verif_limite_rev "${callback_query_from_username}"
+        _limsomarev2=$(echo "$_result + 1" | bc)
+        [[ "$_limsomarev2" -gt "$_limTotal" ]] && {
+            ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
+                --text "❌ No tienes cupos disponibles para realizar esta acción." \
+                --parse_mode html
+            return 0
+        }
+    }
+    # ---------------- FIN DE LA VERIFICACIÓN ----------------
+
     [[ "$(grep -wc ${callback_query_from_username} $suspensos)" != '0' ]] && {
         ShellBot.answerCallbackQuery --callback_query_id ${callback_query_id[$id]} \
             --text "⚠️ ¡ESTÁS SUSPENDIDO! CONTACTAR AL ADMINISTRADOR"
