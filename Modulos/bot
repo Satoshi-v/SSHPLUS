@@ -2181,30 +2181,31 @@ while :; do
     }
     alterar_data_user $(cat /tmp/name-d) ${message_text[$id]}
     [[ "$_erro" == '1' ]] && return 0
-    
-    # ---------------- LÓGICA CORREGIDA PARA DESCONTAR Y NOTIFICAR EL CUPO ----------------
+
+    # Lógica de descuento y notificación de cupo
     if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
-        # Obtiene el límite actual del revendedor
-        _limite_actual=$(grep -w "${message_from_username}" $ativos | awk '{print $4}')
+        # Obtiene la línea completa del revendedor y su cupo actual
+        local linea_rev=$(grep -w "${message_from_username}" $ativos)
+        local _limite_actual=$(echo "$linea_rev" | awk '{print $4}')
         
         # Le resta 1 al límite
-        _limite_nuevo=$((_limite_actual - 1))
-        
-        # Actualiza la línea completa del revendedor con el nuevo límite en el 4to campo
-        sed -i "s/^${message_from_username} \([^ ]*\) \([^ ]*\) \([^ ]*\) \(.*/${message_from_username} \1 \2 \3 $_limite_nuevo/" $ativos
+        local _limite_nuevo=$((_limite_actual - 1))
 
+        # Reemplaza la línea completa con el nuevo cupo
+        local nueva_linea=$(echo "$linea_rev" | sed "s/${_limite_actual}/${_limite_nuevo}/")
+        sed -i "s|${linea_rev}|${nueva_linea}|" $ativos
+        
         # Envía el mensaje de confirmación con el nuevo límite
         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
             --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ DATO ALTERADO !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-d)\n<b>Nueva Fecha:</b> $udata\n\n<b>💥 LÍMITE RESTANTE:</b> $_limite_nuevo")" \
             --parse_mode html
     else
-        # Si es un admin, solo envía el mensaje de confirmación sin descontar
+        # Si es un admin, solo envía el mensaje de confirmación
         ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
             --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ DATO ALTERADO !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-d)\n<b>Nueva Fecha:</b> $udata")" \
             --parse_mode html
     fi
-    # ---------------- FIN DE LA LÓGICA ----------------
-    
+
     rm /tmp/name-d >/dev/null 2>&1
     ;;
                 '[1] - AGREGAR ARCHIVO\n[2] - EXCLUIR ARCHIVO\n\nIngrese la opcion [1-2]')
