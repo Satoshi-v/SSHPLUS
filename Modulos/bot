@@ -1847,7 +1847,7 @@ keyboard1="$(ShellBot.InlineKeyboardMarkup -b 'menu1')"
 unset menu2
 menu2=''
 ShellBot.InlineKeyboardButton --button 'menu2' --line 1 --text 'CREAR USUARIO' --callback_data '_criaruser2'
-ShellBot.InlineKeyboardButton --button 'menu2' --line 1 --text ' RENOVAR USUARIO' --callback_data '_renovar_usuario'
+ShellBot.InlineKeyboardButton --button 'menu2' --line 1 --text 'RENOVAR USUARIO' --callback_data '_criarteste2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 2 --text 'ONLINE' --callback_data '_monitor2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 3 --text 'INFO USUARIOS' --callback_data '_verusers2'
 ShellBot.InlineKeyboardButton --button 'menu2' --line 4 --text 'CAMBIAR CONTRASEÑA' --callback_data '_altsenha2'
@@ -2565,42 +2565,39 @@ while :; do
                     susp_rev $_VAR1
                     break
                     ;;
-                '_renovar_usuario')
+                '_criarteste2')
     verifica_acesso
     [[ "$_erro" == '1' ]] && break
-    ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+    ShellBot.sendMessage --chat_id ${callback_query_message_chat_id[$id]} \
         --text "$(echo -e '<b>♻️ RENOVACIÓN DE USUARIO</b>\n\nIngrese el nombre de usuario que desea renovar:')" \
-        --parse_mode html
-    ShellBot.set --key "renovar_usuario"
+        --parse_mode html --reply_markup "$(ShellBot.ForceReply)"
+    ShellBot.set --key "renovar_usuario_step1"
     ;;
-'renovar_usuario')
+'renovar_usuario_step1')
     local nome_usuario=${message_text[$id]}
-    ShellBot.set
     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-        --text "Ingrese la cantidad de dias a renovar:"
-    ShellBot.set --key 2
-    ShellBot.save_data_session "${message_from_id[$id]}" "renovar_usuario2"
-    ShellBot.save_data_session "${message_from_id[$id]}" "$nome_usuario"
+        --text "Ingrese la cantidad de dias a renovar:" \
+        --parse_mode html --reply_markup "$(ShellBot.ForceReply)"
+    ShellBot.set --key "renovar_usuario_step2"
+    ShellBot.save_data_session "${message_from_id[$id]}" "nome_usuario_a_renovar" "$nome_usuario"
     ;;
-'renovar_usuario2')
-    local nome_usuario=$(ShellBot.get_data_session "${message_from_id[$id]}")
-    [[ -z "$nome_usuario" ]] && {
-        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "❌ Error: El nombre de usuario no se pudo obtener." \
-            --parse_mode html
-        fun_menu
-        break
-    }
+'renovar_usuario_step2')
+    local nome_usuario=$(ShellBot.get_data_session "${message_from_id[$id]}" "nome_usuario_a_renovar")
     local dias_a_sumar=${message_text[$id]}
-    [[ "$dias_a_sumar" != ?(+|-)+([0-9]) ]] && {
-        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-            --text "❌ Error: Utilice solo números para los días." \
-            --parse_mode html
+
+    # Validaciones
+    [[ -z "$nome_usuario" ]] && {
+        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text "❌ Error: El nombre de usuario no se pudo obtener."
         fun_menu
         break
     }
-    
-    # Lógica de descuento de cupo, similar a la de 'CREAR TEST'
+    [[ "$dias_a_sumar" != ?(+|-)+([0-9]) ]] && {
+        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} --text "❌ Error: Utilice solo números para los días."
+        fun_menu
+        break
+    }
+
+    # Lógica de descuento de cupo
     [[ "${message_from_id[$id]}" != "$id_admin" ]] && {
         _limTotal=$(grep -w "${message_from_username}" $ativos | awk '{print $4}')
         fun_verif_limite_rev "${message_from_username}"
@@ -2621,7 +2618,8 @@ while :; do
     ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
         --text "$(echo -e "✅ USUARIO RENOVADO CON ÉXITO ✅\n\n<b>Usuario:</b> $nome_usuario\n<b>Días añadidos:</b> $dias_a_sumar")" \
         --parse_mode html
-        
+    
+    ShellBot.rm_data_session "${message_from_id[$id]}" "nome_usuario_a_renovar"
     fun_menu
     ;;
                 esac
