@@ -4,17 +4,7 @@
 #   DATA ATT: 18 de JuL 2022
 #   DESENVOLVIDO POR: TURBONETPN2023
 #   API SHELLBOT: ORION
-#   CONTATO TELEGRAM: http://t.me/TURBONET2023
-#   CANAL TELEGRAM: http://t.me/TURBONET2023
-#===================================================
-[[ ! -d /etc/SSHPlus ]] && exit 0
-[[ ! -d /etc/bot ]] && exit 0
-source ShellBot.sh
-api_bot=$1
-id_admin=$2
-[[ -z $api_bot ]] && exit 0
-[[ -z $id_admin ]] && exit 0
-[[ ! -e /usr/lib/licence ]] && exit 0
+#    -e /usr/lib/licence ]] && exit 0
 ativos='/etc/bot/lista_ativos'
 suspensos='/etc/bot/lista_suspensos'
 ShellBot.init --token "$api_bot" --monitor --return map --flush
