@@ -314,27 +314,19 @@ alterar_data_user() {
     inputdate=$2
     database="/root/usuarios.db"
 
-    if [[ "$(echo -e "$inputdate" | sed -e 's/[^/]//g')" != "//" ]]; then
-        # Si es número de días
-        udata=$(date -d "+$inputdate days" +"%d/%m/%Y")
+    if [[ $inputdate =~ ^[0-9]+$ ]]; then
+        # input son días
         sysdate=$(date -d "+$inputdate days" +"%Y-%m-%d")
+        udata=$(date -d "+$inputdate days" +"%d/%m/%Y")
     else
-        # Si es fecha dd/mm/YYYY
-        udata="$inputdate"
+        # input es fecha dd/mm/YYYY
         sysdate=$(echo "$inputdate" | awk -F/ '{printf "%04d-%02d-%02d\n",$3,$2,$1}')
-        today=$(date +"%Y%m%d")
-        timemachine=$(date -d "$sysdate" +"%Y%m%d")
-        if [[ $today -ge $timemachine ]]; then
-            ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                --text "❌ Error! Fecha inválida." \
-                --parse_mode html
-            _erro='1'
-            return 1
-        fi
+        udata="$inputdate"
     fi
 
-    # Cambiar fecha en el sistema
+    # Aplicar en el sistema (dos comandos para asegurar)
     chage -E "$sysdate" "$usuario"
+    usermod -e "$sysdate" "$usuario"
 
     # Actualizar info-users
     if [[ -e /etc/bot/info-users/$usuario ]]; then
