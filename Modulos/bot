@@ -2005,7 +2005,7 @@ while :; do
                         --parse_mode html
                     rm /tmp/name-l >/dev/null 2>&1
                     ;;
-                                                '⏳ Alterar Fecha ⏳\n\nNombre de usuario:')
+                                                                '⏳ Alterar Fecha ⏳\n\nNombre de usuario:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
 
@@ -2018,7 +2018,8 @@ while :; do
                             ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
                                 --text "⚠️ No tienes límites disponibles para alterar fechas." \
                                 --parse_mode html
-                            break
+                            _erro='1'
+                            return 0
                         fi
                     fi
                     # --- Fin verificación de límites ---
@@ -2031,14 +2032,15 @@ while :; do
                         --reply_markup "$(ShellBot.ForceReply)"
                     ;;
 
-                                'ingrese cantidad de dias:')
+                'ingrese cantidad de dias:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
                     [[ ${message_text[$id]} != ?(+|-)+([0-9/]) ]] && {
                         ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
                             --text "$(echo -e "❌ Error! Siga el ejemplo\n\nDias formato [Ej: 30]\nFormato dato [Ej: 30/12/2019]")" \
                             --parse_mode html
-                        break
+                        _erro='1'
+                        return 0
                     }
 
                     # --- Validar máximo de 32 días para revendedores/subrevendedores ---
@@ -2048,7 +2050,8 @@ while :; do
                                 ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
                                     --text "⚠️ Solo puedes renovar hasta 32 días máximo." \
                                     --parse_mode html
-                                break
+                                _erro='1'
+                                return 0
                             fi
                         fi
                     fi
