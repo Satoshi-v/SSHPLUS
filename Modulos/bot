@@ -2005,9 +2005,24 @@ while :; do
                         --parse_mode html
                     rm /tmp/name-l >/dev/null 2>&1
                     ;;
-                '⏳ Alterar Fecha ⏳\n\nNombre de usuario:')
+                                '⏳ Alterar Fecha ⏳\n\nNombre de usuario:')
                     verifica_acesso
                     [[ "$_erro" == '1' ]] && break
+
+                    # --- Verificar límites antes de continuar ---
+                    if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
+                        revendedor="${message_from_username}"
+                        limite_atual=$(grep -w "$revendedor" $ativos | awk '{print $4}')
+
+                        if [[ -z "$limite_atual" || "$limite_atual" -le 0 ]]; then
+                            ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
+                                --text "⚠️ No tienes límites disponibles para alterar fechas." \
+                                --parse_mode html
+                            break
+                        fi
+                    fi
+                    # --- Fin verificación de límites ---
+
                     fun_verif_user ${message_text[$id]}
                     [[ "$_erro" == '1' ]] && break
                     echo "${message_text[$id]}" >/tmp/name-d
@@ -2015,61 +2030,28 @@ while :; do
                         --text 'ingrese cantidad de dias:' \
                         --reply_markup "$(ShellBot.ForceReply)"
                     ;;
-                                'ingrese cantidad de dias:')
-                    verifica_acesso
-                    [[ "$_erro" == '1' ]] && break
-                    [[ ${message_text[$id]} != ?(+|-)+([0-9/]) ]] && {
-                        ShellBot.sendMessage --chat_id ${message_chat_id[$id]} \
-                            --text "$(echo -e "❌ Error! Siga el ejemplo\n\nDias formato [Ej: 30]\nFormato dato [Ej: 30/12/2019]")" \
-                            --parse_mode html
-                        break
-                    }
+
+
                     alterar_data_user $(cat /tmp/name-d) ${message_text[$id]}
                     [[ "$_erro" == '1' ]] && break
 
-                    # --- Restar 1 límite (mejorado) ---
-# Solo restar cuando quien altera NO es el admin
-if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
-    revendedor="${message_from_username}"
-    # tipo: 'revenda' o 'subrevenda' (según cómo esté registrado en lista_ativos)
-    tipo=$(grep -w "$revendedor" "$ativos" | awk '{print $NF}')
-
-    if [[ "$tipo" == "revenda" ]]; then
-        limite_atual=$(grep -w "$revendedor" "$ativos" | awk '{print $4}')
-        if [[ -n "$limite_atual" && "$limite_atual" -gt 0 ]]; then
-            novo=$((limite_atual - 1))
-            # Reemplazo seguro en la línea del revendedor (igual que en lim_rev)
-            sed -i "/$revendedor/ s/LIMITE: $limite_atual/LIMITE: $novo/" "$ativos"
-        fi
-
-    elif [[ "$tipo" == "subrevenda" ]]; then
-        # Buscar el archivo del revendedor padre donde está la definición SUBREVENDA
-        parent_file=$(grep -R "SUBREVENDA: $revendedor" /etc/bot/revenda 2>/dev/null | head -n1 | cut -d: -f1)
-        if [[ -n "$parent_file" ]]; then
-            limite_sub=$(grep -w "SUBREVENDA: $revendedor" "$parent_file" | awk '{print $4}')
-            if [[ -n "$limite_sub" && "$limite_sub" -gt 0 ]]; then
-                novo_sub=$((limite_sub - 1))
-                # Reemplaza únicamente en el archivo del padre
-                sed -i "/SUBREVENDA: $revendedor/ s/$limite_sub/$novo_sub/" "$parent_file"
-            fi
-        else
-            # Fallback: si no se encuentra el padre, intenta decrementar en lista_ativos
-            limite_atual=$(grep -w "$revendedor" "$ativos" | awk '{print $4}')
-            if [[ -n "$limite_atual" && "$limite_atual" -gt 0 ]]; then
-                novo=$((limite_atual - 1))
-                sed -i "/$revendedor/ s/LIMITE: $limite_atual/LIMITE: $novo/" "$ativos"
-            fi
-        fi
-    fi
-fi
-# --- Fin Restar 1 límite ---
-
+                    # --- Restar 1 límite ---
+                    if [[ "${message_from_id[$id]}" != "$id_admin" ]]; then
+                        revendedor="${message_from_username}"
+                        limite_atual=$(grep -w "$revendedor" $ativos | awk '{print $4}')
+                        if [[ -n "$limite_atual" && "$limite_atual" -gt 0 ]]; then
+                            novo=$((limite_atual - 1))
+                            sed -i "/$revendedor/ s/LIMITE: $limite_atual/LIMITE: $novo/" $ativos
+                        fi
+                    fi
+                    # --- Fin restar 1 límite ---
 
                     ShellBot.sendMessage --chat_id ${message_from_id[$id]} \
-                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ DATO ALTERADO !</b> !\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-d)\n<b>Nueva Fecha:</b> $udata")" \
+                        --text "$(echo -e "=×=×=×=×=×=×=×=×=×=×=×\n<b>✅ DATO ALTERADO !</b>\n=×=×=×=×=×=×=×=×=×=×=×\n\n<b>Usuario:</b> $(cat /tmp/name-d)\n<b>Nueva Fecha:</b> $udata")" \
                         --parse_mode html
                     rm /tmp/name-d >/dev/null 2>&1
                     ;;
+
 
                 '[1] - AGREGAR ARCHIVO\n[2] - EXCLUIR ARCHIVO\n\nIngrese la opcion [1-2]')
                     [[ ${message_text[$id]} != ?(+|-)+([0-9]) ]] && {
